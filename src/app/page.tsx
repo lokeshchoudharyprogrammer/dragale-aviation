@@ -1,103 +1,127 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { CirclePause, Play, Volume, VolumeOff } from 'lucide-react';
+import { useRef, useState } from 'react';
+import About from './about/page';
+import ContactUs from './contactus/page';
+import Aircraft from './products/page';
+
+export default function Leading() {
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isVoicePlaying, setIsVoicePlaying] = useState(false);
+  const ref = useRef(null);
+
+  const handleStopVideo = () => {
+    if (ref.current) {
+
+      // @ts-expect-error
+      ref.current?.pause();
+
+      setIsPlaying(false);
+
+
+    }
+  };
+
+  const handlePlayVideo = () => {
+    if (ref.current) {
+
+
+      // @ts-expect-error
+      ref.current?.play();
+
+      setIsPlaying(true);
+
+    }
+  };
+
+
+  const handlePlayVoice = () => {
+    setIsVoicePlaying(!isVoicePlaying);
+    if (ref.current) {
+      // @ts-expect-error
+      ref.current.muted = isVoicePlaying;
+      // @ts-expect-error
+      ref.current?.play();
+
+      setIsPlaying(true);
+    }
+  };
+
+
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="pt-10 flex flex-col min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+      {/* Main content grows to fill space */}
+      <main className="flex-grow overflow-hidden">
+        {/* Hero Video Section */}
+        <section
+          className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden"
+          style={{ height: '60vh', minHeight: '300px' }}
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            ref={ref}
+          >
+            <source src="/dargale_aviation.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {isPlaying ? (
+            <button
+              onClick={handleStopVideo}
+              className="absolute bottom-4 left-4 z-10 bg-black/60 text-white px-4 py-2 text-sm rounded-lg hover:bg-black/80 transition"
+            >
+              <CirclePause />
+            </button>
+          ) :
+            <button
+              onClick={handlePlayVideo}
+              className="absolute bottom-4 left-4 z-10 bg-black/60 text-white px-4 py-2 text-sm rounded-lg hover:bg-black/80 transition"
+            >
+              <Play />
+            </button>
+          }
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={handlePlayVoice}
+            className="absolute bottom-4 left-20 z-10 bg-black/60 text-white px-4 py-2 text-sm rounded-lg hover:bg-black/80 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+            {!isVoicePlaying ? <VolumeOff /> : <Volume />}
+          </button>
+          {/* Blurred Overlay */}
+          {/* <div
+            className="absolute inset-0"
+            style={{
+              background: "rgba(0, 0, 0, 0.3)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              // zIndex: 1,
+            }}
+          ></div> */}
+        </section>
+
+        {/* About Company Section */}
+        <section className="w-[90%] max-w-4xl mx-auto text-center my-10 px-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            Dragale Aviation
+          </h1>
+          <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+            At <span className="font-semibold text-white">Dragale Aviation</span>, we’re pioneering emergency medical transport with India’s first <span className="font-semibold text-white">eVTOL air ambulance</span>. Our mission is to deliver rapid, safe, and innovative critical care—ensuring patients reach help swiftly when every second counts.
+          </p>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Sticky Footer */}
+      <div className=' bg-gradient-to-br from-gray-900 to-black text-white'>
+        <Aircraft />
+        <About />
+        <ContactUs />
+      </div>
+
     </div>
   );
 }
