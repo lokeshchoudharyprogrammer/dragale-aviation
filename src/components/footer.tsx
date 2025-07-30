@@ -14,8 +14,10 @@ export const Footer: React.FC = () => {
       <div className=" max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="text-sm text-gray-300 text-center sm:text-left">
           <p className="font-medium">Dragale Aviation</p>
+          
           <p>Jaipur City, India</p>
           <p>
+
             Email:{" "}
             <a href="mailto:dragaleaviation@gmail.com" className="hover:text-gray-400 transition">
             info@dragaleaviation.com
