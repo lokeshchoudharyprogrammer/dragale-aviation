@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
           <p>
             Email:{" "}
             <a href="mailto:dragaleaviation@gmail.com" className="hover:text-gray-400 transition">
-              dragaleaviation@gmail.com
+            info@dragaleaviation.com
             </a>
           </p>
         </div>
