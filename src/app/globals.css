@@ -5,3 +5,14 @@
   background-color: rgba(255, 255, 255, 0.162); /* Semi-transparent white */
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

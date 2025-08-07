@@ -1,15 +1,17 @@
 'use client';
 
 import { CirclePause, Play, Volume, VolumeOff } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import About from './about/page';
 import ContactUs from './contactus/page';
 import Aircraft from './products/page';
+import LoadingScreen from '@/components/LoadingScreen';
 
 export default function Leading() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isVoicePlaying, setIsVoicePlaying] = useState(false);
   const ref = useRef(null);
+const [loading, setLoading] = useState(true)
 
   const handleStopVideo = () => {
     if (ref.current) {
@@ -49,6 +51,15 @@ export default function Leading() {
   };
 
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 5000) // Show model for 4 seconds
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) return <LoadingScreen onFinish={() => setLoading(false)} />
 
   return (
     <div className="pt-10 flex flex-col min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     shortcut: "./founders/newlogo.png",
     apple: "./founders/newlogo.png",
   }
-
+  
 };
 
 
