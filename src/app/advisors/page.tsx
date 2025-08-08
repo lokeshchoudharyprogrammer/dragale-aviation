@@ -80,7 +80,7 @@ export default function AdvisorsPage() {
                         <SocialBadge
                             icon="FaLinkedin"
                             label="LinkedIn"
-                            link="https://www.linkedin.com/in/dansloat/"
+                            link="https://www.linkedin.com/in/dan-sloat/"
                             color="#0077b5"
                         />
                     </div>
