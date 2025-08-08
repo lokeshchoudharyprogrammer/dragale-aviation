@@ -1,6 +1,5 @@
 "use client";
 
-import { Footer } from "../../components/footer";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";

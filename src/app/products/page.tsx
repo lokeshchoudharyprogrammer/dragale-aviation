@@ -1,7 +1,7 @@
 "use client";
 
-import { Footer } from "../../components/footer";
 import { AnimatePresence, motion, useInView } from "framer-motion";
+import { ArrowDownToDot, CircleX } from "lucide-react";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { FaAmbulance, FaPhone, FaRocket } from "react-icons/fa";
@@ -275,7 +275,7 @@ export default function Aircraft() {
           }
         `}</style>
       </Head>
-      <div className=" min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+      <div className="pt-10 min-h-screen bg-black text-white">
 
         <main id="aircraft" className="px-4 sm:px-8 lg:px-16 py-12 relative">
           {/* Video Background */}
@@ -312,18 +312,21 @@ export default function Aircraft() {
           <motion.div className="mt-10 text-center max-w-5xl mx-auto relative z-10">
             <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} perspective={1000}>
               <motion.div
-                className="bg-white/5 backdrop-blur-3xl p-8 rounded-2xl border border-white/10 shadow-xl"
+                className="bg-white/5 backdrop-blur-3xl p-8 rounded-2xl border-dash border-white/10 shadow-xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
+                style={{
+                  borderBottom: `1.5px dashed #0077b5`,
+                }}
               >
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-white flex items-center justify-center gap-2"
+                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#3b82f6]/60 flex items-center justify-center gap-2"
                 >
-                  <FaRocket className="text-gray-400" /> AyuRatha eVTOL Ambulance
+                  <FaRocket className="text-[#3b82f6]" /> AyuRatha eVTOL Ambulance
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -348,15 +351,15 @@ export default function Aircraft() {
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
                   <div className="text-gray-200 text-sm">
-                    <FaRocket className="mx-auto text-gray-400 mb-2" />
+                    <FaRocket className="mx-auto text-[#3b82f6] mb-2" />
                     VTOL Technology
                   </div>
                   <div className="text-gray-200 text-sm">
-                    <FaAmbulance className="mx-auto text-gray-400 mb-2" />
+                    <FaAmbulance className="mx-auto text-[#3b82f6] mb-2" />
                     Advanced Medical Suite
                   </div>
                   <div className="text-gray-200 text-sm">
-                    <FaPhone className="mx-auto text-gray-400 mb-2" />
+                    <FaPhone className="mx-auto text-[#3b82f6] mb-2" />
                     Redundant Safety Systems
                   </div>
                 </motion.div>
@@ -418,9 +421,12 @@ export default function Aircraft() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="max-w-7xl mx-auto mt-8"
+
           >
             <h2 className="text-2xl font-semibold text-white text-center mb-6">Why AyuRatha?</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+
+            >
               {whyAyuRatha.map((item, index) => (
                 <Tilt
                   key={index}
@@ -434,9 +440,12 @@ export default function Aircraft() {
                     initial="initial"
                     animate="animate"
                     transition={{ delay: index * 0.1 }}
+                    style={{
+                      borderBottom: `1.5px dashed #0077b5`,
+                    }}
                     className="bg-white/5 backdrop-blur-3xl p-6 rounded-2xl border border-white/10 hover:border-gray-400/30 transition-all text-center"
                   >
-                    <div className="text-2xl text-gray-400 mb-2">{item.icon}</div>
+                    <div className="text-2xl text-[#3b82f6] mb-2">{item.icon}</div>
                     <h3 className="text-lg font-medium text-white">{item.title}</h3>
                     <p className="text-sm text-gray-300 mt-2">{item.desc}</p>
                   </motion.div>
@@ -454,6 +463,9 @@ export default function Aircraft() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
+              style={{
+                borderBottom: `1.5px dashed #0077b5`,
+              }}
             >
               <motion.button
                 onClick={() => toggleSection("technical")}
@@ -466,7 +478,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "technical" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  ▼
+                  <ArrowDownToDot className="text-[#3b82f6]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -521,6 +533,9 @@ export default function Aircraft() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
+              style={{
+                borderBottom: `1.5px dashed #0077b5`,
+              }}
             >
               <motion.button
                 onClick={() => toggleSection("equipment")}
@@ -533,7 +548,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "equipment" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  ▼
+                  <ArrowDownToDot className="text-[#3b82f6]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -544,7 +559,7 @@ export default function Aircraft() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4"
+                    className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 "
                   >
                     {aircraftData.medicalEquipment.map((item, index) => (
                       <Tilt
@@ -590,6 +605,9 @@ export default function Aircraft() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
+              style={{
+                borderBottom: `1.5px dashed #0077b5`,
+              }}
             >
               <motion.button
                 onClick={() => toggleSection("design")}
@@ -602,7 +620,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "design" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  ▼
+                  <ArrowDownToDot className="text-[#3b82f6]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -659,6 +677,9 @@ export default function Aircraft() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
+              style={{
+                borderBottom: `1.5px dashed #0077b5`,
+              }}
             >
               <motion.button
                 onClick={() => toggleSection("dimensions")}
@@ -671,7 +692,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "dimensions" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  ▼
+                  <ArrowDownToDot className="text-[#3b82f6]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -723,7 +744,7 @@ export default function Aircraft() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4"
+                className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4 bg-gradient-to-tr from-black/90 to-[#0077b5]/70"
                 onClick={closeTooltip}
                 role="dialog"
                 aria-labelledby="item-details-title"
@@ -745,7 +766,7 @@ export default function Aircraft() {
                     className="absolute top-4 right-4 text-xl text-gray-300 hover:text-gray-400 transition-all "
                     aria-label="Close modal"
                   >
-                    ×
+                    <CircleX/>
                   </motion.button>
                   <h3 id="item-details-title" className="text-lg font-semibold text-white">
                     {/*  @ts-ignore */}
@@ -755,12 +776,17 @@ export default function Aircraft() {
                   <p className="text-gray-200 text-sm mt-4">{selectedItem.desc}</p>
                   <motion.a
                     href="/contactus"
-                    whileHover={{ scale: 1.05, backgroundColor: "#6B7280" }}
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "#0077b5", // Tailwind gray-600 equivalent, slightly darker
+                      
+                    }}
                     whileTap={{ scale: 0.95 }}
-                    className="mt-4 inline-flex bg-gray-500 text-white py-2 px-6 rounded-full font-medium text-sm shadow-md hover:bg-gray-600 transition duration-300"
+                    className="mt-4 inline-flex border-2 border-dashed border-white/100 bg-gray-700 text-white py-2 px-8 rounded-full font-semibold text-sm shadow-md transition duration-300"
                   >
                     Contact for Details
                   </motion.a>
+
                 </motion.div>
               </motion.div>
             )}

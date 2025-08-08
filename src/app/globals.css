@@ -16,3 +16,18 @@
     transform: translateY(0px);
   }
 }
+
+@keyframes dash-border {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 1000;
+  }
+}
+
+.hover\\:animate-dash-border:hover {
+  animation: dash-border 5s linear infinite;
+  border-style: dashed !important;
+  border-color: #22c55e !important;
+}

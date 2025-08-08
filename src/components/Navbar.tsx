@@ -1,322 +1,114 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Home, Plane, Info, Phone, ChevronDown } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { Home, Plane, Info, Phone, Briefcase } from "lucide-react";
 import Link from "next/link";
-import clsx from "clsx";
-import Image from "next/image";
 
 const navItems = [
-  { name: "Home", icon: Home, href: "/" },
-  {
-    name: "Product",
-    icon: Plane,
-    href: "/products",
-    // subItems: [
-    //   { name: "AyuRatha (DX1)", href: "/products" },
-    //   { name: "Future Models", href: "#" },
-    // ],
-  },
-  { name: "About", icon: Info, href: "/about" },
-  { name: "Contact Us", icon: Phone, href: "/contactus" },
+  { icon: Home, href: "/", label: "Home", color: "#ec4899" },
+  { icon: Plane, href: "/products", label: "Products", color: "#3b82f6" },
+  { icon: Info, href: "/about", label: "About", color: "#8b5cf6" },
+  { icon: Phone, href: "/contactus", label: "Contact", color: "#22c55e" },
+  { icon: Briefcase, href: "/advisors", label: "Advisors", color: "#facc15" },
 ];
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const [expandedSubMenu, setExpandedSubMenu] = useState<string | null>(null);
-  const navRef = useRef<HTMLElement>(null);
+function MagneticIcon({ icon: Icon, href, label, color }: typeof navItems[0]) {
+  const ref = useRef<HTMLDivElement>(null);
 
-  // Scroll handling
-  useEffect(() => {
-    const updateScroll = () => {
-      const scrollY = window.scrollY;
-      setScrolled(scrollY > 50);
-    };
-    window.addEventListener("scroll", updateScroll);
-    return () => window.removeEventListener("scroll", updateScroll);
-  }, []);
+  // Local motion values for magnetic effect per icon
+  const localX = useMotionValue(0);
+  const localY = useMotionValue(0);
 
-  // Close mobile menu on swipe right
-  useEffect(() => {
-    if (!isOpen) return;
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const offsetX = e.clientX - (rect.left + rect.width / 2);
+    const offsetY = e.clientY - (rect.top + rect.height / 2);
 
-    let touchStartX = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX;
-    };
+    // Subtle magnetic effect
+    localX.set(offsetX * 0.25);
+    localY.set(offsetY * 0.25);
+  }
 
-    const handleTouchMove = (e: TouchEvent) => {
-      const touchX = e.touches[0].clientX;
-      if (touchX - touchStartX > 100) {
-        setIsOpen(false);
-        setExpandedSubMenu(null);
-      }
-    };
+  function handleMouseLeave() {
+    localX.set(0);
+    localY.set(0);
+  }
 
-    document.addEventListener("touchstart", handleTouchStart);
-    document.addEventListener("touchmove", handleTouchMove);
-    return () => {
-      document.removeEventListener("touchstart", handleTouchStart);
-      document.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, [isOpen]);
-
-  // Focus trap for mobile menu
-  useEffect(() => {
-    if (!isOpen || !navRef.current) return;
-
-    const focusableElements = navRef.current.querySelectorAll(
-      'a[href], button, [tabindex]:not([tabindex="-1"])'
-    );
-    const firstElement = focusableElements[0] as HTMLElement;
-    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Tab") {
-        if (e.shiftKey && document.activeElement === firstElement) {
-          e.preventDefault();
-          lastElement.focus();
-        } else if (!e.shiftKey && document.activeElement === lastElement) {
-          e.preventDefault();
-          firstElement.focus();
-        }
-      }
-      if (e.key === "Escape") {
-        setIsOpen(false);
-        setExpandedSubMenu(null);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    firstElement?.focus();
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
-
-  const navVariants = {
-    hidden: { opacity: 0, y: -20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: -10 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-  };
-
-  const mobileMenuVariants = {
-    hidden: { x: "100%" },
-    show: { x: 0, transition: { duration: 0.3 } },
-    exit: { x: "100%", transition: { duration: 0.3 } },
-  };
-
-  const subMenuVariants = {
-    hidden: { height: 0, opacity: 0 },
-    show: { height: "auto", opacity: 1, transition: { duration: 0.3 } },
-    exit: { height: 0, opacity: 0, transition: { duration: 0.3 } },
-  };
-
-  const handleNavClick = () => {
-    if (navigator.vibrate) navigator.vibrate(50);
-  };
+  function handleFocus(e: React.FocusEvent<HTMLDivElement>) {
+    e.currentTarget.style.boxShadow = `0 0 15px ${color}`;
+  }
+  function handleBlur(e: React.FocusEvent<HTMLDivElement>) {
+    e.currentTarget.style.boxShadow = "";
+  }
 
   return (
-    <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:p-2 focus:bg-gray-500 focus:text-white">
-        Skip to content
-      </a>
-      <nav
-        ref={navRef}
-        className={clsx(
-          "fixed top-0 left-0 w-full z-50 px-4 sm:px-6 lg:px-8 py-3 transition-all duration-300 border-1 border-b-gray-500 bg-transparent",
-          scrolled ? "bg-transparent" : "bg-transparent"
-        )}
+    <Link href={href} aria-label={label} passHref>
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{ scale: 1.3, y: -5, boxShadow: `0 0 18px ${color}` }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        style={{ x: localX, y: localY }}
+        className="flex items-center justify-center w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-gray-200 cursor-pointer outline-none relative select-none"
+        tabIndex={0}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 text-white font-semibold text-lg"
-          >
-            <Link href="/" aria-label="Dragale Aviation Home" className="flex items-center gap-2">
-              <Image
-                src="/dgw.png"
-                alt="Dragale Aviation Logo"
-                width={40}
-                height={40}
-                priority
-                className="object-contain"
-                onError={(e) => {
-                  const target = e.currentTarget as HTMLImageElement;
-                  target.src = "/dragale-logo.png";
-                }}
-              />
-              <span className="hidden sm:inline">Dragale Aviation</span>
-            </Link>
-          </motion.div>
+        {/* Glow behind icon */}
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{ filter: "blur(8px)" }}
+          animate={{
+            boxShadow: [
+              `0 0 8px ${color}`,
+              `0 0 18px ${color}`,
+              `0 0 8px ${color}`,
+            ],
+          }}
+          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+        />
+        <Icon size={20} stroke={color} strokeWidth={2} className="relative z-10" />
+      </motion.div>
+    </Link>
+  );
+}
 
+export default function ResponsiveIconNavbar() {
+  return (
+    <motion.div
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full w-sm sm:max-w-lg"
+      animate={{ y: [0, -2, 0] }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <nav
+        className="
+          relative flex justify-between gap-1
+          px-8 py-3 sm:px-8 p-9  rounded-full
+          backdrop-blur-xl bg-white/10 border border-white/20
+          shadow-lg shadow-black/50 overflow-hidden
+          before:absolute before:inset-[-3px] before:rounded-full before:border before:border-dashed before:border-white/10 before:pointer-events-none
+          sm:justify-center
+          sm:gap-9
+          "
+        aria-label="Primary navigation"
+      >
+        {/* Light reflection shimmer */}
+        <motion.div
+          className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
+          animate={{ x: ["-150%", "150%"] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          aria-hidden="true"
+        />
 
-          {/* Desktop Nav */}
-          <motion.ul
-            className="hidden md:flex items-center space-x-6"
-            variants={navVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {/*@ts-ignore */}
-            {navItems.map(({ name, icon: Icon, href, subItems }) => (
-              <motion.li
-                key={name}
-                variants={itemVariants}
-                className="relative"
-                onMouseEnter={() => subItems && setHoveredItem(name)}
-                onMouseLeave={() => subItems && setHoveredItem(null)}
-              >
-                <Link
-                  href={href}
-                  className="flex items-center space-x-1 text-gray-200 hover:text-gray-400 transition"
-                  aria-label={name}
-                >
-                  <Icon size={18} />
-                  <span>{name}</span>
-                </Link>
-                {subItems && hoveredItem === name && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 mt-2 bg-white/10 backdrop-blur-lg rounded-md shadow-lg p-2"
-                  >
-                    {/*@ts-ignore */}
-                    {subItems.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        href={subItem.href}
-                        className="block px-4 py-2 text-gray-200 hover:bg-white/20 rounded transition"
-                        onClick={() => setHoveredItem(null)}
-                        aria-label={subItem.name}
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </motion.li>
-            ))}
-
-          </motion.ul>
-
-          {/* Mobile Toggle */}
-          <motion.div className="md:hidden">
-            <button
-              onClick={() => {
-                setIsOpen(!isOpen);
-                if (!isOpen) setExpandedSubMenu(null);
-              }}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
-              className="text-gray-200 hover:text-gray-400 transition"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </motion.div>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="fixed top-0 left-0 w-full h-screen bg-white/10 backdrop-blur-lg md:hidden z-40"
-            >
-              <motion.ul className="flex flex-col items-center space-y-4 py-16">
-                {/*@ts-ignore */}
-                {navItems.map(({ name, icon: Icon, href, subItems }) => (
-                  <motion.li
-                    key={name}
-                    variants={itemVariants}
-                    className="w-full text-center"
-                    onClick={handleNavClick}
-                  >
-                    <div
-                      className={clsx(
-                        "flex items-center justify-center space-x-2 text-gray-200 text-lg p-4",
-                        subItems && "cursor-pointer"
-                      )}
-                      onClick={() => {
-                        if (subItems) {
-                          setExpandedSubMenu(expandedSubMenu === name ? null : name);
-                        } else {
-                          setIsOpen(false);
-                          setExpandedSubMenu(null);
-                        }
-                      }}
-                      role={subItems ? "button" : undefined}
-                      aria-expanded={subItems ? expandedSubMenu === name : undefined}
-                    >
-                      <Icon size={20} />
-                      <Link href={href} aria-label={name} className="flex-1">
-                        {name}
-                      </Link>
-                      {subItems && (
-                        <ChevronDown
-                          size={20}
-                          className={clsx(expandedSubMenu === name && "rotate-180")}
-                        />
-                      )}
-                    </div>
-                    {subItems && expandedSubMenu === name && (
-                      <motion.div
-                        variants={subMenuVariants}
-                        initial="hidden"
-                        animate="show"
-                        exit="exit"
-                        className="px-4"
-                      >
-                        {/*@ts-ignore */}
-                        {subItems.map((subItem) => (
-                          <Link
-                            key={subItem.name}
-                            href={subItem.href}
-                            className="block py-2 text-gray-300 hover:text-gray-400 transition"
-                            onClick={() => {
-                              setIsOpen(false);
-                              setExpandedSubMenu(null);
-                            }}
-                            aria-label={subItem.name}
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </motion.li>
-                ))}
-
-              </motion.ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <style jsx>{`
-          .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-          }
-        `}</style>
+        {navItems.map((item) => (
+          <MagneticIcon key={item.label} {...item} />
+        ))}
       </nav>
-    </>
+    </motion.div>
   );
 }

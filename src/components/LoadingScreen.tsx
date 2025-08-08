@@ -60,11 +60,13 @@ export default function LoadingScreen({ onFinish }: { onFinish: () => void }) {
                 </p>
 
                 {/* Optional CTA button for pro feel */}
-                <div className="mt-6">
-                    <button className="px-6 py-2 rounded-full bg-white/10 text-white text-sm md:text-base font-medium backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300">
+                {/* <div className="mt-6">
+                    <button onClick={()=>{
+                        
+                    }} className="px-6 py-2 rounded-full bg-white/10 text-white text-sm md:text-base font-medium backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300">
                         Explore Our Mission
                     </button>
-                </div>
+                </div> */}
             </motion.div>
             {/* Responsive Glow Effects */}
             <div className="absolute w-[60vw] max-w-[300px] h-[60vw] max-h-[300px] bg-purple-600 blur-[160px] opacity-20 rounded-full top-[10%] left-[5%] pointer-events-none" />

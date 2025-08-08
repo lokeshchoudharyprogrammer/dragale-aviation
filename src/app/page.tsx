@@ -1,11 +1,12 @@
 'use client';
 
+import LoadingScreen from '@/components/LoadingScreen';
 import { CirclePause, Play, Volume, VolumeOff } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import About from './about/page';
+import AdvisorsPage from './advisors/page';
 import ContactUs from './contactus/page';
 import Aircraft from './products/page';
-import LoadingScreen from '@/components/LoadingScreen';
 
 export default function Leading() {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -62,13 +63,14 @@ const [loading, setLoading] = useState(true)
   if (loading) return <LoadingScreen onFinish={() => setLoading(false)} />
 
   return (
-    <div className="pt-10 flex flex-col min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+    <div className="pt-13 flex flex-col min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white">
       {/* Main content grows to fill space */}
       <main className="flex-grow overflow-hidden">
         {/* Hero Video Section */}
         <section
-          className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden"
-          style={{ height: '60vh', minHeight: '300px' }}
+          className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden  "
+          style={{ height: '60vh', minHeight: '300px', border: `1.2px dashed white`, }}
+          
         >
           <video
             autoPlay
@@ -130,6 +132,8 @@ const [loading, setLoading] = useState(true)
       <div className=' bg-gradient-to-br from-gray-900 to-black text-white'>
         <Aircraft />
         <About />
+        <AdvisorsPage/>
+        
         <ContactUs />
       </div>
 

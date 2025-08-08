@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="backdrop-blur-md bg-gradient-to-br from-gray-900 to-black px-4 sm:px-8 lg:px-16 py-6"
+      className="backdrop-blur-md bg-black px-4 sm:px-8 lg:px-16 py-6"
     >
       <div className=" max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="text-sm text-gray-300 text-center sm:text-left">

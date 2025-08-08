@@ -1,12 +1,12 @@
 "use client";
 
-import { Footer } from "../../components/footer";
 import { AnimatePresence, motion, useInView } from "framer-motion";
+import { CircleX } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import Tilt from "react-parallax-tilt";
-
+import { Person } from "../../../utils/types";
 
 const teamData = [
   {
@@ -21,7 +21,6 @@ const teamData = [
       - Recognized as a Young Innovator by India Tech Awards
     `,
     img: "/founders/shivanshu.jpg",
-    badge: "Founder",
     linkedin: "https://www.linkedin.com/in/shivanshu-tank-556b00232/",
   },
   {
@@ -36,35 +35,22 @@ const teamData = [
       - Speaker at Global Aviation Summit 2024
     `,
     img: "/founders/syed.jpg",
-    badge: "Founder",
     linkedin: "https://www.linkedin.com/in/syed-mujahid-496064228/",
   },
-  // {
-  //   name: "Pushpendra Kumar Jangid",
-  //   role: "Co-Founder & ESIS",
-  //   bio: `
-  //     Pushpendra, with a diploma and degree in Electrical Engineering, drives the integration of advanced electrical systems for Dragale’s eVTOL. His focus on reliability and precision ensures every mission is powered safely and efficiently.
-  //   `,
-  //   achievements: `
-  //     - Developed eVTOL battery management system
-  //     - Patented electrical integration module
-  //     - Mentored 50+ engineering students
-  //   `,
-  //   img: "/founders/pushpendra.png",
-  //   badge: "Founder",
-  //   linkedin: "https://linkedin.com/in/pushpendrajangid",
-  // },
 ];
+
 
 export default function About() {
   const ref = useRef(null);
   const modalRef = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [selectedMember, setSelectedMember] = useState(null);
+  const [selectedMember, setSelectedMember] = useState<Person | null>(null);
   const [activeTab, setActiveTab] = useState("bio");
   const text = "Meet Our Visionaries";
-  // @ts-ignore
-  const handleCardClick = (person) => {
+  const primaryColor = "#8b5cf6"; // purple
+
+
+  const handleCardClick = (person: Person) => {
     setSelectedMember(person);
     setActiveTab("bio");
   };
@@ -73,17 +59,16 @@ export default function About() {
     setSelectedMember(null);
   };
 
-  // Focus trap for modal
   useEffect(() => {
     if (selectedMember && modalRef.current) {
-      // @ts-ignore
+      // @ts-expect-error dont ask again here bcz this is crt 
       const focusableElements = modalRef.current.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
-      // @ts-ignore
-      const handleKeyDown = (e) => {
+
+      const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Tab") {
           if (e.shiftKey && document.activeElement === firstElement) {
             e.preventDefault();
@@ -107,64 +92,69 @@ export default function About() {
 
   const cardVariants = {
     initial: { opacity: 0, y: 20 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
-
   const badgeVariants = {
     initial: { scale: 1, y: 0 },
-    hover: {
-      scale: 1.1,
-      y: -2,
-      transition: { type: "spring", stiffness: 400, damping: 15 },
-    },
+    hover: { scale: 1.1, y: -2, transition: { type: "spring", stiffness: 400, damping: 15 } },
   };
 
   return (
     <>
-
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-20 text-white">
-        {/* Breadcrumb Navigation */}
-
-
-        <main id="about" className="px-4 sm:px-8 lg:px-16 py-16 space-y-12">
-          {/* Animated Background */}
-
-
-          {/* Hero Section */}
+      <section className="min-h-screen bg-black pt-20 text-white">
+        <main id="about" className="px-4 sm:px-8 lg:px-16 py-16 space-y-12 max-w-6xl mx-auto">
+          {/* Hero */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto relative"
+            className="relative text-left pb-5"
+            style={{
+              borderBottom: `1.5px dashed rgba(139, 92, 246, 0.3)`,
+            }}
           >
-            <h1 className="text-3xl sm:text-4xl font-bold text-white flex items-center justify-center gap-2 mb-4">
+            <h1
+              className="text-3xl sm:text-4xl font-extrabold mb-4"
+              style={{
+                background: `linear-gradient(to right, ${primaryColor}, #a78bfa)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               Dragale Aviation
             </h1>
-            <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+            <p className="text-gray-300 text-base leading-relaxed max-w-3xl">
               At Dragale Aviation, we’re redefining emergency medical transport with India’s first eVTOL air ambulance. Our mission is to deliver rapid, safe, and innovative critical care, ensuring every patient reaches help when it matters most.
             </p>
-
           </motion.div>
 
-          {/* Our Vision */}
+
+
+          {/* Vision */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-3xl mx-auto text-center"
+            className="relative text-left pb-5"
+            style={{
+              borderBottom: `1.5px dashed rgba(139, 92, 246, 0.3)`,
+            }}
           >
-            <h2 className="text-2xl font-semibold text-white mb-4">Our Vision</h2>
-            <p className="text-gray-300 text-sm sm:text-base">
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: primaryColor }}>
+              Our Vision
+            </h2>
+            <p className="text-gray-400 text-base max-w-3xl">
               We envision a future where advanced air mobility transforms lives. By pioneering eVTOL technology, Dragale Aviation aims to make emergency medical transport accessible, efficient, and sustainable across India and beyond.
             </p>
           </motion.div>
 
-          {/* Heading */}
-          <div className="flex justify-center">
+          {/* Animated Heading */}
+          <div className="flex justify-start relative text-left pb-5"
+
+            style={{
+              borderBottom: `1.5px dashed rgba(139, 92, 246, 0.3)`,
+            }}
+            role="heading" aria-level={2} aria-label="Meet Our Visionaries">
             <AnimatePresence>
               {text.split("").map((char, i) => (
                 <motion.span
@@ -173,16 +163,20 @@ export default function About() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.3, delay: i * 0.03 }}
-                  className="text-xl sm:text-3xl font-bold tracking-tight"
+                  className="text-2xl sm:text-4xl font-bold tracking-tight select-none"
+                  style={{ color: primaryColor }}
                 >
-                  {char === " " ? <span> </span> : char}
+                  {char === " " ? "\u00A0" : char}
                 </motion.span>
               ))}
             </AnimatePresence>
           </div>
 
-          {/* Team Members */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {/* Team Grid */}
+          <section
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8"
+            aria-label="Team Members"
+          >
             {teamData.map((person, index) => (
               <Tilt
                 key={index}
@@ -191,6 +185,10 @@ export default function About() {
                 perspective={1000}
                 transitionSpeed={300}
                 scale={1.02}
+                glareEnable={true}
+                glareMaxOpacity={0.15}
+                glareColor={primaryColor}
+                glareBorderRadius="20px"
               >
                 <motion.div
                   variants={cardVariants}
@@ -198,26 +196,23 @@ export default function About() {
                   whileInView="animate"
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-xl border border-white/10 hover:border-gray-400/30 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-400 group"
+                  className="relative bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-xl border border-white/20 hover:border-purple-500 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 group"
                   onClick={() => handleCardClick(person)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => e.key === "Enter" && handleCardClick(person)}
                   aria-label={`View details about ${person.name}`}
                 >
-
-
-
                   {/* Image */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.1 }}
-                    className="w-24 h-24 relative rounded-full overflow-hidden shadow-md mx-auto mb-4"
+                    className="w-24 h-24 relative rounded-full overflow-hidden shadow-lg mx-auto mb-4"
                   >
                     <Image
                       src={person.img}
-                      alt={person.name}
+                      alt={`Photo of ${person.name}`}
                       layout="intrinsic"
                       width={96}
                       height={96}
@@ -239,11 +234,10 @@ export default function About() {
                       variants={badgeVariants}
                       initial="initial"
                       whileHover="hover"
-                      className="bg-gray-900/20 text-white text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-gray-400/30"
+                      className="bg-gray-900/30 text-purple-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-purple-500/40"
                     >
                       {person.role}
                     </motion.span>
-                    {/* <p className="text-gray-300 text-sm mt-1">{person.role}</p> */}
                   </motion.div>
 
                   {/* Social Link */}
@@ -251,8 +245,9 @@ export default function About() {
                     <motion.a
                       href={person.linkedin}
                       target="_blank"
-                      whileHover={{ scale: 1.2, color: "white" }}
-                      className="absolute top-4 right-4 text-gray-300"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.2, color: primaryColor }}
+                      className="absolute top-4 right-4 text-gray-400"
                       aria-label={`Visit ${person.name}'s LinkedIn profile`}
                     >
                       <FaLinkedin size={20} />
@@ -261,7 +256,7 @@ export default function About() {
                 </motion.div>
               </Tilt>
             ))}
-          </div>
+          </section>
 
           {/* Modal Pop-Up */}
           <AnimatePresence>
@@ -271,7 +266,7 @@ export default function About() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4"
+                className="fixed inset-0 bg-gradient-to-tr from-black/90 to-purple-900/70 flex justify-center items-center z-50 p-4"
                 onClick={closeModal}
                 role="dialog"
                 aria-labelledby="team-member-name"
@@ -283,26 +278,24 @@ export default function About() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                  className="bg-white/5 backdrop-blur-3xl p-6 sm:p-8 rounded-2xl shadow-2xl max-w-3xl w-full relative border border-white/10"
+                  className="bg-white/5 backdrop-blur-3xl p-6 sm:p-8 rounded-2xl shadow-2xl max-w-3xl w-full relative border border-purple-600"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={closeModal}
-                    className="absolute top-4 right-4 text-xl text-gray-300 hover:text-gray-400 "
+                    className="absolute top-4 right-4 text-xl text-purple-300 hover:text-purple-400"
                     aria-label="Close modal"
                   >
-                    ×
+                    <CircleX />
                   </motion.button>
                   <div className="flex flex-col sm:flex-row gap-6">
                     {/* Image */}
                     <div className="w-32 h-32 relative rounded-full overflow-hidden shadow-xl flex-shrink-0 mx-auto sm:mx-0">
                       <Image
-                        //   @ts-ignore
                         src={selectedMember.img}
-                        //   @ts-ignore
-                        alt={selectedMember.name}
+                        alt={`Photo of ${selectedMember.name}`}
                         layout="intrinsic"
                         width={128}
                         height={128}
@@ -312,77 +305,79 @@ export default function About() {
 
                     {/* Member Info */}
                     <div className="flex-1">
-                      <h3 id="team-member-name" className="text-2xl font-bold text-white">
-                        {/*@ts-ignore */}
+                      <h3 id="team-member-name" className="text-2xl font-bold" style={{ color: primaryColor }}>
                         {selectedMember.name}
                       </h3>
                       <motion.span
                         variants={badgeVariants}
                         initial="initial"
                         whileHover="hover"
-                        className="bg-gray-900/20 text-white text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-gray-400/30"
+                        className="bg-gray-900/30 text-purple-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-purple-500/40"
                       >
-                        {/*@ts-ignore */}
                         {selectedMember.role}
                       </motion.span>
-                      {/*@ts-ignore */}
-                      {/* <p className="text-gray-300 text-sm mt-1">{selectedMember.role}</p> */}
 
                       {/* Tabs */}
-                      <div className="flex gap-4 mt-4 border-b border-white/10">
+                      <div
+                        className="flex gap-4 mt-6 border-b border-purple-600"
+                        role="tablist"
+                        aria-label="Team member details tabs"
+                      >
                         <button
                           onClick={() => setActiveTab("bio")}
-                          className={`pb-2 text-sm font-medium ${activeTab === "bio" ? "text-gray-400 border-b-2 border-gray-400" : "text-gray-300"
+                          className={`pb-2 text-sm font-semibold ${activeTab === "bio"
+                            ? "text-purple-400 border-b-2 border-purple-400"
+                            : "text-purple-300 hover:text-purple-400"
                             }`}
                           aria-selected={activeTab === "bio"}
                           aria-controls="bio-panel"
+                          role="tab"
+                          tabIndex={activeTab === "bio" ? 0 : -1}
                         >
                           Bio
                         </button>
                         <button
                           onClick={() => setActiveTab("achievements")}
-                          className={`pb-2 text-sm font-medium ${activeTab === "achievements" ? "text-gray-400 border-b-2 border-gray-400" : "text-gray-300"
+                          className={`pb-2 text-sm font-semibold ${activeTab === "achievements"
+                            ? "text-purple-400 border-b-2 border-purple-400"
+                            : "text-purple-300 hover:text-purple-400"
                             }`}
                           aria-selected={activeTab === "achievements"}
                           aria-controls="achievements-panel"
+                          role="tab"
+                          tabIndex={activeTab === "achievements" ? 0 : -1}
                         >
                           Achievements
                         </button>
                       </div>
+
                       <div
                         id="bio-panel"
-                        role="region"
+                        role="tabpanel"
+                        aria-labelledby="bio-tab"
                         aria-live="polite"
-                        className="mt-4 text-gray-200 text-sm leading-relaxed"
+                        className="mt-4 text-purple-300 text-sm leading-relaxed whitespace-pre-line"
                         hidden={activeTab !== "bio"}
                       >
-                        {/*@ts-ignore */}
                         {selectedMember.bio.trim()}
                       </div>
                       <div
                         id="achievements-panel"
-                        role="region"
+                        role="tabpanel"
+                        aria-labelledby="achievements-tab"
                         aria-live="polite"
-                        className="mt-4 text-gray-200 text-sm leading-relaxed"
+                        className="mt-4 text-purple-300 text-sm leading-relaxed"
                         hidden={activeTab !== "achievements"}
                       >
                         <ul className="list-disc pl-5">
-                          {/*@ts-ignore */}
-                          {selectedMember.achievements.trim().split("\n").map((item, i) => (
-                            <li key={i}>{item.trim().replace("- ", "")}</li>
-                          ))}
+                          {selectedMember.achievements
+                            .trim()
+                            .split("\n")
+                            .map((item, i) => (
+                              <li key={i}>{item.trim().replace(/^- /, "")}</li>
+                            ))}
                         </ul>
                       </div>
-
-                      {/* CTA */}
-                      {/* <motion.a
-                        href="/contact"
-                        whileHover={{ scale: 1.05, backgroundColor: "#111827" }}
-                        whileTap={{ scale: 0.95 }}
-                        className="mt-6 inline-flex bg-gray-900/20 text-white py-2 px-6 rounded-full font-medium text-sm shadow-md hover:bg-gray-600 transition duration-300 navbar-glass"
-                      >
-                        Contact Us
-                      </motion.a> */}
                     </div>
                   </div>
                 </motion.div>
@@ -390,10 +385,7 @@ export default function About() {
             )}
           </AnimatePresence>
         </main>
-
-        {/* Footer */}
-        {/* <Footer /> */}
-      </div>
+      </section>
     </>
   );
 }
