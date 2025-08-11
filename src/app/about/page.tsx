@@ -47,7 +47,7 @@ export default function About() {
   const [selectedMember, setSelectedMember] = useState<Person | null>(null);
   const [activeTab, setActiveTab] = useState("bio");
   const text = "Meet Our Visionaries";
-  const primaryColor = "#8b5cf6"; // purple
+  const primaryColor = "#fff"; // purple
 
 
   const handleCardClick = (person: Person) => {
@@ -110,13 +110,13 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="relative text-left pb-5"
             style={{
-              borderBottom: `1.5px dashed rgba(139, 92, 246, 0.3)`,
+              borderBottom: `1.5px dashed #fff`,
             }}
           >
             <h1
               className="text-3xl sm:text-4xl font-extrabold mb-4"
               style={{
-                background: `linear-gradient(to right, ${primaryColor}, #a78bfa)`,
+                background: `#fff`,
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -137,7 +137,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative text-left pb-5"
             style={{
-              borderBottom: `1.5px dashed rgba(139, 92, 246, 0.3)`,
+              borderBottom: `1.5px dashed #fff`,
             }}
           >
             <h2 className="text-2xl font-semibold mb-4" style={{ color: primaryColor }}>
@@ -152,7 +152,7 @@ export default function About() {
           <div className="flex justify-start relative text-left pb-5"
 
             style={{
-              borderBottom: `1.5px dashed rgba(139, 92, 246, 0.3)`,
+              borderBottom: `1.5px dashed #fff`,
             }}
             role="heading" aria-level={2} aria-label="Meet Our Visionaries">
             <AnimatePresence>
@@ -196,7 +196,7 @@ export default function About() {
                   whileInView="animate"
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-xl border border-white/20 hover:border-purple-500 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 group"
+                  className="relative bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-xl border border-white/20 hover:border-gray-500 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 group"
                   onClick={() => handleCardClick(person)}
                   role="button"
                   tabIndex={0}
@@ -234,7 +234,7 @@ export default function About() {
                       variants={badgeVariants}
                       initial="initial"
                       whileHover="hover"
-                      className="bg-gray-900/30 text-purple-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-purple-500/40"
+                      className="bg-gray-900/30 text-#fff-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-#fff-500/40"
                     >
                       {person.role}
                     </motion.span>
@@ -266,7 +266,7 @@ export default function About() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-gradient-to-tr from-black/90 to-purple-900/70 flex justify-center items-center z-50 p-4"
+                className="fixed inset-0  flex justify-center items-center z-50 p-4"
                 onClick={closeModal}
                 role="dialog"
                 aria-labelledby="team-member-name"
@@ -278,14 +278,14 @@ export default function About() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                  className="bg-white/5 backdrop-blur-3xl p-6 sm:p-8 rounded-2xl shadow-2xl max-w-3xl w-full relative border border-purple-600"
+                  className="bg-white/5 backdrop-blur-3xl p-6 sm:p-8 rounded-2xl shadow-2xl max-w-3xl w-full relative border "
                   onClick={(e) => e.stopPropagation()}
                 >
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={closeModal}
-                    className="absolute top-4 right-4 text-xl text-purple-300 hover:text-purple-400"
+                    className="absolute top-4 right-4 text-xl "
                     aria-label="Close modal"
                   >
                     <CircleX />
@@ -312,22 +312,22 @@ export default function About() {
                         variants={badgeVariants}
                         initial="initial"
                         whileHover="hover"
-                        className="bg-gray-900/30 text-purple-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-purple-500/40"
+                        className="bg-gray-900/30 text-#fff-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border "
                       >
                         {selectedMember.role}
                       </motion.span>
 
                       {/* Tabs */}
                       <div
-                        className="flex gap-4 mt-6 border-b border-purple-600"
+                        className="flex gap-4 mt-6 border-b "
                         role="tablist"
                         aria-label="Team member details tabs"
                       >
                         <button
                           onClick={() => setActiveTab("bio")}
                           className={`pb-2 text-sm font-semibold ${activeTab === "bio"
-                            ? "text-purple-400 border-b-2 border-purple-400"
-                            : "text-purple-300 hover:text-purple-400"
+                            ? "text-#fff-400 border-b-2 "
+                            : "text-#fff-300 "
                             }`}
                           aria-selected={activeTab === "bio"}
                           aria-controls="bio-panel"
@@ -339,8 +339,8 @@ export default function About() {
                         <button
                           onClick={() => setActiveTab("achievements")}
                           className={`pb-2 text-sm font-semibold ${activeTab === "achievements"
-                            ? "text-purple-400 border-b-2 border-purple-400"
-                            : "text-purple-300 hover:text-purple-400"
+                            ? "text-#fff-400"
+                            : "text-#fff-400"
                             }`}
                           aria-selected={activeTab === "achievements"}
                           aria-controls="achievements-panel"
@@ -356,7 +356,7 @@ export default function About() {
                         role="tabpanel"
                         aria-labelledby="bio-tab"
                         aria-live="polite"
-                        className="mt-4 text-purple-300 text-sm leading-relaxed whitespace-pre-line"
+                        className="mt-4 text-#fff-300 text-sm leading-relaxed whitespace-pre-line"
                         hidden={activeTab !== "bio"}
                       >
                         {selectedMember.bio.trim()}
@@ -366,7 +366,7 @@ export default function About() {
                         role="tabpanel"
                         aria-labelledby="achievements-tab"
                         aria-live="polite"
-                        className="mt-4 text-purple-300 text-sm leading-relaxed"
+                        className="mt-4 text-#fff-300 text-sm leading-relaxed"
                         hidden={activeTab !== "achievements"}
                       >
                         <ul className="list-disc pl-5">

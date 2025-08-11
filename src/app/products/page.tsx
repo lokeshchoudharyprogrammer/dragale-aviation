@@ -316,17 +316,15 @@ export default function Aircraft() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                style={{
-                  borderBottom: `1.5px dashed #0077b5`,
-                }}
+                
               >
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#3b82f6]/60 flex items-center justify-center gap-2"
+                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#fff]/60 flex items-center justify-center gap-2"
                 >
-                  <FaRocket className="text-[#3b82f6]" /> AyuRatha eVTOL Ambulance
+                  <FaRocket className="text-[#fff]" /> AyuRatha eVTOL Ambulance
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -351,15 +349,15 @@ export default function Aircraft() {
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
                   <div className="text-gray-200 text-sm">
-                    <FaRocket className="mx-auto text-[#3b82f6] mb-2" />
+                    <FaRocket className="mx-auto text-[#fff] mb-2" />
                     VTOL Technology
                   </div>
                   <div className="text-gray-200 text-sm">
-                    <FaAmbulance className="mx-auto text-[#3b82f6] mb-2" />
+                    <FaAmbulance className="mx-auto text-[#fff] mb-2" />
                     Advanced Medical Suite
                   </div>
                   <div className="text-gray-200 text-sm">
-                    <FaPhone className="mx-auto text-[#3b82f6] mb-2" />
+                    <FaPhone className="mx-auto text-[#fff] mb-2" />
                     Redundant Safety Systems
                   </div>
                 </motion.div>
@@ -441,11 +439,11 @@ export default function Aircraft() {
                     animate="animate"
                     transition={{ delay: index * 0.1 }}
                     style={{
-                      borderBottom: `1.5px dashed #0077b5`,
+                      borderBottom: `1.5px dashed #fff`,
                     }}
                     className="bg-white/5 backdrop-blur-3xl p-6 rounded-2xl border border-white/10 hover:border-gray-400/30 transition-all text-center"
                   >
-                    <div className="text-2xl text-[#3b82f6] mb-2">{item.icon}</div>
+                    <div className="text-2xl text-[#fff] mb-2">{item.icon}</div>
                     <h3 className="text-lg font-medium text-white">{item.title}</h3>
                     <p className="text-sm text-gray-300 mt-2">{item.desc}</p>
                   </motion.div>
@@ -464,7 +462,7 @@ export default function Aircraft() {
               transition={{ duration: 0.6 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
               style={{
-                borderBottom: `1.5px dashed #0077b5`,
+                borderBottom: `1.5px dashed #fff`,
               }}
             >
               <motion.button
@@ -478,7 +476,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "technical" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ArrowDownToDot className="text-[#3b82f6]" />
+                  <ArrowDownToDot className="text-[#fff]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -534,7 +532,7 @@ export default function Aircraft() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
               style={{
-                borderBottom: `1.5px dashed #0077b5`,
+                borderBottom: `1.5px dashed #fff`,
               }}
             >
               <motion.button
@@ -548,7 +546,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "equipment" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ArrowDownToDot className="text-[#3b82f6]" />
+                  <ArrowDownToDot className="text-[#fff]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -606,7 +604,7 @@ export default function Aircraft() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
               style={{
-                borderBottom: `1.5px dashed #0077b5`,
+                borderBottom: `1.5px dashed #fff`,
               }}
             >
               <motion.button
@@ -620,7 +618,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "design" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ArrowDownToDot className="text-[#3b82f6]" />
+                  <ArrowDownToDot className="text-[#fff]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -678,7 +676,7 @@ export default function Aircraft() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
               style={{
-                borderBottom: `1.5px dashed #0077b5`,
+                borderBottom: `1.5px dashed #fff`,
               }}
             >
               <motion.button
@@ -692,7 +690,7 @@ export default function Aircraft() {
                   animate={{ rotate: expandedSection === "dimensions" ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ArrowDownToDot className="text-[#3b82f6]" />
+                  <ArrowDownToDot className="text-[#fff]" />
                 </motion.span>
               </motion.button>
               <AnimatePresence>
@@ -744,7 +742,7 @@ export default function Aircraft() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4 bg-gradient-to-tr from-black/90 to-[#0077b5]/70"
+                className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4 "
                 onClick={closeTooltip}
                 role="dialog"
                 aria-labelledby="item-details-title"
@@ -778,7 +776,7 @@ export default function Aircraft() {
                     href="/contactus"
                     whileHover={{
                       scale: 1.05,
-                      backgroundColor: "#0077b5", // Tailwind gray-600 equivalent, slightly darker
+                      backgroundColor: "#fff", // Tailwind gray-600 equivalent, slightly darker
                       
                     }}
                     whileTap={{ scale: 0.95 }}

@@ -157,7 +157,7 @@ export default function ContactUs() {
             className="lg:col-span-2 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-10 shadow-lg shadow-black/40"
           >
             <h2 className="text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
-              <FaAmbulance className="text-green-400" size={32} /> Contact Dragale Aviation
+              <FaAmbulance className="text-gray-400" size={32} /> Contact Dragale Aviation
             </h2>
             <p className="text-gray-300 mb-8 max-w-lg">
               Reach out for inquiries about our air ambulance services or to coordinate emergency transport.
@@ -175,7 +175,7 @@ export default function ContactUs() {
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.6 }}
-                className="h-full bg-green-500 rounded-full shadow-lg"
+                className="h-full bg-gray-500 rounded-full shadow-lg"
               />
             </div>
 
@@ -261,7 +261,7 @@ export default function ContactUs() {
                       aria-invalid={!!error}
                       aria-describedby={error ? `${id}-error` : undefined}
                       className={`mt-1 w-full rounded-xl bg-white/10 border ${error ? "border-red-500" : "border-white/20"
-                        } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-0 transition duration-300 shadow-sm`}
+                        } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm`}
                     />
                     {error && (
                       <p id={`${id}-error`} className="mt-1 text-xs text-red-400 select-none">
@@ -290,7 +290,7 @@ export default function ContactUs() {
                     placeholder="Your message here..."
                     rows={6}
                     className={`mt-1 w-full rounded-xl bg-white/10 border ${errors.message ? "border-red-500" : "border-white/20"
-                      } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-0 transition duration-300 shadow-sm resize-y`}
+                      } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm resize-y`}
                   />
                   {errors.message && (
                     <p id="message-error" className="mt-1 text-xs text-red-400 select-none">
@@ -312,7 +312,7 @@ export default function ContactUs() {
                     required
                     aria-invalid={!!errors.consent}
                     aria-describedby={errors.consent ? "consent-error" : undefined}
-                    className="h-5 w-5 rounded-md text-green-400 border-white/30 bg-white/10 focus:ring-green-400 transition"
+                    className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
                   />
                   <div className="text-sm text-gray-300">
                     <span className="font-semibold select-none">Consent to Use Personal Information</span>
@@ -334,7 +334,7 @@ export default function ContactUs() {
                     name="marketingConsent"
                     checked={formData.marketingConsent}
                     onChange={handleCheckboxChange}
-                    className="h-5 w-5 rounded-md text-green-400 border-white/30 bg-white/10 focus:ring-green-400 transition"
+                    className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
                   />
                   <div className="text-sm text-gray-300">
                     <span className="font-semibold select-none">Optional Marketing Communication</span>
@@ -352,16 +352,16 @@ export default function ContactUs() {
                 whileTap={{ scale: 0.95 }}
                 className={`
                           mt-8 w-full sm:w-auto
-                          bg-gradient-to-r from-green-500 to-green-600
+                          bg-gradient-to-r from-gray-500 to-gray-600
                           text-white font-semibold py-3 px-10 rounded-full
                           relative overflow-hidden
-                          border-2 border-dashed border-green-400
-                          shadow-lg shadow-green-800/60
+                          border-2 border-dashed border-gray-400
+                          shadow-lg shadow-gray-800/60
                           flex items-center justify-center gap-3
                           transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed
                           
                           before:absolute before:inset-0 before:rounded-full
-                          before:border-2 before:border-dashed before:border-green-300
+                          before:border-2 before:border-dashed before:border-gray-300
                           before:pointer-events-none before:opacity-40 before:blur-sm
                           before:transition-opacity before:duration-300
                           
@@ -369,7 +369,7 @@ export default function ContactUs() {
                           hover:before:animate-dash-border
 
                           after:absolute after:inset-[-4px] after:rounded-full
-                          after:border-4 after:border-solid after:border-green-400
+                          after:border-4 after:border-solid after:border-gray-400
                           after:opacity-30 after:blur-lg
                           after:pointer-events-none
                           hover:after:opacity-60
@@ -424,7 +424,7 @@ export default function ContactUs() {
                     whileHover={{ x: 6 }}
                     className="flex items-start gap-4"
                   >
-                    <Icon className="text-green-400 text-3xl mt-1" />
+                    <Icon className="text-gray-400 text-3xl mt-1" />
                     <div>
                       <h4 className="text-lg font-semibold text-white">{title}</h4>
                       <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
@@ -443,11 +443,11 @@ export default function ContactUs() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6 }}
-                className="text-gray-300 italic relative before:content-['“'] before:text-green-400 before:absolute before:-left-4 before:-top-2 before:text-5xl"
+                className="text-gray-300 italic relative before:content-['“'] before:text-gray-400 before:absolute before:-left-4 before:-top-2 before:text-5xl"
               >
                 {testimonials[currentTestimonial].quote}
               </motion.blockquote>
-              <p className="mt-4 text-green-400 font-semibold">{testimonials[currentTestimonial].author}</p>
+              <p className="mt-4 text-gray-400 font-semibold">{testimonials[currentTestimonial].author}</p>
               <p className="text-gray-400 text-sm">{testimonials[currentTestimonial].role}</p>
             </section> */}
           </motion.aside>
@@ -474,7 +474,7 @@ export default function ContactUs() {
                 transition={{ type: "spring", stiffness: 100 }}
               >
                 <div className="flex flex-col items-center text-center space-y-4">
-                  <FaCheckCircle className="text-green-400 text-5xl" />
+                  <FaCheckCircle className="text-gray-400 text-5xl" />
                   <h3 id="success-modal-title" className="text-2xl font-bold text-white">
                     Thank You!
                   </h3>
@@ -485,7 +485,7 @@ export default function ContactUs() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsSubmitted(false)}
-                    className="bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-8 rounded-full font-semibold text-sm shadow-lg shadow-green-700/50 hover:from-green-700 hover:to-green-800 transition duration-300"
+                    className="bg-gradient-to-r from-gray-600 to-gray-700 text-white py-3 px-8 rounded-full font-semibold text-sm shadow-lg shadow-gray-700/50 hover:from-gray-700 hover:to-gray-800 transition duration-300"
                   >
                     Close
                   </motion.button>

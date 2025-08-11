@@ -50,7 +50,7 @@ export default function AdvisorsPage() {
                 transition={{ duration: 0.8 }}
 
                 style={{
-                    borderBottom: `1.5px dashed #0077b5`,
+                    borderBottom: `1.5px dashed #fff`,
                 }}
                 className=" relative text-left pb-5 mt-20 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12 pb-12 border-b border-white/20"
             >

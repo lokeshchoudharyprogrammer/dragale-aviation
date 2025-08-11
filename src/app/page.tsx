@@ -1,8 +1,7 @@
 'use client';
 
-import LoadingScreen from '@/components/LoadingScreen';
 import { CirclePause, Play, Volume, VolumeOff } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import About from './about/page';
 import AdvisorsPage from './advisors/page';
 import ContactUs from './contactus/page';
@@ -12,7 +11,7 @@ export default function Leading() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isVoicePlaying, setIsVoicePlaying] = useState(false);
   const ref = useRef(null);
-const [loading, setLoading] = useState(true)
+
 
   const handleStopVideo = () => {
     if (ref.current) {
@@ -52,15 +51,15 @@ const [loading, setLoading] = useState(true)
   };
 
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 5000) // Show model for 4 seconds
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setLoading(false)
+  //   }, 5000) // Show model for 4 seconds
 
-    return () => clearTimeout(timer)
-  }, [])
+  //   return () => clearTimeout(timer)
+  // }, [])
 
-  if (loading) return <LoadingScreen onFinish={() => setLoading(false)} />
+  // if (loading) return <LoadingScreen onFinish={() => setLoading(false)} />
 
   return (
     <div className="pt-13 flex flex-col min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white">

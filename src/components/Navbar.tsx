@@ -1,16 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Home, Plane, Info, Phone, Briefcase } from "lucide-react";
+import { motion, useMotionValue } from "framer-motion";
+import { Briefcase, Home, Info, Phone, Plane } from "lucide-react";
 import Link from "next/link";
+import { useRef } from "react";
 
 const navItems = [
-  { icon: Home, href: "/", label: "Home", color: "#ec4899" },
-  { icon: Plane, href: "/products", label: "Products", color: "#3b82f6" },
-  { icon: Info, href: "/about", label: "About", color: "#8b5cf6" },
-  { icon: Phone, href: "/contactus", label: "Contact", color: "#22c55e" },
-  { icon: Briefcase, href: "/advisors", label: "Advisors", color: "#facc15" },
+  { icon: Home, href: "/", label: "Home", color: "#fff" },
+  { icon: Plane, href: "/products", label: "Products", color: "#fff" },
+  { icon: Info, href: "/about", label: "About", color: "#fff" },
+  { icon: Phone, href: "/contactus", label: "Contact", color: "#fff" },
+  { icon: Briefcase, href: "/advisors", label: "Advisors", color: "#fff" },
 ];
 
 function MagneticIcon({ icon: Icon, href, label, color }: typeof navItems[0]) {
