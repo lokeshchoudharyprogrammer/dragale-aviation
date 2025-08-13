@@ -22,6 +22,7 @@ const teamData = [
     `,
     img: "/founders/shivanshu.png",
     linkedin: "https://www.linkedin.com/in/shivanshu-tank-556b00232/",
+
   },
   {
     name: "Syed Mujahid",
@@ -128,6 +129,9 @@ export default function About() {
               At Dragale Aviation, we’re redefining emergency medical transport with India’s first eVTOL air ambulance. Our mission is to deliver rapid, safe, and innovative critical care, ensuring every patient reaches help when it matters most.
             </p>
           </motion.div>
+
+
+
 
 
 
