@@ -20,14 +20,15 @@ const teamData = [
       - Led development of eVTOL prototype
       - Recognized as a Young Innovator by India Tech Awards
     `,
-    img: "/founders/shivanshu.jpg",
+    img: "/founders/shivanshu.png",
     linkedin: "https://www.linkedin.com/in/shivanshu-tank-556b00232/",
   },
   {
     name: "Syed Mujahid",
     role: "Co-Founder & CTO",
     bio: `
-      Syed Mujahid, an Aerospace Engineering expert, leads the design of Dragale’s eVTOL air ambulance. His experience at Mallard Enterprises and as a Youth Ambassador at the Advanced Air Mobility Institute ensures cutting-edge innovation and safety in every system.
+      Syed Mujahid, an Aerospace Engineering expert, leads the design of Dragale’s eVTOL air ambulance. His experience at Mallard Enterprises and as a Youth Ambassador & Advisor at the Advanced Air Mobility Institute ensures cutting-edge innovation and safety in every system.
+
     `,
     achievements: `
       - Designed core eVTOL propulsion system
@@ -208,7 +209,7 @@ export default function About() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.1 }}
-                    className="w-24 h-24 relative rounded-full overflow-hidden shadow-lg mx-auto mb-4"
+                    className="w-24 h-24 relative rounded-full overflow-hidden shadow-lg mx-auto mb-4 bg-white"
                   >
                     <Image
                       src={person.img}
@@ -292,7 +293,7 @@ export default function About() {
                   </motion.button>
                   <div className="flex flex-col sm:flex-row gap-6">
                     {/* Image */}
-                    <div className="w-32 h-32 relative rounded-full overflow-hidden shadow-xl flex-shrink-0 mx-auto sm:mx-0">
+                    <div className="w-32 h-32 relative rounded-full overflow-hidden shadow-xl flex-shrink-0 mx-auto sm:mx-0 bg-white">
                       <Image
                         src={selectedMember.img}
                         alt={`Photo of ${selectedMember.name}`}
