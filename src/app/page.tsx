@@ -118,10 +118,10 @@ export default function Leading() {
 
         {/* About Company Section */}
         <section className="w-[90%] max-w-4xl mx-auto text-center my-10 px-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h1 className="font-bold text-3xl md:text-4xl text-3xl sm:text-4xl font-bold text-white mb-4">
             Dragale Aviation
           </h1>
-          <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+          <p className="font-medium text-gray-300 text-sm sm:text-base leading-relaxed">
             At <span className="font-semibold text-white">Dragale Aviation</span>, we’re pioneering emergency medical transport with India’s first <span className="font-semibold text-white">eVTOL air ambulance</span>. Our mission is to deliver rapid, safe, and innovative critical care—ensuring patients reach help swiftly when every second counts.
           </p>
         </section>

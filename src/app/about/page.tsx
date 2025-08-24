@@ -125,7 +125,7 @@ export default function About() {
             >
               Dragale Aviation
             </h1>
-            <p className="text-gray-300 text-base leading-relaxed max-w-3xl">
+            <p className="font-stretch-normal line-clamp-3 text-gray-300 text-base leading-relaxed max-w-3xl">
               At Dragale Aviation, we’re redefining emergency medical transport with India’s first eVTOL air ambulance. Our mission is to deliver rapid, safe, and innovative critical care, ensuring every patient reaches help when it matters most.
             </p>
           </motion.div>
@@ -148,7 +148,7 @@ export default function About() {
             <h2 className="text-2xl font-semibold mb-4" style={{ color: primaryColor }}>
               Our Vision
             </h2>
-            <p className="text-gray-400 text-base max-w-3xl">
+            <p className="font-stretch-normal line-clamp-3  text-gray-400 text-base max-w-3xl">
               We envision a future where advanced air mobility transforms lives. By pioneering eVTOL technology, Dragale Aviation aims to make emergency medical transport accessible, efficient, and sustainable across India and beyond.
             </p>
           </motion.div>
@@ -201,7 +201,7 @@ export default function About() {
                   whileInView="animate"
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-xl border border-white/20 hover:border-gray-500 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 group"
+                  className="font-stretch-normal line-clamp-3 relative bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-xl border border-white/20 hover:border-gray-500 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 group"
                   onClick={() => handleCardClick(person)}
                   role="button"
                   tabIndex={0}
@@ -234,12 +234,12 @@ export default function About() {
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
                     className="text-center"
                   >
-                    <h3 className="text-lg font-semibold text-white">{person.name}</h3>
+                    <h3 className="font-stretch-normal line-clamp-3 text-lg font-semibold text-white">{person.name}</h3>
                     <motion.span
                       variants={badgeVariants}
                       initial="initial"
                       whileHover="hover"
-                      className="bg-gray-900/30 text-#fff-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-#fff-500/40"
+                      className="font-stretch-normal line-clamp-3  bg-gray-900/30 text-#fff-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border border-#fff-500/40"
                     >
                       {person.role}
                     </motion.span>
@@ -310,14 +310,14 @@ export default function About() {
 
                     {/* Member Info */}
                     <div className="flex-1">
-                      <h3 id="team-member-name" className="text-2xl font-bold" style={{ color: primaryColor }}>
+                      <h3 id="team-member-name" className="font-stretch-normal line-clamp-3  text-2xl font-bold" style={{ color: primaryColor }}>
                         {selectedMember.name}
                       </h3>
                       <motion.span
                         variants={badgeVariants}
                         initial="initial"
                         whileHover="hover"
-                        className="bg-gray-900/30 text-#fff-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border "
+                        className="font-stretch-normal line-clamp-3  bg-gray-900/30 text-#fff-300 text-xs py-1 px-3 rounded-full font-medium mt-2 inline-block border "
                       >
                         {selectedMember.role}
                       </motion.span>

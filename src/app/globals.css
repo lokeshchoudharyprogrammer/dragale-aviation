@@ -1,17 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700&display=swap");
 @import "tailwindcss";
+
+
+
 /* Glass effect on the navbar */
 .navbar-glass {
-  backdrop-filter: blur(10px); /* Adds blur to the background */
-  background-color: rgba(255, 255, 255, 0.162); /* Semi-transparent white */
+  backdrop-filter: blur(10px);
+  /* Adds blur to the background */
+  background-color: rgba(255, 255, 255, 0.162);
+  /* Semi-transparent white */
 }
+
+* {
+  font-family: 'Archivo';
+}
+
+
+
 
 @keyframes float {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -21,6 +36,7 @@
   0% {
     stroke-dashoffset: 0;
   }
+
   100% {
     stroke-dashoffset: 1000;
   }

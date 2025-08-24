@@ -67,12 +67,12 @@ export default function AdvisorsPage() {
 
                 {/* Name + Title + Social */}
                 <div className="flex-1 text-center md:text-left">
-                    <h1 className="text-5xl font-extrabold tracking-tight text-white leading-tight">
+                    <h1 className="font-stretch-normal line-clamp-3 text-5xl font-extrabold tracking-tight text-white leading-tight">
                         Dan Sloat
                     </h1>
                     <div className="w-24 h-[2px] bg-white mx-auto md:mx-0 mt-2 rounded-full"></div>
 
-                    <p className="mt-4 text-xl text-gray-300 font-medium leading-relaxed max-w-2xl">
+                    <p className="font-stretch-normal line-clamp-3  mt-4 text-xl text-gray-300 font-medium leading-relaxed max-w-2xl">
                         Founder & President, Advanced Air Mobility Institute
                     </p>
 

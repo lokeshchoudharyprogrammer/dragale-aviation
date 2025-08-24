@@ -139,6 +139,8 @@ export default function Aircraft() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [currentHighlight, setCurrentHighlight] = useState(0);
   const modalRef = useRef(null);
+  const fullText = "AyuRatha eVTOL Ambulance";
+  const [displayedText, setDisplayedText] = useState("");
   // @ts-ignore
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
@@ -192,6 +194,15 @@ export default function Aircraft() {
     }
   }, [selectedItem]);
 
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayedText(fullText.slice(0, i + 1));
+      i++;
+      if (i === fullText.length) clearInterval(interval);
+    }, 80); // typing speed (ms)
+    return () => clearInterval(interval);
+  }, []);
   const cardVariants = {
     initial: { opacity: 0, y: 20 },
     animate: {
@@ -251,9 +262,7 @@ export default function Aircraft() {
           })}
         </script>
         <style>{`
-          body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          }
+          
           @media (prefers-reduced-motion: reduce) {
             .motion-div, .motion-h1, .motion-p, .motion-a, .motion-button {
               transition: none !important;
@@ -316,16 +325,21 @@ export default function Aircraft() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                
+
               >
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#fff]/60 flex items-center justify-center gap-2"
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="font-archivo text-center flex items-center justify-center gap-3 
+                 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg"
                 >
-                  <FaRocket className="text-[#fff]" /> AyuRatha eVTOL Ambulance
+                  <FaRocket className="text-white/90 text-4xl animate-bounce" />
+                  <span className="border-r-2 border-white/70 pr-1 animate-pulse">
+                    {displayedText}
+                  </span>
                 </motion.h1>
+
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -338,7 +352,7 @@ export default function Aircraft() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="mt-4 max-w-3xl mx-auto text-sm sm:text-base text-gray-300"
+                  className="font-stretch-normal mt-4 max-w-3xl mx-auto text-sm sm:text-base text-gray-300"
                   id="hero-desc"
                 >
                   The AyuRatha (DX1) delivers life-saving care with advanced medical systems and VTOL precision.                </motion.p>
@@ -764,7 +778,7 @@ export default function Aircraft() {
                     className="absolute top-4 right-4 text-xl text-gray-300 hover:text-gray-400 transition-all "
                     aria-label="Close modal"
                   >
-                    <CircleX/>
+                    <CircleX />
                   </motion.button>
                   <h3 id="item-details-title" className="text-lg font-semibold text-white">
                     {/*  @ts-ignore */}
@@ -777,7 +791,7 @@ export default function Aircraft() {
                     whileHover={{
                       scale: 1.05,
                       backgroundColor: "#fff", // Tailwind gray-600 equivalent, slightly darker
-                      
+
                     }}
                     whileTap={{ scale: 0.95 }}
                     className="mt-4 inline-flex border-2 border-dashed border-white/100 bg-gray-700 text-white py-2 px-8 rounded-full font-semibold text-sm shadow-md transition duration-300"

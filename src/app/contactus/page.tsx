@@ -145,6 +145,8 @@ export default function ContactUs() {
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
+
+
   return (
     <>
       <div className="pt-40 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24">
@@ -156,10 +158,10 @@ export default function ContactUs() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-10 shadow-lg shadow-black/40"
           >
-            <h2 className="text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
-              <FaAmbulance className="text-gray-400" size={32} /> Contact Dragale Aviation
+            <h2 className="font-stretch-normal line-clamp-3 text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
+              <FaAmbulance className="font-stretch-normal line-clamp-3 text-gray-400" size={32} /> Contact Dragale Aviation
             </h2>
-            <p className="text-gray-300 mb-8 max-w-lg">
+            <p className="font-stretch-normal line-clamp-3 text-gray-300 mb-8 max-w-lg">
               Reach out for inquiries about our air ambulance services or to coordinate emergency transport.
             </p>
 
@@ -275,7 +277,7 @@ export default function ContactUs() {
                 <div className="sm:col-span-2 relative">
                   <label
                     htmlFor="message"
-                    className="flex items-center gap-2 text-gray-300 font-semibold text-sm select-none"
+                    className="font-stretch-normal line-clamp-3 flex items-center gap-2 text-gray-300 font-semibold text-sm select-none"
                   >
                     <FaComment /> Message <span className="text-red-400">*</span>
                   </label>
@@ -289,7 +291,7 @@ export default function ContactUs() {
                     aria-describedby={errors.message ? "message-error" : undefined}
                     placeholder="Your message here..."
                     rows={6}
-                    className={`mt-1 w-full rounded-xl bg-white/10 border ${errors.message ? "border-red-500" : "border-white/20"
+                    className={`font-stretch-normal line-clamp-3 mt-1 w-full rounded-xl bg-white/10 border ${errors.message ? "border-red-500" : "border-white/20"
                       } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm resize-y`}
                   />
                   {errors.message && (
@@ -315,7 +317,7 @@ export default function ContactUs() {
                     className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
                   />
                   <div className="text-sm text-gray-300">
-                    <span className="font-semibold select-none">Consent to Use Personal Information</span>
+                    <span className="font-stretch-normal line-clamp-3 font-semibold select-none">Consent to Use Personal Information</span>
                     <p className="mt-1 text-xs max-w-lg leading-snug">
                       We collect your name, email, contact number, company, and message to respond to your inquiry. Your data will be retained only as long as necessary.
                     </p>
@@ -351,6 +353,8 @@ export default function ContactUs() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`
+                  
+                         font-stretch-normal line-clamp-3
                           mt-8 w-full sm:w-auto
                           bg-gradient-to-r from-gray-500 to-gray-600
                           text-white font-semibold py-3 px-10 rounded-full

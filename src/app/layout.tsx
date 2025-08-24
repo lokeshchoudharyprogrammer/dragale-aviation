@@ -1,20 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Archivo } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 
 import { Analytics } from "@vercel/analytics/react"
 import { Footer } from "../components/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const archivo = Archivo({
   subsets: ["latin"],
+  weight: ["100", "400", "700"], // thin, normal, bold
+  variable: "--font-archivo",    // optional, for Tailwind
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 
 
@@ -33,7 +40,7 @@ export const metadata: Metadata = {
     shortcut: "./founders/newlogo.png",
     apple: "./founders/newlogo.png",
   }
-  
+
 };
 
 
@@ -46,9 +53,12 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${archivo.variable}  antialiased`}
+       
         
+      >
+
         <Navbar />
         {children}
         <Analytics />
