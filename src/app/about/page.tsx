@@ -20,7 +20,7 @@ const teamData = [
       - Led development of eVTOL prototype
       - Recognized as a Young Innovator by India Tech Awards
     `,
-    img: "/founders/shivanshu.png",
+    img: "/founders/shivanshu.jpeg",
     linkedin: "https://www.linkedin.com/in/shivanshu-tank-556b00232/",
 
   },

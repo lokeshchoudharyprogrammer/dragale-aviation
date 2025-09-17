@@ -6,6 +6,7 @@ import About from './about/page';
 import AdvisorsPage from './advisors/page';
 import ContactUs from './contactus/page';
 import Aircraft from './products/page';
+import AirplaneModel from '@/components/AirplaneModel';
 
 export default function Leading() {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -69,7 +70,7 @@ export default function Leading() {
         <section
           className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden  "
           style={{ height: '60vh', minHeight: '300px', border: `1.2px dashed white`, }}
-          
+
         >
           <video
             autoPlay
@@ -127,12 +128,16 @@ export default function Leading() {
         </section>
       </main>
 
+      {/* <section className="w-[90%] max-w-7xl mx-auto my-12 rounded-3xl overflow-hidden" style={{ height: '70vh' }}>
+        <AirplaneModel />
+      </section> */}
       {/* Sticky Footer */}
       <div className=' bg-gradient-to-br from-gray-900 to-black text-white'>
+
         <Aircraft />
         <About />
-        <AdvisorsPage/>
-        
+        <AdvisorsPage />
+
         <ContactUs />
       </div>
 
