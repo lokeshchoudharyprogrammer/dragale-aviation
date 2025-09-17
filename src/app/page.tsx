@@ -16,7 +16,7 @@ export default function Leading() {
   const handleStopVideo = () => {
     if (ref.current) {
 
-      // @ts-expect-error
+      // @ts-expect-error this crt deont ask me again ok
       ref.current?.pause();
 
       setIsPlaying(false);
@@ -29,7 +29,7 @@ export default function Leading() {
     if (ref.current) {
 
 
-      // @ts-expect-error
+     // @ts-expect-error this crt deont ask me again ok
       ref.current?.play();
 
       setIsPlaying(true);
@@ -41,9 +41,9 @@ export default function Leading() {
   const handlePlayVoice = () => {
     setIsVoicePlaying(!isVoicePlaying);
     if (ref.current) {
-      // @ts-expect-error
+    // @ts-expect-error this crt deont ask me again ok
       ref.current.muted = isVoicePlaying;
-      // @ts-expect-error
+    // @ts-expect-error this crt deont ask me again ok
       ref.current?.play();
 
       setIsPlaying(true);
