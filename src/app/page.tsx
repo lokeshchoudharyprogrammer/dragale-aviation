@@ -6,7 +6,6 @@ import About from './about/page';
 import AdvisorsPage from './advisors/page';
 import ContactUs from './contactus/page';
 import Aircraft from './products/page';
-import AirplaneModel from '@/components/AirplaneModel';
 
 export default function Leading() {
   const [isPlaying, setIsPlaying] = useState(true);
