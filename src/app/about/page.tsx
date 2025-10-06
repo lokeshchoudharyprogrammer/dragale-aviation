@@ -130,11 +130,6 @@ export default function About() {
             </p>
           </motion.div>
 
-
-
-
-
-
           {/* Vision */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
