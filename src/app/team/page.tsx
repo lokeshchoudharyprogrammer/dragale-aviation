@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import TeamCard from "@/components/TeamCard";
 import { Person } from "../../../utils/types";
 import TeamModal from "@/components/TeamModal";
-export const teamData = [
+
+const teamData = [
     {
         name: "Ankit Soni",
         role: "Design Director",

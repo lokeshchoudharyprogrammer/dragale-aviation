@@ -195,7 +195,6 @@ export default function About() {
             )
           }
 
-
           {/* Modal Pop-Up */}
           <TeamModal
             selectedMember={selectedMember}
