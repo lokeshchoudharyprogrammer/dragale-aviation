@@ -6,6 +6,7 @@ import About from './about/page';
 import AdvisorsPage from './advisors/page';
 import ContactUs from './contactus/page';
 import Aircraft from './products/page';
+import TeamPage from './team/page';
 
 export default function Leading() {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -29,7 +30,7 @@ export default function Leading() {
     if (ref.current) {
 
 
-     // @ts-expect-error this crt deont ask me again ok
+      // @ts-expect-error this crt deont ask me again ok
       ref.current?.play();
 
       setIsPlaying(true);
@@ -41,9 +42,9 @@ export default function Leading() {
   const handlePlayVoice = () => {
     setIsVoicePlaying(!isVoicePlaying);
     if (ref.current) {
-    // @ts-expect-error this crt deont ask me again ok
+      // @ts-expect-error this crt deont ask me again ok
       ref.current.muted = isVoicePlaying;
-    // @ts-expect-error this crt deont ask me again ok
+      // @ts-expect-error this crt deont ask me again ok
       ref.current?.play();
 
       setIsPlaying(true);
@@ -136,7 +137,7 @@ export default function Leading() {
         <Aircraft />
         <About />
         <AdvisorsPage />
-
+        <TeamPage />
         <ContactUs />
       </div>
 

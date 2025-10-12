@@ -149,9 +149,8 @@ export default function ContactUs() {
 
   return (
     <>
-      <div className="pt-40 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24">
+      <div className="pt-10 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24">
         <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Form Section */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
