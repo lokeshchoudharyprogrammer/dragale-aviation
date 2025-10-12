@@ -43,8 +43,8 @@ Passionate about technology and human factors, he creates impactful design solut
     `,
         img: "/team/sujay.png",
         linkedin: "",
-    },
-    
+    }
+
 ];
 
 
@@ -74,7 +74,7 @@ const TeamPage: React.FC = () => {
     };
 
     return (
-        <section className="min-h-screen  bg-black text-white px-6 py-30 flex flex-col items-center justify-center">
+        <section className="min-h-screen  bg-black text-white px-6 py-30 flex flex-col  items-center justify-center p-8 w-[80%">
             <div>
                 <motion.div
                     initial={{ opacity: 0, y: -40 }}
@@ -91,13 +91,14 @@ const TeamPage: React.FC = () => {
                 </motion.div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 items-center justify-center w-6xl">
+            <div className="flex gap-10 flex-wrap items-center items-center justify-center p-8 w-[80%]">
 
                 <TeamCard
                     teamData={teamData}
                     cardVariants={cardVariants}
                     badgeVariants={badgeVariants}
                     handleCardClick={(person) => handleCardClick(person as Person)}
+                    width={"40%"}
                 />
 
             </div>
