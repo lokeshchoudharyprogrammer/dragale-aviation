@@ -44,6 +44,7 @@ Passionate about technology and human factors, he creates impactful design solut
         img: "/team/sujay.png",
         linkedin: "",
     },
+    
 ];
 
 
@@ -73,38 +74,33 @@ const TeamPage: React.FC = () => {
     };
 
     return (
-        <section className="min-h-screen  bg-black text-white px-6 py-30 flex flex-col items-center">
-            <motion.div
-                initial={{ opacity: 0, y: -40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="max-w-5xl mb-16 text-center" // 🔥 change from text-center → text-left
-            >
-                <h2 className="text-4xl sm:text-5xl font-semibold mb-4 text-white leading-tight">
-                    Meet Our Team
-                </h2>
-                <p className="text-gray-300 text-lg leading-relaxed">
-                    A group of talented individuals dedicated to building thoughtful and high-quality products.
-                </p>
-            </motion.div>
+        <section className="min-h-screen  bg-black text-white px-6 py-30 flex flex-col items-center justify-center">
+            <div>
+                <motion.div
+                    initial={{ opacity: 0, y: -40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="max-w-5xl mb-16 text-center" // 🔥 change from text-center → text-left
+                >
+                    <h2 className="text-4xl sm:text-5xl font-semibold mb-4 text-white leading-tight">
+                        Meet Our Team
+                    </h2>
+                    <p className="text-gray-300 text-lg leading-relaxed">
+                        A group of talented individuals dedicated to building thoughtful and high-quality products.
+                    </p>
+                </motion.div>
+            </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 items-center justify-center w-6xl">
 
-
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl"
-            >
                 <TeamCard
                     teamData={teamData}
                     cardVariants={cardVariants}
                     badgeVariants={badgeVariants}
                     handleCardClick={(person) => handleCardClick(person as Person)}
                 />
-            </motion.div>
 
-
+            </div>
             {isModalOpen && <TeamModal
                 selectedMember={selectedMember}
                 isOpen={isModalOpen}
