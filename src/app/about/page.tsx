@@ -1,14 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion, useInView } from "framer-motion";
-import { CircleX } from "lucide-react";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { FaLinkedin } from "react-icons/fa";
-import Tilt from "react-parallax-tilt";
-import { Person } from "../../../utils/types";
 import TeamCard from "@/components/TeamCard";
 import TeamModal from "@/components/TeamModal";
+import { AnimatePresence, motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { Person } from "../../../utils/types";
 import TeamPage from "../team/page";
 
 const teamData = [
