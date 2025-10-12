@@ -54,6 +54,13 @@ export default function About() {
   const primaryColor = "#fff";
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [showTeam, setShowTeam] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === "/about") {
+      setShowTeam(true);
+    }
+  }, []);
 
   const handleCardClick = (person: any) => {
     setSelectedMember(person);
@@ -190,7 +197,7 @@ export default function About() {
 
           {/* Team Section */}
           {
-            location.pathname === "/about" && (
+            showTeam && (
               <TeamPage />
             )
           }
