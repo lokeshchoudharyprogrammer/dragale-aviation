@@ -183,6 +183,7 @@ export default function About() {
             className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 justify-center  items-center"
             aria-label="Team Members"
           >
+            
             <TeamCard
               teamData={teamData}
               cardVariants={cardVariants}
