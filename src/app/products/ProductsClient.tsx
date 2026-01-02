@@ -149,10 +149,12 @@ export default function Aircraft({
 }: {
   headingLevel?: 1 | 2;
 }) {
+  type SelectedItem = { name: string; desc: string };
+
   const statsRef = useRef(null);
   const isStatsInView = useInView(statsRef, { once: true });
   const [expandedSection, setExpandedSection] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
   const [currentHighlight, setCurrentHighlight] = useState(0);
   const modalRef = useRef(null);
   const fullText = 'AyuRatha eVTOL Ambulance';
@@ -171,7 +173,7 @@ export default function Aircraft({
     setExpandedSection(expandedSection === section ? null : section);
   };
   // @ts-ignore
-  const handleItemClick = (item) => {
+  const handleItemClick = (item: SelectedItem) => {
     setSelectedItem(item);
   };
 
@@ -842,11 +844,11 @@ export default function Aircraft({
                     className="text-lg font-semibold text-white"
                   >
                     {/*  @ts-ignore */}
-                    {selectedItem.name}
+                    {selectedItem?.name}
                   </h3>
                   {/*  @ts-ignore */}
                   <p className="text-gray-200 text-sm mt-4">
-                    {selectedItem.desc}
+                    {selectedItem?.desc}
                   </p>
                   <motion.a
                     href="/contact-us"
