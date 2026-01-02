@@ -153,11 +153,11 @@ export default function Leading() {
       </section> */}
       {/* Sticky Footer */}
       <div className=" bg-gradient-to-br from-gray-900 to-black text-white">
-        <ProductsClient />
-        <AboutClient />
-        <AdvisorsClient />
-        <TeamClient />
-        <ContactClient />
+        <ProductsClient headingLevel={2} />
+        <AboutClient headingLevel={2} />
+        <AdvisorsClient headingLevel={2} />
+        <TeamClient headingLevel={2} />
+        <ContactClient headingLevel={2} />
       </div>
     </div>
   );

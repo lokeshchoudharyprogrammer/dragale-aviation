@@ -41,7 +41,7 @@ const teamData = [
   // },
 ];
 
-export default function About() {
+export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
   const ref = useRef(null);
   const modalRef = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -134,16 +134,29 @@ export default function About() {
               borderBottom: `1.5px dashed #fff`,
             }}
           >
-            <h1
-              className="text-3xl sm:text-4xl font-extrabold mb-4"
-              style={{
-                background: `#fff`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Dragale Aviation
-            </h1>
+            {headingLevel === 2 ? (
+              <h2
+                className="text-3xl sm:text-4xl font-extrabold mb-4"
+                style={{
+                  background: `#fff`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Dragale Aviation
+              </h2>
+            ) : (
+              <h1
+                className="text-3xl sm:text-4xl font-extrabold mb-4"
+                style={{
+                  background: `#fff`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Dragale Aviation
+              </h1>
+            )}
             <p className="font-stretch-normal line-clamp-3 text-gray-300 text-base leading-relaxed max-w-3xl">
               At Dragale Aviation, we’re redefining emergency medical transport
               with India’s first eVTOL air ambulance. Our mission is to deliver
@@ -217,7 +230,7 @@ export default function About() {
           </section>
 
           {/* Team Section */}
-          {showTeam && <TeamPage />}
+          {showTeam && <TeamPage headingLevel={2} />}
 
           {/* Modal Pop-Up */}
           <TeamModal
