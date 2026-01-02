@@ -15,7 +15,7 @@ const ProductsClient = dynamic(() => import('./products/ProductsClient'), {
   ssr: false,
 });
 const TeamClient = dynamic(() => import('./team/TeamClient'), { ssr: false });
-const ContactClient = dynamic(() => import('./contactus/ContactClient'), {
+const ContactClient = dynamic(() => import('./contact-us/ContactClient'), {
   ssr: false,
 });
 

@@ -1,19 +1,24 @@
-"use client";
+'use client';
 
-import { motion, useMotionValue } from "framer-motion";
-import { Briefcase, Home, Info, Phone, Plane } from "lucide-react";
-import Link from "next/link";
-import { useRef } from "react";
+import { motion, useMotionValue } from 'framer-motion';
+import { Briefcase, Home, Info, Phone, Plane } from 'lucide-react';
+import Link from 'next/link';
+import { useRef } from 'react';
 
 const navItems = [
-  { icon: Home, href: "/", label: "Home", color: "#fff" },
-  { icon: Plane, href: "/products", label: "Products", color: "#fff" },
-  { icon: Info, href: "/about", label: "About", color: "#fff" },
-  { icon: Phone, href: "/contactus", label: "Contact", color: "#fff" },
-  { icon: Briefcase, href: "/advisors", label: "Advisors", color: "#fff" },
+  { icon: Home, href: '/', label: 'Home', color: '#fff' },
+  { icon: Plane, href: '/products', label: 'Products', color: '#fff' },
+  { icon: Info, href: '/about', label: 'About', color: '#fff' },
+  { icon: Phone, href: '/contact-us', label: 'Contact', color: '#fff' },
+  { icon: Briefcase, href: '/advisors', label: 'Advisors', color: '#fff' },
 ];
 
-function MagneticIcon({ icon: Icon, href, label, color }: typeof navItems[0]) {
+function MagneticIcon({
+  icon: Icon,
+  href,
+  label,
+  color,
+}: (typeof navItems)[0]) {
   const ref = useRef<HTMLDivElement>(null);
 
   // Local motion values for magnetic effect per icon
@@ -40,7 +45,7 @@ function MagneticIcon({ icon: Icon, href, label, color }: typeof navItems[0]) {
     e.currentTarget.style.boxShadow = `0 0 15px ${color}`;
   }
   function handleBlur(e: React.FocusEvent<HTMLDivElement>) {
-    e.currentTarget.style.boxShadow = "";
+    e.currentTarget.style.boxShadow = '';
   }
 
   return (
@@ -51,7 +56,7 @@ function MagneticIcon({ icon: Icon, href, label, color }: typeof navItems[0]) {
         onMouseLeave={handleMouseLeave}
         whileHover={{ scale: 1.3, y: -5, boxShadow: `0 0 18px ${color}` }}
         whileTap={{ scale: 0.9 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         style={{ x: localX, y: localY }}
         className="flex items-center justify-center w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-gray-200 cursor-pointer outline-none relative select-none"
         tabIndex={0}
@@ -62,7 +67,7 @@ function MagneticIcon({ icon: Icon, href, label, color }: typeof navItems[0]) {
         <motion.div
           aria-hidden="true"
           className="absolute inset-0 rounded-full pointer-events-none"
-          style={{ filter: "blur(8px)" }}
+          style={{ filter: 'blur(8px)' }}
           animate={{
             boxShadow: [
               `0 0 8px ${color}`,
@@ -70,9 +75,14 @@ function MagneticIcon({ icon: Icon, href, label, color }: typeof navItems[0]) {
               `0 0 8px ${color}`,
             ],
           }}
-          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+          transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}
         />
-        <Icon size={20} stroke={color} strokeWidth={2} className="relative z-10" />
+        <Icon
+          size={20}
+          stroke={color}
+          strokeWidth={2}
+          className="relative z-10"
+        />
       </motion.div>
     </Link>
   );
@@ -83,7 +93,7 @@ export default function ResponsiveIconNavbar() {
     <motion.div
       className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full w-sm sm:max-w-lg"
       animate={{ y: [0, -2, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
     >
       <nav
         className="
@@ -100,8 +110,8 @@ export default function ResponsiveIconNavbar() {
         {/* Light reflection shimmer */}
         <motion.div
           className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
-          animate={{ x: ["-150%", "150%"] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          animate={{ x: ['-150%', '150%'] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
           aria-hidden="true"
         />
 
