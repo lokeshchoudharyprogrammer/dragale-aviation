@@ -34,10 +34,10 @@ const cardData = [
 ];
 
 export default function Home() {
-  const [selectedCard, setSelectedCard] = useState(null);
+  type SelectedCard = (typeof cardData)[number];
+  const [selectedCard, setSelectedCard] = useState<SelectedCard | null>(null);
   const modalRef = useRef(null);
-  // @ts-ignore
-  const handleCardClick = (card) => {
+  const handleCardClick = (card: SelectedCard) => {
     setSelectedCard(card);
   };
 
@@ -270,12 +270,10 @@ export default function Home() {
                     id="card-details-title"
                     className="text-lg font-semibold text-white"
                   >
-                    {/*  @ts-ignore */}
-                    {selectedCard.desc}
+                    {selectedCard?.desc}
                   </h2>
-                  {/*  @ts-ignore */}
                   <p className="text-gray-200 text-sm mt-4">
-                    {selectedCard.details}
+                    {selectedCard?.details}
                   </p>
                 </motion.div>
               </motion.div>
