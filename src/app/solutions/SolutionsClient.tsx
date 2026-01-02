@@ -1,31 +1,35 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { FaAmbulance } from "react-icons/fa";
-import Tilt from "react-parallax-tilt";
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { FaAmbulance } from 'react-icons/fa';
+import Tilt from 'react-parallax-tilt';
 
 const cardData = [
   {
-    desc: "Seamless VTOL Patient Transport",
-    details: "Our eVTOL design enables vertical takeoff and landing, ensuring rapid access to remote or congested areas for seamless patient transport.",
-    img: "/images/transport.png",
+    desc: 'Seamless VTOL Patient Transport',
+    details:
+      'Our eVTOL design enables vertical takeoff and landing, ensuring rapid access to remote or congested areas for seamless patient transport.',
+    img: '/images/transport.png',
   },
   {
-    desc: "Hospital-to-Hospital Transfers",
-    details: "Efficiently transfer patients between medical facilities with our high-speed eVTOL, reducing transit time for critical care.",
-    img: "/images/hospital.png",
+    desc: 'Hospital-to-Hospital Transfers',
+    details:
+      'Efficiently transfer patients between medical facilities with our high-speed eVTOL, reducing transit time for critical care.',
+    img: '/images/hospital.png',
   },
   {
-    desc: "Live Patient Monitoring System",
-    details: "Real-time monitoring systems track vital signs during transport, ensuring medical teams are informed and prepared.",
-    img: "/images/bed.png",
+    desc: 'Live Patient Monitoring System',
+    details:
+      'Real-time monitoring systems track vital signs during transport, ensuring medical teams are informed and prepared.',
+    img: '/images/bed.png',
   },
   {
-    desc: "Critical Heart Patient Support",
-    details: "Specialized equipment and trained staff provide life-saving care for heart patients during air transport.",
-    img: "/images/heart.png",
+    desc: 'Critical Heart Patient Support',
+    details:
+      'Specialized equipment and trained staff provide life-saving care for heart patients during air transport.',
+    img: '/images/heart.png',
   },
 ];
 
@@ -52,7 +56,7 @@ export default function Home() {
       const lastElement = focusableElements[focusableElements.length - 1];
       // @ts-ignore
       const handleKeyDown = (e) => {
-        if (e.key === "Tab") {
+        if (e.key === 'Tab') {
           if (e.shiftKey && document.activeElement === firstElement) {
             e.preventDefault();
             lastElement.focus();
@@ -61,15 +65,15 @@ export default function Home() {
             firstElement.focus();
           }
         }
-        if (e.key === "Escape") {
+        if (e.key === 'Escape') {
           closeTooltip();
         }
       };
 
-      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
       firstElement.focus();
 
-      return () => document.removeEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
     }
   }, [selectedCard]);
 
@@ -78,28 +82,26 @@ export default function Home() {
     animate: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: 'easeOut' },
     },
   };
 
   return (
     <>
-
       <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
         {/* Breadcrumb Navigation */}
-
 
         <main id="solutions" className="px-4 sm:px-8 lg:px-16 py-12">
           {/* Animated Background */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             animate={{ opacity: [0.2, 0.3, 0.2] }}
-            transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+            transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
           >
             <motion.div
               className="absolute top-1/3 left-1/3 opacity-10 text-gray-400"
               animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-              transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+              transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
             >
               <FaAmbulance size={40} />
             </motion.div>
@@ -123,7 +125,8 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-4 text-lg sm:text-xl text-gray-200"
             >
-              Pioneering India’s first eVTOL air ambulance for rapid, safe, and innovative critical care.
+              Pioneering India’s first eVTOL air ambulance for rapid, safe, and
+              innovative critical care.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -133,11 +136,13 @@ export default function Home() {
               className="mt-4 max-w-3xl mx-auto text-sm sm:text-base text-gray-300"
               id="hero-desc"
             >
-              Dragale’s eVTOL ambulance delivers unmatched speed (200 km/h), range (150 km), and advanced medical capabilities, ensuring patients receive life-saving care when every second counts.
+              Dragale’s eVTOL ambulance delivers unmatched speed (200 km/h),
+              range (150 km), and advanced medical capabilities, ensuring
+              patients receive life-saving care when every second counts.
             </motion.p>
             <motion.a
-              href="/contactus"
-              whileHover={{ scale: 1.05, backgroundColor: "#6B7280" }}
+              href="/contact-us"
+              whileHover={{ scale: 1.05, backgroundColor: '#6B7280' }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -152,7 +157,7 @@ export default function Home() {
             <motion.div
               className="mt-4 w-full h-40 bg-[url('/evtol-silhouette.png')] bg-center bg-contain bg-no-repeat opacity-30"
               animate={{ scale: [1, 1.02, 1], opacity: [0.3, 0.4, 0.3] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
               aria-hidden="true"
             />
           </motion.div>
@@ -184,7 +189,7 @@ export default function Home() {
                   onClick={() => handleCardClick(card)}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && handleCardClick(card)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleCardClick(card)}
                   aria-label={`Learn more about ${card.desc}`}
                 >
                   {/* Image Section */}
@@ -192,14 +197,18 @@ export default function Home() {
                     <motion.div
                       className="absolute inset-0 border border-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       animate={{ opacity: [0.2, 0.3, 0.2] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
                     />
                     <Image
                       src={card.img}
                       alt={card.desc}
                       fill
                       priority={index === 0}
-                      loading={index > 0 ? "lazy" : undefined}
+                      loading={index > 0 ? 'lazy' : undefined}
                       className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
@@ -207,7 +216,9 @@ export default function Home() {
 
                   {/* Description */}
                   <div className="bg-white/10 backdrop-blur-md p-4 text-center">
-                    <p className="text-sm sm:text-base text-gray-200 font-medium">{card.desc}</p>
+                    <p className="text-sm sm:text-base text-gray-200 font-medium">
+                      {card.desc}
+                    </p>
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
@@ -242,7 +253,7 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 20 }}
                   className="bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-2xl max-w-md w-full relative border border-white/10"
                   onClick={(e) => e.stopPropagation()}
                 >
@@ -255,12 +266,17 @@ export default function Home() {
                   >
                     ×
                   </motion.button>
-                  <h3 id="card-details-title" className="text-lg font-semibold text-white">
+                  <h3
+                    id="card-details-title"
+                    className="text-lg font-semibold text-white"
+                  >
                     {/*  @ts-ignore */}
                     {selectedCard.desc}
                   </h3>
                   {/*  @ts-ignore */}
-                  <p className="text-gray-200 text-sm mt-4">{selectedCard.details}</p>
+                  <p className="text-gray-200 text-sm mt-4">
+                    {selectedCard.details}
+                  </p>
                 </motion.div>
               </motion.div>
             )}
