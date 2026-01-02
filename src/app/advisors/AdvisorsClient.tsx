@@ -4,7 +4,11 @@ import SocialBadge from '@/components/SocialBadge';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-export default function AdvisorsClient() {
+export default function AdvisorsClient({
+  headingLevel = 1,
+}: {
+  headingLevel?: 1 | 2;
+}) {
   const headerVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
@@ -25,9 +29,15 @@ export default function AdvisorsClient() {
         initial="hidden"
         animate="visible"
       >
-        <h1 className="text-5xl md:text-6xl font-extrabold uppercase tracking-widest text-white">
-          Board of Advisors
-        </h1>
+        {headingLevel === 2 ? (
+          <h2 className="text-5xl md:text-6xl font-extrabold uppercase tracking-widest text-white">
+            Board of Advisors
+          </h2>
+        ) : (
+          <h1 className="text-5xl md:text-6xl font-extrabold uppercase tracking-widest text-white">
+            Board of Advisors
+          </h1>
+        )}
         <motion.div
           className="mt-4 mx-auto "
           animate={{
@@ -65,9 +75,9 @@ export default function AdvisorsClient() {
 
         {/* Name + Title + Social */}
         <div className="flex-1 text-center md:text-left">
-          <h1 className="font-stretch-normal line-clamp-3 text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <h2 className="font-stretch-normal line-clamp-3 text-5xl font-extrabold tracking-tight text-white leading-tight">
             Dan Sloat
-          </h1>
+          </h2>
           <div className="w-24 h-[2px] bg-white mx-auto md:mx-0 mt-2 rounded-full"></div>
 
           <p className="font-stretch-normal line-clamp-3  mt-4 text-xl text-gray-300 font-medium leading-relaxed max-w-2xl">

@@ -144,7 +144,11 @@ const performanceHighlights = [
   },
 ];
 
-export default function Aircraft() {
+export default function Aircraft({
+  headingLevel = 1,
+}: {
+  headingLevel?: 1 | 2;
+}) {
   const statsRef = useRef(null);
   const isStatsInView = useInView(statsRef, { once: true });
   const [expandedSection, setExpandedSection] = useState(null);
@@ -346,18 +350,33 @@ export default function Aircraft() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: 'easeOut' }}
-                  className="font-archivo text-center flex items-center justify-center gap-3 
+                {headingLevel === 2 ? (
+                  <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    className="font-archivo text-center flex items-center justify-center gap-3 
                  text-3xl sm:text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg"
-                >
-                  <FaRocket className="text-white/90 text-4xl animate-bounce" />
-                  <span className="border-r-2 border-white/70 pr-1 animate-pulse">
-                    {displayedText}
-                  </span>
-                </motion.h1>
+                  >
+                    <FaRocket className="text-white/90 text-4xl animate-bounce" />
+                    <span className="border-r-2 border-white/70 pr-1 animate-pulse">
+                      {displayedText}
+                    </span>
+                  </motion.h2>
+                ) : (
+                  <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    className="font-archivo text-center flex items-center justify-center gap-3 
+                 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg"
+                  >
+                    <FaRocket className="text-white/90 text-4xl animate-bounce" />
+                    <span className="border-r-2 border-white/70 pr-1 animate-pulse">
+                      {displayedText}
+                    </span>
+                  </motion.h1>
+                )}
 
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}

@@ -266,13 +266,13 @@ export default function Home() {
                   >
                     ×
                   </motion.button>
-                  <h3
+                  <h2
                     id="card-details-title"
                     className="text-lg font-semibold text-white"
                   >
                     {/*  @ts-ignore */}
                     {selectedCard.desc}
-                  </h3>
+                  </h2>
                   {/*  @ts-ignore */}
                   <p className="text-gray-200 text-sm mt-4">
                     {selectedCard.details}
