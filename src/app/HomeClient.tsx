@@ -90,6 +90,7 @@ export default function Leading() {
             loop
             muted
             playsInline
+            preload="none"
             className="absolute inset-0 w-full h-full object-cover"
             ref={ref}
           >

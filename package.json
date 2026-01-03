@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "audit:assets": "node scripts/audit-assets.mjs",
+    "audit:assets:trash": "node scripts/audit-assets.mjs --move-unused",
+    "audit:assets:trash:simulate": "node scripts/audit-assets.mjs --move-unused --simulate"
   },
   "dependencies": {
     "@react-three/drei": "^10.6.1",
