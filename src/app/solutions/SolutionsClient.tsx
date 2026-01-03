@@ -1,10 +1,13 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FaAmbulance } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
+
+import { solutions } from '../../utils/solutions';
 
 const cardData = [
   {
@@ -34,48 +37,13 @@ const cardData = [
 ];
 
 export default function Home() {
-  type SelectedCard = (typeof cardData)[number];
-  const [selectedCard, setSelectedCard] = useState<SelectedCard | null>(null);
-  const modalRef = useRef(null);
-  const handleCardClick = (card: SelectedCard) => {
-    setSelectedCard(card);
+  const router = useRouter();
+
+  const navigateToSolution = (index: number) => {
+    const solution = solutions[index];
+    if (!solution) return;
+    router.push(`/solutions/${solution.slug}`);
   };
-
-  const closeTooltip = () => {
-    setSelectedCard(null);
-  };
-
-  // Focus trap for modal
-  useEffect(() => {
-    if (selectedCard && modalRef.current) {
-      // @ts-ignore
-      const focusableElements = modalRef.current.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      // @ts-ignore
-      const handleKeyDown = (e) => {
-        if (e.key === 'Tab') {
-          if (e.shiftKey && document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          } else if (!e.shiftKey && document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
-        if (e.key === 'Escape') {
-          closeTooltip();
-        }
-      };
-
-      document.addEventListener('keydown', handleKeyDown);
-      firstElement.focus();
-
-      return () => document.removeEventListener('keydown', handleKeyDown);
-    }
-  }, [selectedCard]);
 
   const cardVariants = {
     initial: { opacity: 0, y: 20 },
@@ -155,7 +123,7 @@ export default function Home() {
               Get in Touch
             </motion.a>
             <motion.div
-              className="mt-4 w-full h-40 bg-[url('/evtol-silhouette.png')] bg-center bg-contain bg-no-repeat opacity-30"
+              className="mt-2 w-full h-15 bg-[url('/evtol-silhouette.png')] bg-center bg-contain bg-no-repeat opacity-30"
               animate={{ scale: [1, 1.02, 1], opacity: [0.3, 0.4, 0.3] }}
               transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
               aria-hidden="true"
@@ -186,12 +154,23 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="relative rounded-2xl shadow-xl bg-white/5 backdrop-blur-3xl overflow-hidden border border-white/10 hover:border-gray-400/30 transition-all group cursor-pointer"
-                  onClick={() => handleCardClick(card)}
+                  onClick={() => navigateToSolution(index)}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => e.key === 'Enter' && handleCardClick(card)}
+                  onKeyDown={(e) =>
+                    e.key === 'Enter' && navigateToSolution(index)
+                  }
                   aria-label={`Learn more about ${card.desc}`}
                 >
+                  {solutions[index] ? (
+                    <Link
+                      href={`/solutions/${solutions[index].slug}`}
+                      className="sr-only"
+                      tabIndex={-1}
+                    >
+                      {solutions[index].title}
+                    </Link>
+                  ) : null}
                   {/* Image Section */}
                   <div className="relative w-full h-48 overflow-hidden">
                     <motion.div
@@ -223,7 +202,10 @@ export default function Home() {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       className="mt-2 text-gray-300 text-xs underline"
-                      onClick={() => handleCardClick(card)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigateToSolution(index);
+                      }}
                       aria-label={`View details for ${card.desc}`}
                     >
                       Learn More
@@ -233,52 +215,6 @@ export default function Home() {
               </Tilt>
             ))}
           </motion.div>
-
-          {/* Tooltip Modal */}
-          <AnimatePresence>
-            {selectedCard && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4"
-                onClick={closeTooltip}
-                role="dialog"
-                aria-labelledby="card-details-title"
-                aria-modal="true"
-              >
-                <motion.div
-                  ref={modalRef}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                  className="bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-2xl max-w-md w-full relative border border-white/10"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={closeTooltip}
-                    className="absolute top-4 right-4 text-xl text-gray-300  transition-all "
-                    aria-label="Close modal"
-                  >
-                    ×
-                  </motion.button>
-                  <h2
-                    id="card-details-title"
-                    className="text-lg font-semibold text-white"
-                  >
-                    {selectedCard?.desc}
-                  </h2>
-                  <p className="text-gray-200 text-sm mt-4">
-                    {selectedCard?.details}
-                  </p>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </main>
 
         {/* <Footer /> */}
