@@ -1,6 +1,9 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const envBaseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const baseUrl = (envBaseUrl || "https://dragaleaviation.com").replace(/\/$/, "");
+
   return {
     rules: [
       {
@@ -8,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://dragaleaviation.com/sitemap.xml",
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

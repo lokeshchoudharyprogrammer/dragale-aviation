@@ -1,13 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  FaLinkedin,
-  FaTwitter,
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-} from 'react-icons/fa';
+import { FaLinkedin, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 export const Footer: React.FC = () => {
   return (

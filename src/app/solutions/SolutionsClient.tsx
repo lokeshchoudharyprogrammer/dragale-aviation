@@ -7,8 +7,6 @@ import { useRouter } from 'next/navigation';
 import { FaAmbulance } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
 
-import { solutions } from '../../utils/solutions';
-
 const cardData = [
   {
     desc: 'Seamless VTOL Patient Transport',

@@ -26,12 +26,6 @@ interface FormData {
   marketingConsent: boolean;
 }
 
-interface Testimonial {
-  quote: string;
-  author: string;
-  role: string;
-}
-
 export default function ContactUs({
   headingLevel = 1,
 }: {
@@ -50,29 +44,9 @@ export default function ContactUs({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<FormData>>({});
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  const testimonials: Testimonial[] = [
-    {
-      quote:
-        'Dragale Aviation’s swift response saved my father’s life. Their professionalism is unmatched.',
-      author: 'Sarah M.',
-      role: 'Family Member',
-    },
-    {
-      quote:
-        'Their medical transport services are reliable and compassionate, giving us peace of mind.',
-      author: 'Dr. James R.',
-      role: 'Physician',
-    },
-    {
-      quote:
-        'A trusted partner for emergency air evacuations, always prioritizing patient safety.',
-      author: 'Emily T.',
-      role: 'Hospital Administrator',
-    },
-  ];
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
+    {}
+  );
 
   const whyChooseUs = [
     {
@@ -100,7 +74,7 @@ export default function ContactUs({
     100;
 
   const validateForm = () => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: Partial<Record<keyof FormData, string>> = {};
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (
       !formData.email.trim() ||
@@ -108,7 +82,6 @@ export default function ContactUs({
     )
       newErrors.email = 'Valid email is required';
     if (!formData.message.trim()) newErrors.message = 'Message is required';
-    // @ts-ignore
     if (!formData.consent) newErrors.consent = 'Consent is required';
     return newErrors;
   };
@@ -166,13 +139,6 @@ export default function ContactUs({
       return () => clearTimeout(timer);
     }
   }, [isSubmitted]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
 
   return (
     <>

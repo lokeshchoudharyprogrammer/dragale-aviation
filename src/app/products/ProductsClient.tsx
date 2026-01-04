@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDownToDot, CircleX } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -150,24 +150,6 @@ const whyAyuRatha = [
   },
 ];
 
-const performanceHighlights = [
-  {
-    title: 'Cruising Speed',
-    value: '250 km/h',
-    desc: 'Reach patients faster than traditional ambulances.',
-  },
-  {
-    title: 'Maximum Range',
-    value: '270 km',
-    desc: 'Cover long distances for hospital transfers.',
-  },
-  {
-    title: 'Flight Time',
-    value: '45–60 min',
-    desc: 'Sustained operations for critical missions.',
-  },
-];
-
 export default function Aircraft({
   headingLevel = 1,
 }: {
@@ -176,19 +158,16 @@ export default function Aircraft({
   const isEmbedded = headingLevel === 2;
   type SelectedItem = { name: string; desc: string };
 
-  const statsRef = useRef(null);
-  const isStatsInView = useInView(statsRef, { once: true });
-  const [expandedSection, setExpandedSection] = useState(null);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
-  const [currentHighlight, setCurrentHighlight] = useState(0);
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const fullText = 'AyuRatha eVTOL Ambulance';
   const [displayedText, setDisplayedText] = useState('');
-  // @ts-ignore
-  const toggleSection = (section) => {
-    setExpandedSection(expandedSection === section ? null : section);
+
+  const toggleSection = (section: string) => {
+    setExpandedSection((prev) => (prev === section ? null : section));
   };
-  // @ts-ignore
+
   const handleItemClick = (item: SelectedItem) => {
     setSelectedItem(item);
   };
@@ -196,26 +175,18 @@ export default function Aircraft({
     setSelectedItem(null);
   };
 
-  // Auto-cycle performance highlights
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHighlight((prev) => (prev + 1) % performanceHighlights.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   // Focus trap for modal
   useEffect(() => {
     if (selectedItem && modalRef.current) {
-      // @ts-ignore
-      const focusableElements = modalRef.current.querySelectorAll(
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
-      // @ts-ignore
-      const handleKeyDown = (e) => {
+
+      const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Tab') {
+          if (!firstElement || !lastElement) return;
           if (e.shiftKey && document.activeElement === firstElement) {
             e.preventDefault();
             lastElement.focus();
@@ -230,7 +201,7 @@ export default function Aircraft({
       };
 
       document.addEventListener('keydown', handleKeyDown);
-      firstElement.focus();
+      firstElement?.focus();
 
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
@@ -252,20 +223,6 @@ export default function Aircraft({
       y: 0,
       transition: { duration: 0.6, ease: 'easeOut' },
     },
-  };
-
-  const statsVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, staggerChildren: 0.2 },
-    },
-  };
-
-  const statItemVariants = {
-    initial: { opacity: 0, scale: 0.8 },
-    animate: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
   };
 
   return (
@@ -908,10 +865,8 @@ export default function Aircraft({
                     id="item-details-title"
                     className="text-lg font-semibold text-white"
                   >
-                    {/*  @ts-ignore */}
                     {selectedItem?.name}
                   </h3>
-                  {/*  @ts-ignore */}
                   <p className="text-gray-200 text-sm mt-4">
                     {selectedItem?.desc}
                   </p>

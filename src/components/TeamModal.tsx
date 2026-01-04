@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, type Variants } from 'framer-motion';
 import Image from 'next/image';
 import { CircleX } from 'lucide-react';
 
@@ -17,7 +17,7 @@ interface TeamModalProps {
   selectedMember: TeamMember | null;
   isOpen: boolean;
   onClose: () => void;
-  badgeVariants?: any;
+  badgeVariants?: Variants;
 }
 
 const TeamModal: React.FC<TeamModalProps> = ({
@@ -59,7 +59,7 @@ const TeamModal: React.FC<TeamModalProps> = ({
 
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
-  }, [selectedMember]);
+  }, [selectedMember, onClose]);
   return (
     <AnimatePresence>
       {isOpen && selectedMember && (

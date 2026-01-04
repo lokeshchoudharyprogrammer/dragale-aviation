@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Archivo } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Archivo } from 'next/font/google';
 import './globals.css';
 import Navbar from '../components/Navbar';
 
@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     'Dragale Aviation offers reliable and quick air ambulance services for medical emergencies. Our team ensures prompt, safe, and comfortable air transport for critical patients.',
   keywords:
     'air ambulance, medical transport, emergency air service, air evacuation, patient air transport, emergency healthcare, medical flight',
-  viewport: 'width=device-width, initial-scale=1.0',
 
   creator: 'Dragale Aviation',
   publisher: 'Dragale Aviation',
@@ -39,6 +38,11 @@ export const metadata: Metadata = {
     shortcut: './founders/newlogo.png',
     apple: './founders/newlogo.png',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({

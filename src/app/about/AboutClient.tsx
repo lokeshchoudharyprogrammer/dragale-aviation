@@ -59,7 +59,7 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
     }
   }, []);
 
-  const handleCardClick = (person: any) => {
+  const handleCardClick = (person: Person) => {
     setSelectedMember(person);
     setIsModalOpen(true);
   };
