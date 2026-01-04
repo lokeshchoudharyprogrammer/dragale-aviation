@@ -116,9 +116,9 @@ export default function ResponsiveIconNavbar() {
         className="
           relative flex justify-between gap-1
           px-3 py-2 sm:px-8 sm:py-3 rounded-full
-          backdrop-blur-xl bg-white/10 border border-white/20
+          overflow-hidden backdrop-blur-xl bg-white/10 border border-white/20
           shadow-lg shadow-black/50
-          before:absolute before:inset-[-3px] before:rounded-full before:border before:border-dashed before:border-white/10 before:pointer-events-none
+          before:absolute before:inset-[-3px] before:rounded-full before:border before:border-white/10 before:pointer-events-none
           sm:justify-center
           gap-0.5 sm:gap-9
           "

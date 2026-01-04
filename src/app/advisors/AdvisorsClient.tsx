@@ -9,6 +9,7 @@ export default function AdvisorsClient({
 }: {
   headingLevel?: 1 | 2;
 }) {
+  const isEmbedded = headingLevel === 2;
   const headerVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
@@ -22,9 +23,17 @@ export default function AdvisorsClient({
   ];
 
   return (
-    <div className="pt-40 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black py-16 px-6">
+    <div
+      className={
+        isEmbedded
+          ? 'bg-gradient-to-b from-black via-gray-950 to-black py-10 px-4 sm:px-8 lg:px-16'
+          : 'pt-40 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black py-16 px-6'
+      }
+    >
       <motion.div
-        className="max-w-4xl mx-auto mb-16 text-center"
+        className={`${
+          isEmbedded ? 'mb-8' : 'mb-16'
+        } max-w-4xl mx-auto text-center`}
         variants={headerVariants}
         initial="hidden"
         animate="visible"
@@ -57,13 +66,12 @@ export default function AdvisorsClient({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        style={{
-          borderBottom: `1.5px dashed #fff`,
-        }}
-        className=" relative text-left pb-5 mt-20 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12 pb-12 border-b border-white/20"
+        className={`relative text-left ${
+          isEmbedded ? 'mt-8' : 'mt-20'
+        } max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12 pb-12 border-b border-white/20`}
       >
         {/* Profile Image */}
-        <div className="relative w-40 h-40 flex-shrink-0 rounded-full overflow-hidden shadow-2xl border-2 border-[#0077b5]/0 border border-dashed">
+        <div className="relative w-40 h-40 flex-shrink-0 rounded-full overflow-hidden shadow-2xl border-2 border-[#0077b5]/0 border border-solid">
           <Image
             src="/advisor.jpeg"
             alt="Dan Sloat, Founder and President of Advanced Air Mobility Institute"

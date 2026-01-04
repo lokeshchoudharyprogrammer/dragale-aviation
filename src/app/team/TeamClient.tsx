@@ -56,9 +56,13 @@ const badgeVariants = {
   hover: { scale: 1.1 },
 };
 
-const TeamPage: React.FC<{ headingLevel?: 1 | 2 }> = ({ headingLevel = 1 }) => {
+const TeamPage: React.FC<{ headingLevel?: 1 | 2; contained?: boolean }> = ({
+  headingLevel = 1,
+  contained = false,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Person | null>(null);
+  const isNested = headingLevel === 2;
 
   const handleCardClick = (person: Person) => {
     console.log('Clicked:', person.name);
@@ -72,31 +76,37 @@ const TeamPage: React.FC<{ headingLevel?: 1 | 2 }> = ({ headingLevel = 1 }) => {
   };
 
   return (
-    <section className="min-h-screen  bg-black text-white px-6 py-30 flex flex-col  items-center justify-center p-8 w-[80%">
-      <div>
+    <section
+      className={`bg-black text-white w-full flex flex-col ${
+        isNested
+          ? `pt-6 gap-8 ${contained ? '' : 'px-4 sm:px-8 lg:px-16'}`
+          : 'min-h-screen px-6 py-20 gap-14 items-center justify-center'
+      }`}
+    >
+      <div className="max-w-6xl w-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-5xl mb-16 text-center" // 🔥 change from text-center → text-left
+          className="max-w-6xl w-full pb-6 section-divider text-left"
         >
           {headingLevel === 2 ? (
-            <h2 className="text-4xl sm:text-5xl font-semibold mb-4 text-white leading-tight">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-3">
               Meet Our Team
             </h2>
           ) : (
-            <h1 className="text-4xl sm:text-5xl font-semibold mb-4 text-white leading-tight">
+            <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-3">
               Meet Our Team
             </h1>
           )}
-          <p className="text-gray-300 text-lg leading-relaxed">
+          <p className="text-gray-300 text-base leading-relaxed max-w-3xl">
             A group of talented individuals dedicated to building thoughtful and
             high-quality products.
           </p>
         </motion.div>
       </div>
 
-      <div className="flex gap-10 flex-wrap items-center items-center justify-center p-8 w-[80%]">
+      <div className="max-w-6xl w-full mx-auto flex gap-8 flex-wrap justify-center md:justify-start items-start">
         <TeamCard
           teamData={teamData}
           cardVariants={cardVariants}

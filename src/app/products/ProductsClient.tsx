@@ -4,9 +4,32 @@ import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { ArrowDownToDot, CircleX } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaAmbulance, FaPhone, FaRocket } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
+
+const PARTICLE_CLASSES = [
+  'left-[0%] [animation-delay:0s]',
+  'left-[37%] [animation-delay:0.61s]',
+  'left-[74%] [animation-delay:1.22s]',
+  'left-[11%] [animation-delay:1.83s]',
+  'left-[48%] [animation-delay:2.44s]',
+  'left-[85%] [animation-delay:3.05s]',
+  'left-[22%] [animation-delay:3.66s]',
+  'left-[59%] [animation-delay:4.27s]',
+  'left-[96%] [animation-delay:4.88s]',
+  'left-[33%] [animation-delay:5.49s]',
+  'left-[70%] [animation-delay:6.10s]',
+  'left-[7%] [animation-delay:6.71s]',
+  'left-[44%] [animation-delay:7.32s]',
+  'left-[81%] [animation-delay:7.93s]',
+  'left-[18%] [animation-delay:8.54s]',
+  'left-[55%] [animation-delay:9.15s]',
+  'left-[92%] [animation-delay:9.76s]',
+  'left-[29%] [animation-delay:0.37s]',
+  'left-[66%] [animation-delay:0.98s]',
+  'left-[3%] [animation-delay:1.59s]',
+];
 
 const aircraftData = {
   model: 'AyuRatha (DX1)',
@@ -150,6 +173,7 @@ export default function Aircraft({
 }: {
   headingLevel?: 1 | 2;
 }) {
+  const isEmbedded = headingLevel === 2;
   type SelectedItem = { name: string; desc: string };
 
   const statsRef = useRef(null);
@@ -160,15 +184,6 @@ export default function Aircraft({
   const modalRef = useRef(null);
   const fullText = 'AyuRatha eVTOL Ambulance';
   const [displayedText, setDisplayedText] = useState('');
-
-  const particleStyles = useMemo(
-    () =>
-      Array.from({ length: 20 }, (_, i) => ({
-        left: `${(i * 37) % 100}%`,
-        animationDelay: `${((i * 0.61) % 10).toFixed(2)}s`,
-      })),
-    []
-  );
   // @ts-ignore
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
@@ -339,8 +354,19 @@ export default function Aircraft({
           }
         `}</style>
       </Head>
-      <div className="pt-10 min-h-screen bg-black text-white">
-        <main id="aircraft" className="px-4 sm:px-8 lg:px-16 py-12 relative">
+      <div
+        className={
+          isEmbedded
+            ? 'bg-black text-white'
+            : 'pt-10 min-h-screen bg-black text-white'
+        }
+      >
+        <main
+          id="aircraft"
+          className={`px-4 sm:px-8 lg:px-16 ${
+            isEmbedded ? 'py-8 scroll-mt-28' : 'py-12'
+          } relative`}
+        >
           {/* Video Background */}
           <motion.div
             className="absolute inset-0 pointer-events-none overflow-hidden z-0"
@@ -350,13 +376,17 @@ export default function Aircraft({
           >
             <div className="aircraft-bg opacity-30" aria-hidden="true" />
             {/* Particle Effect */}
-            {particleStyles.map((style, i) => (
-              <div key={i} className="particle" style={style} />
+            {PARTICLE_CLASSES.map((particleClassName, i) => (
+              <div key={i} className={`particle ${particleClassName}`} />
             ))}
           </motion.div>
 
           {/* Hero Section */}
-          <motion.div className="mt-10 text-center max-w-5xl mx-auto relative z-10">
+          <motion.div
+            className={`${
+              isEmbedded ? 'mt-4' : 'mt-10'
+            } text-center max-w-5xl mx-auto relative z-10`}
+          >
             <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} perspective={1000}>
               <motion.div
                 className="bg-white/5 backdrop-blur-3xl p-8 rounded-2xl border-dash border-white/10 shadow-xl"
@@ -892,7 +922,7 @@ export default function Aircraft({
                       backgroundColor: '#fff', // Tailwind gray-600 equivalent, slightly darker
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="mt-4 inline-flex border-2 border-dashed border-white/100 bg-gray-700 text-white py-2 px-8 rounded-full font-semibold text-sm shadow-md transition duration-300"
+                    className="mt-4 inline-flex border-2 border-solid border-white/100 bg-gray-700 text-white py-2 px-8 rounded-full font-semibold text-sm shadow-md transition duration-300"
                   >
                     Contact for Details
                   </motion.a>

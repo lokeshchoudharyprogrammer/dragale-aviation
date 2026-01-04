@@ -53,7 +53,9 @@ export default function RootLayout({
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         className={`${archivo.variable}  antialiased`}
       >
-        <Navbar />
+        <header>
+          <Navbar />
+        </header>
         {children}
         <Analytics />
         <Footer />
