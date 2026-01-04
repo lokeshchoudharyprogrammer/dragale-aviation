@@ -4,6 +4,7 @@ import { CirclePause, Play, Volume, VolumeOff } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 const AboutClient = dynamic(() => import('./about/AboutClient'), {
   ssr: false,
@@ -144,7 +145,14 @@ export default function Leading() {
               eVTOL air ambulance
             </span>
             . Our mission is to deliver rapid, safe, and innovative critical
-            care—ensuring patients reach help swiftly when every second counts.
+            care—ensuring patients reach help swiftly when every second counts.{' '}
+            <Link
+              href="/solutions"
+              className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
+            >
+              Explore our aviation solutions
+            </Link>
+            .
           </p>
         </section>
       </main>
