@@ -49,6 +49,16 @@ export default async function SolutionPage({ params }: PageProps) {
   const { slug } = await params;
   const solution = getSolutionOrNotFound(slug);
 
+  const relatedSlugs = Array.from(new Set(solution.relatedSlugs ?? []))
+    .filter((s) => s && s !== solution.slug)
+    .filter((s) => isSolutionSlug(s));
+
+  const relatedSolutions = relatedSlugs
+    .map((s) => getSolutionBySlug(s))
+    .filter((s): s is NonNullable<ReturnType<typeof getSolutionBySlug>> =>
+      Boolean(s)
+    );
+
   return (
     <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
       <main className="px-4 sm:px-8 lg:px-16 py-12">
@@ -84,6 +94,29 @@ export default async function SolutionPage({ params }: PageProps) {
               ))}
             </div>
           </section>
+
+          {relatedSolutions.length > 0 ? (
+            <section className="mt-8" aria-labelledby="related-solutions">
+              <h2
+                id="related-solutions"
+                className="text-sm sm:text-base font-semibold text-gray-200"
+              >
+                Related solutions you may need
+              </h2>
+              <ul className="mt-3 space-y-2">
+                {relatedSolutions.map((s) => (
+                  <li key={s.slug} className="text-sm sm:text-base">
+                    <Link
+                      href={`/solutions/${s.slug}`}
+                      className="text-gray-300 underline underline-offset-4 hover:text-white transition"
+                    >
+                      {s.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </article>
       </main>
     </div>
