@@ -4,6 +4,8 @@ export type Solution = {
   slug: string;
   title: string;
   shortDescription: string;
+  /** Optional cross-links to strengthen topic clustering and crawl depth */
+  relatedSlugs?: string[];
   seo: {
     title: string;
     description: string;
@@ -30,6 +32,10 @@ export const solutions: Solution[] = [
     title: "Seamless VTOL Patient Transport",
     shortDescription:
       "Vertical takeoff and landing capability for fast, reliable patient transport from dense cities to remote zones.",
+    relatedSlugs: [
+      "live-patient-monitoring-system",
+      "hospital-to-hospital-transfers",
+    ],
     seo: {
       title: "Seamless VTOL Patient Transport | Dragle Aviation",
       description:
@@ -51,6 +57,10 @@ export const solutions: Solution[] = [
     title: "Hospital-to-Hospital Transfers",
     shortDescription:
       "Efficient inter-facility patient transfers that reduce transit time and improve handoff quality for critical cases.",
+    relatedSlugs: [
+      "seamless-vtol-patient-transport",
+      "critical-heart-patient-support",
+    ],
     seo: {
       title: "Hospital-to-Hospital Patient Transfers | Dragle Aviation",
       description:
@@ -72,6 +82,10 @@ export const solutions: Solution[] = [
     title: "Live Patient Monitoring System",
     shortDescription:
       "Real-time vital monitoring during transport so clinicians can track trends, respond early, and arrive prepared.",
+    relatedSlugs: [
+      "critical-heart-patient-support",
+      "seamless-vtol-patient-transport",
+    ],
     seo: {
       title: "Live Patient Monitoring During Transport | Dragle Aviation",
       description:
@@ -93,6 +107,10 @@ export const solutions: Solution[] = [
     title: "Critical Heart Patient Support",
     shortDescription:
       "Specialized transport support for cardiac patients with careful stabilization, monitoring, and coordinated escalation pathways.",
+    relatedSlugs: [
+      "live-patient-monitoring-system",
+      "hospital-to-hospital-transfers",
+    ],
     seo: {
       title: "Critical Heart Patient Transport Support | Dragle Aviation",
       description:
