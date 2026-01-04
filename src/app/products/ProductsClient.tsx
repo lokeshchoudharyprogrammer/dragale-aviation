@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { ArrowDownToDot, CircleX } from 'lucide-react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { FaAmbulance, FaPhone, FaRocket } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
@@ -176,7 +177,6 @@ export default function Aircraft({
   const handleItemClick = (item: SelectedItem) => {
     setSelectedItem(item);
   };
-
   const closeTooltip = () => {
     setSelectedItem(null);
   };
@@ -303,6 +303,27 @@ export default function Aircraft({
               animation: none !important;
             }
           }
+
+          .aircraft-bg {
+            position: absolute;
+            inset: 0;
+            background:
+              radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.08), transparent 45%),
+              radial-gradient(circle at 70% 65%, rgba(255, 255, 255, 0.05), transparent 50%),
+              linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(17, 24, 39, 0.65), rgba(0, 0, 0, 0.95)),
+              url('/evtol-silhouette.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            filter: saturate(0.95) contrast(1.05);
+          }
+
+          @media (min-width: 768px) {
+            .aircraft-bg {
+              background-size: 110%;
+            }
+          }
+
           .particle {
             position: absolute;
             width: 2px;
@@ -327,16 +348,7 @@ export default function Aircraft({
             animate={{ opacity: 0.2 }}
             transition={{ duration: 1 }}
           >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover opacity-30"
-              poster="/dgw.png"
-            >
-              <source src="/dargale_aviation.mp4" type="video/mp4" />
-            </video>
+            <div className="aircraft-bg opacity-30" aria-hidden="true" />
             {/* Particle Effect */}
             {particleStyles.map((style, i) => (
               <div key={i} className="particle" style={style} />
@@ -396,7 +408,21 @@ export default function Aircraft({
                   id="hero-desc"
                 >
                   The AyuRatha (DX1) delivers life-saving care with advanced
-                  medical systems and VTOL precision.{' '}
+                  medical systems and VTOL precision. <br></br>
+                  <Link
+                    href="/solutions/hospital-to-hospital-transfers"
+                    className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
+                  >
+                    Learn more about hospital-to-hospital transfers
+                  </Link>
+                  .{' '}
+                  <Link
+                    href="/solutions/critical-heart-patient-support"
+                    className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
+                  >
+                    Learn more about critical heart patient support
+                  </Link>
+                  .
                 </motion.p>
                 <motion.div
                   className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4"
@@ -407,10 +433,26 @@ export default function Aircraft({
                   <div className="text-gray-200 text-sm">
                     <FaRocket className="mx-auto text-[#fff] mb-2" />
                     VTOL Technology
+                    <div className="mt-1 text-[11px]">
+                      <Link
+                        href="/solutions/seamless-vtol-patient-transport"
+                        className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
+                      >
+                        Learn more about seamless VTOL transport
+                      </Link>
+                    </div>
                   </div>
                   <div className="text-gray-200 text-sm">
                     <FaAmbulance className="mx-auto text-[#fff] mb-2" />
                     Advanced Medical Suite
+                    <div className="mt-1 text-[11px]">
+                      <Link
+                        href="/solutions/live-patient-monitoring-system"
+                        className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
+                      >
+                        Learn more about live patient monitoring
+                      </Link>
+                    </div>
                   </div>
                   <div className="text-gray-200 text-sm">
                     <FaPhone className="mx-auto text-[#fff] mb-2" />
@@ -489,9 +531,6 @@ export default function Aircraft({
                     initial="initial"
                     animate="animate"
                     transition={{ delay: index * 0.1 }}
-                    style={{
-                      borderBottom: `1.5px dashed #fff`,
-                    }}
                     className="bg-white/5 backdrop-blur-3xl p-6 rounded-2xl border border-white/10 hover:border-gray-400/30 transition-all text-center"
                   >
                     <div className="text-2xl text-[#fff] mb-2">{item.icon}</div>
@@ -514,9 +553,6 @@ export default function Aircraft({
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
-              style={{
-                borderBottom: `1.5px dashed #fff`,
-              }}
             >
               <motion.button
                 onClick={() => toggleSection('technical')}
@@ -591,9 +627,6 @@ export default function Aircraft({
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
-              style={{
-                borderBottom: `1.5px dashed #fff`,
-              }}
             >
               <motion.button
                 onClick={() => toggleSection('equipment')}
@@ -669,9 +702,6 @@ export default function Aircraft({
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
-              style={{
-                borderBottom: `1.5px dashed #fff`,
-              }}
             >
               <motion.button
                 onClick={() => toggleSection('design')}
@@ -745,9 +775,6 @@ export default function Aircraft({
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
               className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10"
-              style={{
-                borderBottom: `1.5px dashed #fff`,
-              }}
             >
               <motion.button
                 onClick={() => toggleSection('dimensions')}
