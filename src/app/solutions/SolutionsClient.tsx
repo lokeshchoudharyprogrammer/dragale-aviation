@@ -39,10 +39,19 @@ const cardData = [
 export default function Home() {
   const router = useRouter();
 
-  const navigateToSolution = (index: number) => {
-    const solution = solutions[index];
-    if (!solution) return;
-    router.push(`/solutions/${solution.slug}`);
+  const cardHrefMap: Record<string, string> = {
+    'Seamless VTOL Patient Transport':
+      '/solutions/seamless-vtol-patient-transport',
+    'Hospital-to-Hospital Transfers':
+      '/solutions/hospital-to-hospital-transfers',
+    'Live Patient Monitoring System':
+      '/solutions/live-patient-monitoring-system',
+    'Critical Heart Patient Support':
+      '/solutions/critical-heart-patient-support',
+  };
+
+  const navigateToHref = (href: string) => {
+    router.push(href);
   };
 
   const cardVariants = {
@@ -147,71 +156,79 @@ export default function Home() {
                 transitionSpeed={300}
                 scale={1.02}
               >
-                <motion.div
-                  variants={cardVariants}
-                  initial="initial"
-                  whileInView="animate"
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative rounded-2xl shadow-xl bg-white/5 backdrop-blur-3xl overflow-hidden border border-white/10 hover:border-gray-400/30 transition-all group cursor-pointer"
-                  onClick={() => navigateToSolution(index)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) =>
-                    e.key === 'Enter' && navigateToSolution(index)
-                  }
-                  aria-label={`Learn more about ${card.desc}`}
-                >
-                  {solutions[index] ? (
-                    <Link
-                      href={`/solutions/${solutions[index].slug}`}
-                      className="sr-only"
-                      tabIndex={-1}
-                    >
-                      {solutions[index].title}
-                    </Link>
-                  ) : null}
-                  {/* Image Section */}
-                  <div className="relative w-full h-48 overflow-hidden">
-                    <motion.div
-                      className="absolute inset-0 border border-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      animate={{ opacity: [0.2, 0.3, 0.2] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
-                    />
-                    <Image
-                      src={card.img}
-                      alt={card.desc}
-                      fill
-                      priority={index === 0}
-                      loading={index > 0 ? 'lazy' : undefined}
-                      className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                    />
-                  </div>
+                {(() => {
+                  const href = cardHrefMap[card.desc];
 
-                  {/* Description */}
-                  <div className="bg-white/10 backdrop-blur-md p-4 text-center">
-                    <p className="text-sm sm:text-base text-gray-200 font-medium">
-                      {card.desc}
-                    </p>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="mt-2 text-gray-300 text-xs underline"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigateToSolution(index);
+                  return (
+                    <motion.div
+                      variants={cardVariants}
+                      initial="initial"
+                      whileInView="animate"
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className="relative rounded-2xl shadow-xl bg-white/5 backdrop-blur-3xl overflow-hidden border border-white/10 hover:border-gray-400/30 transition-all group cursor-pointer"
+                      onClick={() => {
+                        if (!href) return;
+                        navigateToHref(href);
                       }}
-                      aria-label={`View details for ${card.desc}`}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) =>
+                        e.key === 'Enter' && href && navigateToHref(href)
+                      }
+                      aria-label={`Learn more about ${card.desc}`}
                     >
-                      Learn More
-                    </motion.button>
-                  </div>
-                </motion.div>
+                      {href ? (
+                        <Link href={href} className="sr-only" tabIndex={-1}>
+                          {card.desc}
+                        </Link>
+                      ) : null}
+                      {/* Image Section */}
+                      <div className="relative w-full h-48 overflow-hidden">
+                        <motion.div
+                          className="absolute inset-0 border border-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          animate={{ opacity: [0.2, 0.3, 0.2] }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }}
+                        />
+                        <Image
+                          src={card.img}
+                          alt={card.desc}
+                          fill
+                          priority={index === 0}
+                          loading={index > 0 ? 'lazy' : undefined}
+                          className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                        />
+                      </div>
+
+                      {/* Description */}
+                      <div className="bg-white/10 backdrop-blur-md p-4 text-center">
+                        <p className="text-sm sm:text-base text-gray-200 font-medium">
+                          {card.desc}
+                        </p>
+                        {href ? (
+                          <Link legacyBehavior href={href}>
+                            <motion.a
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.9 }}
+                              className="mt-2 text-gray-300 text-xs underline"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                              }}
+                              aria-label={`View details for ${card.desc}`}
+                            >
+                              Learn More
+                            </motion.a>
+                          </Link>
+                        ) : null}
+                      </div>
+                    </motion.div>
+                  );
+                })()}
               </Tilt>
             ))}
           </motion.div>
