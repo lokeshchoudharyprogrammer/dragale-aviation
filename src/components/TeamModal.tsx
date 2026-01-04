@@ -128,32 +128,57 @@ const TeamModal: React.FC<TeamModalProps> = ({
                   className="flex gap-4 mt-6 border-b border-gray-700"
                   role="tablist"
                 >
-                  <button
-                    onClick={() => setActiveTab('bio')}
-                    className={`pb-2 text-sm font-semibold ${
-                      activeTab === 'bio'
-                        ? 'border-b-2 border-white text-white'
-                        : 'text-gray-400'
-                    }`}
-                    aria-selected={activeTab === 'bio'}
-                    role="tab"
-                    tabIndex={activeTab === 'bio' ? 0 : -1}
-                  >
-                    Bio
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('achievements')}
-                    className={`pb-2 text-sm font-semibold ${
-                      activeTab === 'achievements'
-                        ? 'border-b-2 border-white text-white'
-                        : 'text-gray-400'
-                    }`}
-                    aria-selected={activeTab === 'achievements'}
-                    role="tab"
-                    tabIndex={activeTab === 'achievements' ? 0 : -1}
-                  >
-                    Achievements
-                  </button>
+                  {activeTab === 'bio' ? (
+                    <button
+                      id="bio-tab"
+                      onClick={() => setActiveTab('bio')}
+                      className="pb-2 text-sm font-semibold border-b-2 border-white text-white"
+                      aria-selected="true"
+                      aria-controls="bio-panel"
+                      role="tab"
+                      tabIndex={0}
+                    >
+                      Bio
+                    </button>
+                  ) : (
+                    <button
+                      id="bio-tab"
+                      onClick={() => setActiveTab('bio')}
+                      className="pb-2 text-sm font-semibold text-gray-400"
+                      aria-selected="false"
+                      aria-controls="bio-panel"
+                      role="tab"
+                      tabIndex={-1}
+                    >
+                      Bio
+                    </button>
+                  )}
+
+                  {activeTab === 'achievements' ? (
+                    <button
+                      id="achievements-tab"
+                      onClick={() => setActiveTab('achievements')}
+                      className="pb-2 text-sm font-semibold border-b-2 border-white text-white"
+                      aria-selected="true"
+                      aria-controls="achievements-panel"
+                      role="tab"
+                      tabIndex={0}
+                    >
+                      Achievements
+                    </button>
+                  ) : (
+                    <button
+                      id="achievements-tab"
+                      onClick={() => setActiveTab('achievements')}
+                      className="pb-2 text-sm font-semibold text-gray-400"
+                      aria-selected="false"
+                      aria-controls="achievements-panel"
+                      role="tab"
+                      tabIndex={-1}
+                    >
+                      Achievements
+                    </button>
+                  )}
                 </div>
 
                 {/* Tab Panels */}

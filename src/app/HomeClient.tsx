@@ -78,14 +78,7 @@ export default function Leading() {
       {/* Main content grows to fill space */}
       <main className="flex-grow overflow-hidden">
         {/* Hero Video Section */}
-        <section
-          className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden  "
-          style={{
-            height: '60vh',
-            minHeight: '300px',
-            border: `1.2px dashed white`,
-          }}
-        >
+        <section className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden h-[60vh] min-h-[300px] border border-white/20">
           <video
             autoPlay
             loop
@@ -101,6 +94,9 @@ export default function Leading() {
           {isPlaying ? (
             <button
               onClick={handleStopVideo}
+              type="button"
+              aria-label="Pause hero video"
+              title="Pause hero video"
               className="absolute bottom-4 left-4 z-10 bg-black/60 text-white px-4 py-2 text-sm rounded-lg hover:bg-black/80 transition"
             >
               <CirclePause />
@@ -108,6 +104,9 @@ export default function Leading() {
           ) : (
             <button
               onClick={handlePlayVideo}
+              type="button"
+              aria-label="Play hero video"
+              title="Play hero video"
               className="absolute bottom-4 left-4 z-10 bg-black/60 text-white px-4 py-2 text-sm rounded-lg hover:bg-black/80 transition"
             >
               <Play />
@@ -116,6 +115,11 @@ export default function Leading() {
 
           <button
             onClick={handlePlayVoice}
+            type="button"
+            aria-label={
+              isVoicePlaying ? 'Unmute hero video' : 'Mute hero video'
+            }
+            title={isVoicePlaying ? 'Unmute hero video' : 'Mute hero video'}
             className="absolute bottom-4 left-20 z-10 bg-black/60 text-white px-4 py-2 text-sm rounded-lg hover:bg-black/80 transition"
           >
             {!isVoicePlaying ? <VolumeOff /> : <Volume />}
@@ -133,7 +137,7 @@ export default function Leading() {
         </section>
 
         {/* About Company Section */}
-        <section className="w-[90%] max-w-4xl mx-auto text-center my-10 px-4">
+        <section className="w-[90%] max-w-4xl mx-auto text-center mt-10 mb-4 px-4">
           <h1 className="font-bold text-3xl md:text-4xl text-3xl sm:text-4xl font-bold text-white mb-4">
             Dragale Aviation
           </h1>
@@ -146,6 +150,7 @@ export default function Leading() {
             </span>
             . Our mission is to deliver rapid, safe, and innovative critical
             care—ensuring patients reach help swiftly when every second counts.{' '}
+            <br></br>
             <Link
               href="/solutions"
               className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"

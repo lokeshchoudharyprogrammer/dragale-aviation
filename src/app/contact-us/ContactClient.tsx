@@ -37,6 +37,7 @@ export default function ContactUs({
 }: {
   headingLevel?: 1 | 2;
 }) {
+  const isEmbedded = headingLevel === 2;
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -175,8 +176,18 @@ export default function ContactUs({
 
   return (
     <>
-      <div className="pt-10 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24">
-        <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div
+        className={
+          isEmbedded
+            ? 'bg-black text-white py-10 px-4 sm:px-8 lg:px-16'
+            : 'pt-10 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24'
+        }
+      >
+        <main
+          className={`max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 ${
+            isEmbedded ? 'gap-10 scroll-mt-28' : 'gap-12'
+          }`}
+        >
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -206,12 +217,15 @@ export default function ContactUs({
             </p>
 
             {/* Progress Bar */}
+            <progress
+              className="sr-only"
+              value={Math.round(progress)}
+              max={100}
+              aria-label="Form progress"
+            />
             <div
               className="w-full h-2 rounded-full bg-white/20 mb-8 overflow-hidden"
-              role="progressbar"
-              aria-valuenow={progress}
-              aria-valuemin={0}
-              aria-valuemax={100}
+              aria-hidden="true"
             >
               <motion.div
                 initial={{ width: 0 }}
@@ -377,10 +391,10 @@ export default function ContactUs({
                     checked={formData.consent}
                     onChange={handleCheckboxChange}
                     required
-                    aria-invalid={!!errors.consent}
                     aria-describedby={
                       errors.consent ? 'consent-error' : undefined
                     }
+                    aria-label="Consent to Use Personal Information"
                     className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
                   />
                   <div className="text-sm text-gray-300">
@@ -410,6 +424,7 @@ export default function ContactUs({
                     name="marketingConsent"
                     checked={formData.marketingConsent}
                     onChange={handleCheckboxChange}
+                    aria-label="Optional Marketing Communication"
                     className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
                   />
                   <div className="text-sm text-gray-300">
@@ -436,18 +451,17 @@ export default function ContactUs({
                           bg-gradient-to-r from-gray-500 to-gray-600
                           text-white font-semibold py-3 px-10 rounded-full
                           relative overflow-hidden
-                          border-2 border-dashed border-gray-400
+                            border-2 border-solid border-gray-400
                           shadow-lg shadow-gray-800/60
                           flex items-center justify-center gap-3
                           transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed
                           
                           before:absolute before:inset-0 before:rounded-full
-                          before:border-2 before:border-dashed before:border-gray-300
+                            before:border-2 before:border-solid before:border-gray-300
                           before:pointer-events-none before:opacity-40 before:blur-sm
                           before:transition-opacity before:duration-300
                           
                           hover:before:opacity-100
-                          hover:before:animate-dash-border
 
                           after:absolute after:inset-[-4px] after:rounded-full
                           after:border-4 after:border-solid after:border-gray-400

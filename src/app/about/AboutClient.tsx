@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Person } from '../../../utils/types';
 import TeamPage from '../team/TeamClient';
+import './about.css';
 
 const teamData = [
   {
@@ -47,8 +48,8 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
   const isInView = useInView(ref, { once: true });
   const [selectedMember, setSelectedMember] = useState<Person | null>(null);
   const text = 'Meet Our Visionaries';
-  const primaryColor = '#fff';
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isEmbedded = headingLevel === 2;
 
   const [showTeam, setShowTeam] = useState(false);
 
@@ -119,41 +120,32 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
 
   return (
     <>
-      <section className="min-h-screen bg-black pt-10 text-white">
+      <section
+        className={
+          isEmbedded
+            ? 'bg-black text-white'
+            : 'min-h-screen bg-black pt-10 text-white'
+        }
+      >
         <main
           id="about"
-          className="px-4 sm:px-8 lg:px-16 py-16 space-y-12 max-w-6xl mx-auto"
+          className={`px-4 sm:px-8 lg:px-16 ${
+            isEmbedded ? 'py-8 space-y-8 scroll-mt-28' : 'py-16 space-y-12'
+          } max-w-6xl mx-auto`}
         >
           {/* Hero */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative text-left pb-5"
-            style={{
-              borderBottom: `1.5px dashed #fff`,
-            }}
+            className="relative text-left pb-5 section-divider"
           >
             {headingLevel === 2 ? (
-              <h2
-                className="text-3xl sm:text-4xl font-extrabold mb-4"
-                style={{
-                  background: `#fff`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
+              <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-clip-white">
                 Dragale Aviation
               </h2>
             ) : (
-              <h1
-                className="text-3xl sm:text-4xl font-extrabold mb-4"
-                style={{
-                  background: `#fff`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
+              <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-clip-white">
                 Dragale Aviation
               </h1>
             )}
@@ -170,15 +162,9 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative text-left pb-5"
-            style={{
-              borderBottom: `1.5px dashed #fff`,
-            }}
+            className="relative text-left pb-5 section-divider"
           >
-            <h2
-              className="text-2xl font-semibold mb-4"
-              style={{ color: primaryColor }}
-            >
+            <h2 className="text-2xl font-semibold mb-4 text-white">
               Our Vision
             </h2>
             <p className="font-stretch-normal line-clamp-3  text-gray-400 text-base max-w-3xl">
@@ -190,31 +176,25 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
           </motion.div>
 
           {/* Animated Heading */}
-          <div
-            className="flex justify-start relative text-left pb-5"
-            style={{
-              borderBottom: `1.5px dashed #fff`,
-            }}
-            role="heading"
-            aria-level={2}
+          <h2
+            ref={ref}
+            className="flex justify-start relative text-left pb-5 section-divider"
             aria-label="Meet Our Visionaries"
           >
             <AnimatePresence>
               {text.split('').map((char, i) => (
                 <motion.span
-                  ref={ref}
                   key={i}
                   initial={{ opacity: 0, x: -10 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.3, delay: i * 0.03 }}
-                  className="text-2xl sm:text-4xl font-bold tracking-tight select-none"
-                  style={{ color: primaryColor }}
+                  className="text-2xl sm:text-4xl font-bold tracking-tight select-none text-white"
                 >
                   {char === ' ' ? '\u00A0' : char}
                 </motion.span>
               ))}
             </AnimatePresence>
-          </div>
+          </h2>
 
           {/* Team Grid */}
           <section
@@ -230,7 +210,7 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
           </section>
 
           {/* Team Section */}
-          {showTeam && <TeamPage headingLevel={2} />}
+          {showTeam && <TeamPage headingLevel={2} contained />}
 
           {/* Modal Pop-Up */}
           <TeamModal
