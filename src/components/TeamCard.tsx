@@ -68,7 +68,7 @@ const TeamCard: React.FC<TeamCardProps> = ({
             >
               <Image
                 src={person.img}
-                alt={`Photo of ${person.name}`}
+                alt={`${person.name}, ${person.role}`}
                 width={96}
                 height={96}
                 priority={index === 0}
