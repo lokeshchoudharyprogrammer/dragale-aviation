@@ -66,7 +66,7 @@ export default function AdvisorsClient({
         <div className="relative w-40 h-40 flex-shrink-0 rounded-full overflow-hidden shadow-2xl border-2 border-[#0077b5]/0 border border-dashed">
           <Image
             src="/advisor.jpeg"
-            alt="Dan Sloat"
+            alt="Dan Sloat, Founder and President of Advanced Air Mobility Institute"
             fill
             sizes="(max-width: 768px) 256px, 256px"
             className="object-cover object-center"

@@ -23,7 +23,7 @@ Ankit has also mentored future designers at the World University of Design (WUD)
 - Mentored students at WUD and UID in transportation & industrial design
     `,
     img: '/team/ankit_soni.jpeg',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/ankit-sonie-b3580b13b/',
   },
 
   {
@@ -42,7 +42,7 @@ Passionate about technology and human factors, he creates impactful design solut
 - Passionate about innovative, functional, and aesthetic design
     `,
     img: '/team/sujay.png',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/sujay-patel-589724152/',
   },
 ];
 

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { FaLinkedin } from "react-icons/fa";
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { FaLinkedin } from 'react-icons/fa';
 
 interface AdvisorCardProps {
   name: string;
@@ -12,7 +12,13 @@ interface AdvisorCardProps {
   linkedin: string;
 }
 
-export default function AdvisorCard({ name, title, bio, image, linkedin }: AdvisorCardProps) {
+export default function AdvisorCard({
+  name,
+  title,
+  bio,
+  image,
+  linkedin,
+}: AdvisorCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -30,7 +36,7 @@ export default function AdvisorCard({ name, title, bio, image, linkedin }: Advis
         <div className="relative">
           <Image
             src={image}
-            alt={name}
+            alt={`${name}, ${title}`}
             width={180}
             height={180}
             className="rounded-full object-cover border-4 border-white shadow-lg relative z-10"
