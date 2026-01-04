@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import Image from 'next/image';
 import { FaLinkedin } from 'react-icons/fa';
@@ -14,8 +14,8 @@ interface Person {
 interface TeamCardProps {
   teamData: Person[];
   primaryColor?: string;
-  cardVariants: any;
-  badgeVariants: any;
+  cardVariants: Variants;
+  badgeVariants: Variants;
   handleCardClick?: (person: Person) => void;
   width?: string; // 👈 new prop for % width control
   nameHeadingLevel?: 2 | 3;

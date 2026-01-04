@@ -1,36 +1,45 @@
 import { MetadataRoute } from "next";
+import { getAllSolutionSlugs } from "../utils/solutions";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://dragaleaviation.com";
+  const envBaseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const baseUrl = (envBaseUrl || "https://dragaleaviation.com").replace(/\/$/, "");
+  const lastModified = new Date();
+
+  const solutionUrls = getAllSolutionSlugs().map((slug) => ({
+    url: `${baseUrl}/solutions/${slug}`,
+    lastModified,
+  }));
 
   return [
     {
       url: `${baseUrl}/`,
-      lastModified: new Date(),
+      lastModified,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date(),
+      lastModified,
     },
     {
       url: `${baseUrl}/products`,
-      lastModified: new Date(),
+      lastModified,
     },
     {
       url: `${baseUrl}/solutions`,
-      lastModified: new Date(),
+      lastModified,
     },
     {
       url: `${baseUrl}/advisors`,
-      lastModified: new Date(),
+      lastModified,
     },
     {
       url: `${baseUrl}/team`,
-      lastModified: new Date(),
+      lastModified,
     },
     {
       url: `${baseUrl}/contact-us`,
-      lastModified: new Date(),
+      lastModified,
     },
+    ...solutionUrls,
   ];
 }
