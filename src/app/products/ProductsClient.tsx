@@ -457,6 +457,14 @@ export default function Aircraft({
                   <div className="text-gray-200 text-sm">
                     <FaPhone className="mx-auto text-[#fff] mb-2" />
                     Redundant Safety Systems
+                    <div className="mt-1 text-[11px]">
+                      <Link
+                        href="/solutions/redundant-safety-systems"
+                        className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
+                      >
+                        Learn more about redundant safety systems
+                      </Link>
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>

@@ -127,6 +127,31 @@ export const solutions: Solution[] = [
       ],
     },
   },
+  {
+    slug: "redundant-safety-systems",
+    title: "Redundant Safety Systems",
+    shortDescription:
+      "Redundant flight-critical systems and safety-first design choices to improve reliability across demanding medical transport missions.",
+    relatedSlugs: [
+      "seamless-vtol-patient-transport",
+      "hospital-to-hospital-transfers",
+    ],
+    seo: {
+      title: "Redundant Safety Systems | Dragle Aviation",
+      description:
+        "Learn how Dragle Aviation approaches redundant safety systems for medical eVTOL operations—prioritizing reliability, fault tolerance, and predictable mission readiness.",
+    },
+    content: {
+      heading: "Reliability-focused design for critical missions",
+      paragraphs: [
+        "In emergency medical transport, reliability is part of clinical care. A mission can’t depend on best-case conditions—systems must remain predictable across changing weather, varied landing zones, and urgent timelines.",
+        "Redundancy is a core safety principle: critical functions are designed to tolerate faults without forcing abrupt mission termination. The objective is controlled behavior, clear status visibility, and safe fallback pathways when something degrades.",
+        "A practical redundancy strategy balances safety with operational simplicity. It should be maintainable, testable, and compatible with real-world turnaround times so aircraft readiness stays dependable between missions.",
+        "Safety systems also support coordination: reliable aircraft availability enables hospitals and operators to plan transfers with confidence, reducing uncertainty when every minute matters.",
+        "Our focus is a safety-first approach that strengthens the broader care pathway—helping teams rely on air transport as a consistent, repeatable link in time-sensitive medical response.",
+      ],
+    },
+  },
 ];
 
 /**
