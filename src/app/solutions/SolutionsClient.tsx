@@ -11,25 +11,25 @@ const cardData = [
     desc: 'Seamless VTOL Patient Transport',
     details:
       'Our eVTOL design enables vertical takeoff and landing, ensuring rapid access to remote or congested areas for seamless patient transport.',
-    img: '/images/unnamed.jpg',
+    img: '/images/Seamless VTOL Patient Transport.jpg',
   },
   {
     desc: 'Hospital-to-Hospital Transfers',
     details:
       'Efficiently transfer patients between medical facilities with our high-speed eVTOL, reducing transit time for critical care.',
-    img: '/images/unnamed.jpg',
+    img: '/images/Hospital-to-Hospital Transfers.jpg',
   },
   {
     desc: 'Live Patient Monitoring System',
     details:
       'Real-time monitoring systems track vital signs during transport, ensuring medical teams are informed and prepared.',
-    img: '/images/unnamed.jpg',
+    img: '/images/Live Patient Monitoring System.jpg',
   },
   {
     desc: 'Critical Heart Patient Support',
     details:
       'Specialized equipment and trained staff provide life-saving care for heart patients during air transport.',
-    img: '/images/unnamed.jpg',
+    img: '/images/Critical Heart Patient Support.jpg',
   },
 ];
 
