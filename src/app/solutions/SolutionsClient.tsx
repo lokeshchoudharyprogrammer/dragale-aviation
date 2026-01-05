@@ -209,7 +209,7 @@ export default function Home() {
                         />
                         <Image
                           src={card.img}
-                          alt="Air ambulance aircraft used for emergency medical transport"
+                          alt={`${card.desc} — Dragle Aviation eVTOL air ambulance solution`}
                           fill
                           priority={index === 0}
                           loading={index > 0 ? 'lazy' : undefined}

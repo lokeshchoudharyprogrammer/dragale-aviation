@@ -7,8 +7,10 @@ import { useMemo, useState } from 'react';
 
 export default function AdvisorsClient({
   headingLevel = 1,
+  contained = false,
 }: {
   headingLevel?: 1 | 2;
+  contained?: boolean;
 }) {
   const isEmbedded = headingLevel === 2;
   const isMobile =
@@ -84,11 +86,12 @@ export default function AdvisorsClient({
 
   return (
     <div
-      className={
-        isEmbedded
-          ? 'bg-gradient-to-b from-black via-gray-950 to-black py-10 px-4 sm:px-8 lg:px-16'
-          : 'pt-40 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black py-16 px-6'
-      }
+      className={(() => {
+        if (contained) return 'py-10';
+        if (isEmbedded)
+          return 'bg-gradient-to-b from-black via-gray-950 to-black py-10 px-4 sm:px-8 lg:px-16';
+        return 'pt-40 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black py-16 px-6';
+      })()}
     >
       <motion.div
         className={`${

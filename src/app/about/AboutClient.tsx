@@ -7,6 +7,7 @@ import TeamModal from '@/components/TeamModal';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Person } from '../../../utils/types';
+import AdvisorsClient from '../advisors/AdvisorsClient';
 import TeamPage from '../team/TeamClient';
 import './about.css';
 
@@ -52,10 +53,12 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
   const isEmbedded = headingLevel === 2;
 
   const [showTeam, setShowTeam] = useState(false);
+  const [showAdvisors, setShowAdvisors] = useState(false);
 
   useEffect(() => {
     if (location.pathname === '/about') {
       setShowTeam(true);
+      setShowAdvisors(true);
     }
   }, []);
 
@@ -211,6 +214,13 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
 
           {/* Team Section */}
           {showTeam && <TeamPage headingLevel={2} contained />}
+
+          {/* Advisors Section */}
+          {showAdvisors ? (
+            <section id="advisors" className="scroll-mt-28">
+              <AdvisorsClient headingLevel={2} contained />
+            </section>
+          ) : null}
 
           {/* Modal Pop-Up */}
           <TeamModal
