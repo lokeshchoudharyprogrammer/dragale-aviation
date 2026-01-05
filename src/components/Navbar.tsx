@@ -96,7 +96,7 @@ function MagneticIcon({
           initial={false}
           animate={showLabel ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
           transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded-md bg-black/60 text-white text-[10px] sm:text-xs leading-none whitespace-nowrap pointer-events-none backdrop-blur-md border border-white/10 shadow-md"
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded-md bg-black/60 text-white text-[10px] sm:text-xs leading-none whitespace-nowrap pointer-events-none backdrop-blur-md border border-white/10 shadow-md z-50"
         >
           {label}
         </motion.span>
@@ -116,7 +116,7 @@ export default function ResponsiveIconNavbar() {
         className="
           relative flex justify-between gap-1
           px-3 py-2 sm:px-8 sm:py-3 rounded-full
-          overflow-hidden backdrop-blur-xl bg-white/10 border border-white/20
+          overflow-visible backdrop-blur-xl bg-white/10 border border-white/20
           shadow-lg shadow-black/50
           before:absolute before:inset-[-3px] before:rounded-full before:border before:border-white/10 before:pointer-events-none
           sm:justify-center
@@ -124,13 +124,18 @@ export default function ResponsiveIconNavbar() {
           "
         aria-label="Primary navigation"
       >
-        {/* Light reflection shimmer */}
-        <motion.div
-          className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
-          animate={{ x: ['-150%', '150%'] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        {/* Clip-only layer (keeps shimmer/glaze inside pill) */}
+        <div
+          className="absolute inset-0 rounded-full overflow-hidden pointer-events-none"
           aria-hidden="true"
-        />
+        >
+          {/* Light reflection shimmer */}
+          <motion.div
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            animate={{ x: ['-150%', '150%'] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+          />
+        </div>
 
         {navItems.map((item) => (
           <MagneticIcon key={item.label} {...item} />

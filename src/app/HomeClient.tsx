@@ -166,7 +166,7 @@ export default function Leading() {
         <AirplaneModel />
       </section> */}
       {/* Sticky Footer */}
-      <div className=" bg-gradient-to-br from-gray-900 to-black text-white">
+      <div className="bg-gradient-to-br from-gray-900 to-black text-white space-y-10 sm:space-y-0">
         <ProductsClient headingLevel={2} />
         <AboutClient headingLevel={2} />
         <AdvisorsClient headingLevel={2} />
