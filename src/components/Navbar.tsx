@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useMotionValue } from 'framer-motion';
-import { Briefcase, Home, Info, Lightbulb, Phone, Plane } from 'lucide-react';
+import { Home, Info, Lightbulb, Newspaper, Phone, Plane } from 'lucide-react';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 
@@ -9,9 +9,9 @@ const navItems = [
   { icon: Home, href: '/', label: 'Home', color: '#fff' },
   { icon: Plane, href: '/products', label: 'Products', color: '#fff' },
   { icon: Lightbulb, href: '/solutions', label: 'Solutions', color: '#fff' },
+  { icon: Newspaper, href: '/blog', label: 'Blogs', color: '#fff' },
   { icon: Info, href: '/about', label: 'About', color: '#fff' },
   { icon: Phone, href: '/contact-us', label: 'Contact', color: '#fff' },
-  { icon: Briefcase, href: '/advisors', label: 'Advisors', color: '#fff' },
 ];
 
 function MagneticIcon({
@@ -120,7 +120,7 @@ export default function ResponsiveIconNavbar() {
           shadow-lg shadow-black/50
           before:absolute before:inset-[-3px] before:rounded-full before:border before:border-white/10 before:pointer-events-none
           sm:justify-center
-          gap-0.5 sm:gap-9
+          gap-0.5 sm:gap-6 md:gap-9
           "
         aria-label="Primary navigation"
       >

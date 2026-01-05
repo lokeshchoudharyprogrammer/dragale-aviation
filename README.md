@@ -91,3 +91,52 @@ When evaluating this branch, review it against the intent above:
 
 - Framework context: Next.js (App Router).
 - This README is deliberately rationale-focused and avoids implementation details.
+
+## Blog writing tips (MDX)
+
+This repo includes a minimal, filesystem-based blog.
+
+### Where posts live
+
+- Add posts in [src/content/blog](src/content/blog).
+- Each file name becomes the slug: `my-post.mdx` → `/blog/my-post`.
+
+### Frontmatter rules (strict)
+
+Each post must include ONLY these fields:
+
+- `title`
+- `description`
+- `publishedDate`
+
+Do not add tags, categories, author, keywords, or any other fields.
+
+### Headings
+
+- Do not include an H1 in the MDX body.
+- The page renders exactly one H1 from `title`.
+
+### Image SOP (non-negotiable)
+
+All images in MDX must be rendered with Next.js `Image`.
+
+Rules:
+
+- Do not use Markdown image syntax (`![]()`).
+- Do not use raw HTML `<img>` tags.
+- Images must be local and live under `/public/images/` (recommended: `/public/images/blog/`).
+- Every image must include `width`, `height`, and a meaningful `alt`.
+
+Required pattern (copy/paste):
+
+```mdx
+import Image from 'next/image';
+
+<Image
+  src="/images/blog/example.jpg"
+  alt="Descriptive, human-readable image description"
+  width={1200}
+  height={675}
+  className="rounded-xl my-8"
+/>
+```
