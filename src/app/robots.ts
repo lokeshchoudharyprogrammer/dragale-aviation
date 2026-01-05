@@ -1,5 +1,8 @@
 import { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+export const revalidate = false;
+
 export default function robots(): MetadataRoute.Robots {
   const envBaseUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const baseUrl = (envBaseUrl || "https://dragaleaviation.com").replace(/\/$/, "");
