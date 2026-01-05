@@ -30,6 +30,10 @@ const TeamCard: React.FC<TeamCardProps> = ({
   width = '100%',
   nameHeadingLevel = 3,
 }) => {
+  const isMobile =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(max-width: 767px)').matches;
+
   return (
     <>
       {teamData.map((person, index) => (
@@ -48,10 +52,14 @@ const TeamCard: React.FC<TeamCardProps> = ({
         >
           <motion.div
             variants={cardVariants}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            initial={isMobile ? false : 'initial'}
+            {...(isMobile
+              ? { animate: 'animate' }
+              : { whileInView: 'animate', viewport: { once: true } })}
+            transition={{
+              duration: isMobile ? 0 : 0.6,
+              delay: isMobile ? 0 : index * 0.1,
+            }}
             className="relative bg-white/5 backdrop-blur-3xl p-6 rounded-2xl shadow-xl border border-white/20 hover:border-gray-500 transition-all cursor-pointer group mx-auto"
             onClick={() => handleCardClick?.(person)}
             role="button"
@@ -61,9 +69,12 @@ const TeamCard: React.FC<TeamCardProps> = ({
           >
             {/* Image */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 + 0.1 }}
+              transition={{
+                duration: isMobile ? 0 : 0.5,
+                delay: isMobile ? 0 : index * 0.1 + 0.1,
+              }}
               className="w-24 h-24 relative rounded-full overflow-hidden shadow-lg mx-auto mb-4 bg-white"
             >
               <Image
@@ -79,9 +90,12 @@ const TeamCard: React.FC<TeamCardProps> = ({
 
             {/* Name & Role */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+              transition={{
+                duration: isMobile ? 0 : 0.5,
+                delay: isMobile ? 0 : index * 0.1 + 0.2,
+              }}
               className="text-center"
             >
               {nameHeadingLevel === 2 ? (

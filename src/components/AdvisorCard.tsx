@@ -19,12 +19,17 @@ export default function AdvisorCard({
   image,
   linkedin,
 }: AdvisorCardProps) {
+  const isMobile =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(max-width: 767px)').matches;
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      initial={isMobile ? false : { opacity: 0, y: 40 }}
+      {...(isMobile
+        ? { animate: { opacity: 1, y: 0 } }
+        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true } })}
+      transition={{ duration: isMobile ? 0 : 0.6 }}
       whileHover={{ scale: 1.04 }}
       className=" relative backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 rounded-3xl shadow-2xl p-0 flex flex-col items-center max-w-3xl w-full border border-white/20 hover:border-white/40 transition-all overflow-hidden group"
     >

@@ -136,16 +136,22 @@ const whyAyuRatha = [
   {
     title: 'Unmatched Speed',
     desc: '250 km/h cruising speed for rapid emergency response and fast travel.',
+    href: '/solutions/seamless-vtol-patient-transport',
+    linkText: 'Learn more about seamless VTOL transport',
     icon: <FaRocket />,
   },
   {
     title: 'Advanced Medical Systems',
     desc: 'Equipped with cutting-edge tools for critical care and medical equipment.',
+    href: '/solutions/live-patient-monitoring-system',
+    linkText: 'Learn more about live patient monitoring',
     icon: <FaAmbulance />,
   },
   {
     title: 'Safety First',
     desc: 'Redundant systems and aero-stability ensure secure transport.',
+    href: '/solutions/redundant-safety-systems',
+    linkText: 'Learn more about redundant safety systems',
     icon: <FaPhone />,
   },
 ];
@@ -420,38 +426,14 @@ export default function Aircraft({
                   <div className="text-gray-200 text-sm">
                     <FaRocket className="mx-auto text-[#fff] mb-2" />
                     VTOL Technology
-                    <div className="mt-1 text-[11px]">
-                      <Link
-                        href="/solutions/seamless-vtol-patient-transport"
-                        className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
-                      >
-                        Learn more about seamless VTOL transport
-                      </Link>
-                    </div>
                   </div>
                   <div className="text-gray-200 text-sm">
                     <FaAmbulance className="mx-auto text-[#fff] mb-2" />
                     Advanced Medical Suite
-                    <div className="mt-1 text-[11px]">
-                      <Link
-                        href="/solutions/live-patient-monitoring-system"
-                        className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
-                      >
-                        Learn more about live patient monitoring
-                      </Link>
-                    </div>
                   </div>
                   <div className="text-gray-200 text-sm">
                     <FaPhone className="mx-auto text-[#fff] mb-2" />
                     Redundant Safety Systems
-                    <div className="mt-1 text-[11px]">
-                      <Link
-                        href="/solutions/redundant-safety-systems"
-                        className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
-                      >
-                        Learn more about redundant safety systems
-                      </Link>
-                    </div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -533,6 +515,16 @@ export default function Aircraft({
                       {item.title}
                     </h3>
                     <p className="text-sm text-gray-300 mt-2">{item.desc}</p>
+                    {item.href ? (
+                      <div className="mt-3 text-[11px]">
+                        <Link
+                          href={item.href}
+                          className="text-gray-300/90 underline underline-offset-4 hover:text-white transition"
+                        >
+                          {item.linkText || 'Learn more'}
+                        </Link>
+                      </div>
+                    ) : null}
                   </motion.div>
                 </Tilt>
               ))}

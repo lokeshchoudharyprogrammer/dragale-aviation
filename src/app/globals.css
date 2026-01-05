@@ -42,7 +42,7 @@
   }
 }
 
-.hover\\:animate-dash-border:hover {
+.hover\:animate-dash-border:hover {
   animation: dash-border 5s linear infinite;
   border-style: dashed !important;
   border-color: #22c55e !important;

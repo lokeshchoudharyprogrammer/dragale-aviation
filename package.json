@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
+    "dev:turbo": "next dev --turbo -H 0.0.0.0",
     "start": "next start",
     "lint": "next lint",
     "audit:assets": "node scripts/audit-assets.mjs",

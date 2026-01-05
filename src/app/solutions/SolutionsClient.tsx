@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { FaAmbulance } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
 
@@ -35,7 +34,9 @@ const cardData = [
 ];
 
 export default function Home() {
-  const router = useRouter();
+  const isMobile =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(max-width: 767px)').matches;
 
   const cardHrefMap: Record<string, string> = {
     'Seamless VTOL Patient Transport':
@@ -46,10 +47,6 @@ export default function Home() {
       '/solutions/live-patient-monitoring-system',
     'Critical Heart Patient Support':
       '/solutions/critical-heart-patient-support',
-  };
-
-  const navigateToHref = (href: string) => {
-    router.push(href);
   };
 
   const cardVariants = {
@@ -85,30 +82,48 @@ export default function Home() {
           {/* Hero Section */}
           <motion.div className="text-center max-w-4xl mx-auto relative  p-6">
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-white"
+              initial={isMobile ? false : { opacity: 0, y: 20 }}
+              {...(isMobile
+                ? { animate: { opacity: 1, y: 0 } }
+                : {
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true },
+                  })}
+              transition={{ duration: isMobile ? 0 : 0.6 }}
+              className="solutions-ssr-visible text-3xl sm:text-4xl md:text-5xl font-bold text-white"
             >
               Revolutionizing Air Ambulance Transport
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 text-lg sm:text-xl text-gray-200"
+              initial={isMobile ? false : { opacity: 0, y: 20 }}
+              {...(isMobile
+                ? { animate: { opacity: 1, y: 0 } }
+                : {
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true },
+                  })}
+              transition={{
+                duration: isMobile ? 0 : 0.6,
+                delay: isMobile ? 0 : 0.2,
+              }}
+              className="solutions-ssr-visible mt-4 text-lg sm:text-xl text-gray-200"
             >
               Pioneering India’s first eVTOL air ambulance for rapid, safe, and
               innovative critical care.
             </motion.p>
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-4 max-w-3xl mx-auto text-sm sm:text-base text-gray-300"
+              initial={isMobile ? false : { opacity: 0, y: 20 }}
+              {...(isMobile
+                ? { animate: { opacity: 1, y: 0 } }
+                : {
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true },
+                  })}
+              transition={{
+                duration: isMobile ? 0 : 0.6,
+                delay: isMobile ? 0 : 0.4,
+              }}
+              className="solutions-ssr-visible mt-4 max-w-3xl mx-auto text-sm sm:text-base text-gray-300"
               id="hero-desc"
             >
               Dragale’s eVTOL ambulance delivers unmatched speed (200 km/h),
@@ -119,11 +134,18 @@ export default function Home() {
               href="/contact-us"
               whileHover={{ scale: 1.05, backgroundColor: '#6B7280' }}
               whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-6 inline-flex bg-gray-500 text-white py-3 px-8 rounded-full font-medium text-base shadow-md hover:bg-gray-600 transition duration-300 navbar-glass"
+              initial={isMobile ? false : { opacity: 0, y: 20 }}
+              {...(isMobile
+                ? { animate: { opacity: 1, y: 0 } }
+                : {
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true },
+                  })}
+              transition={{
+                duration: isMobile ? 0 : 0.6,
+                delay: isMobile ? 0 : 0.6,
+              }}
+              className="solutions-ssr-visible mt-6 inline-flex bg-gray-500 text-white py-3 px-8 rounded-full font-medium text-base shadow-md hover:bg-gray-600 transition duration-300 navbar-glass"
               aria-label="Contact us for eVTOL ambulance inquiries"
               aria-describedby="hero-desc"
             >
@@ -139,11 +161,15 @@ export default function Home() {
 
           {/* Cards Grid */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto mt-0"
+            initial={isMobile ? false : { opacity: 0, y: 20 }}
+            {...(isMobile
+              ? { animate: { opacity: 1, y: 0 } }
+              : {
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true },
+                })}
+            transition={{ duration: isMobile ? 0 : 0.6 }}
+            className="solutions-ssr-visible grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto mt-0"
           >
             {cardData.map((card, index) => (
               <Tilt
@@ -157,30 +183,19 @@ export default function Home() {
                 {(() => {
                   const href = cardHrefMap[card.desc];
 
-                  return (
+                  const CardBody = (
                     <motion.div
                       variants={cardVariants}
-                      initial="initial"
-                      whileInView="animate"
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      className="relative rounded-2xl shadow-xl bg-white/5 backdrop-blur-3xl overflow-hidden border border-white/10 hover:border-gray-400/30 transition-all group cursor-pointer"
-                      onClick={() => {
-                        if (!href) return;
-                        navigateToHref(href);
+                      initial={isMobile ? false : 'initial'}
+                      {...(isMobile
+                        ? { animate: 'animate' }
+                        : { whileInView: 'animate', viewport: { once: true } })}
+                      transition={{
+                        duration: isMobile ? 0 : 0.6,
+                        delay: isMobile ? 0 : index * 0.1,
                       }}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) =>
-                        e.key === 'Enter' && href && navigateToHref(href)
-                      }
-                      aria-label={`Learn more about ${card.desc}`}
+                      className="solutions-ssr-visible relative rounded-2xl shadow-xl bg-white/5 backdrop-blur-3xl overflow-hidden border border-white/10 hover:border-gray-400/30 transition-all group"
                     >
-                      {href ? (
-                        <Link href={href} className="sr-only" tabIndex={-1}>
-                          {card.desc}
-                        </Link>
-                      ) : null}
                       {/* Image Section */}
                       <div className="relative w-full h-48 overflow-hidden">
                         <motion.div
@@ -208,29 +223,43 @@ export default function Home() {
                         <p className="text-sm sm:text-base text-gray-200 font-medium">
                           {card.desc}
                         </p>
-                        {href ? (
-                          <Link legacyBehavior href={href}>
-                            <motion.a
-                              whileHover={{ scale: 1.1 }}
-                              whileTap={{ scale: 0.9 }}
-                              className="mt-2 text-gray-300 text-xs underline"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                              aria-label={`View details for ${card.desc}`}
-                            >
-                              Learn More
-                            </motion.a>
-                          </Link>
-                        ) : null}
+                        <motion.span
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="mt-2 inline-block text-gray-300 text-xs underline"
+                          aria-hidden="true"
+                        >
+                          Learn More
+                        </motion.span>
                       </div>
                     </motion.div>
+                  );
+
+                  if (!href) return CardBody;
+
+                  return (
+                    <Link
+                      href={href}
+                      aria-label={`Learn more about ${card.desc}`}
+                      className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-2xl"
+                    >
+                      {CardBody}
+                    </Link>
                   );
                 })()}
               </Tilt>
             ))}
           </motion.div>
         </main>
+
+        <style jsx>{`
+          @media (max-width: 767px) {
+            .solutions-ssr-visible {
+              opacity: 1 !important;
+              transform: none !important;
+            }
+          }
+        `}</style>
 
         {/* <Footer /> */}
       </div>
