@@ -37,9 +37,9 @@ export const solutions: Solution[] = [
       "hospital-to-hospital-transfers",
     ],
     seo: {
-      title: "Seamless VTOL Patient Transport | Dragle Aviation",
+      title: "Seamless VTOL Patient Transport | Dragale Aviation",
       description:
-        "Explore Dragle Aviation’s VTOL-enabled patient transport solution for rapid access, predictable timelines, and safe critical-care movement across challenging terrain.",
+        "Explore Dragale Aviation’s VTOL-enabled patient transport solution for rapid access, predictable timelines, and safe critical-care movement across challenging terrain.",
     },
     content: {
       heading: "Rapid access when every minute matters",
@@ -62,9 +62,9 @@ export const solutions: Solution[] = [
       "critical-heart-patient-support",
     ],
     seo: {
-      title: "Hospital-to-Hospital Patient Transfers | Dragle Aviation",
+      title: "Hospital-to-Hospital Patient Transfers | Dragale Aviation",
       description:
-        "Learn how Dragle Aviation supports rapid hospital-to-hospital patient transfers with coordinated handoffs, predictable routing, and clinically informed transport workflows.",
+        "Learn how Dragale Aviation supports rapid hospital-to-hospital patient transfers with coordinated handoffs, predictable routing, and clinically informed transport workflows.",
     },
     content: {
       heading: "Faster inter-facility transfers with better coordination",
@@ -87,9 +87,9 @@ export const solutions: Solution[] = [
       "seamless-vtol-patient-transport",
     ],
     seo: {
-      title: "Live Patient Monitoring During Transport | Dragle Aviation",
+      title: "Live Patient Monitoring During Transport | Dragale Aviation",
       description:
-        "Discover Dragle Aviation’s live patient monitoring system for medical transport—supporting real-time vitals visibility, trend tracking, and safer clinical decision-making en route.",
+        "Discover Dragale Aviation’s live patient monitoring system for medical transport—supporting real-time vitals visibility, trend tracking, and safer clinical decision-making en route.",
     },
     content: {
       heading: "Continuous visibility from departure to arrival",
@@ -112,9 +112,9 @@ export const solutions: Solution[] = [
       "hospital-to-hospital-transfers",
     ],
     seo: {
-      title: "Critical Heart Patient Transport Support | Dragle Aviation",
+      title: "Critical Heart Patient Transport Support | Dragale Aviation",
       description:
-        "Explore Dragle Aviation’s critical heart patient support solution—focused on safe stabilization, transport planning, continuous monitoring, and rapid access to advanced cardiac care.",
+        "Explore Dragale Aviation’s critical heart patient support solution—focused on safe stabilization, transport planning, continuous monitoring, and rapid access to advanced cardiac care.",
     },
     content: {
       heading: "Transport workflows tailored for cardiac acuity",
@@ -137,9 +137,9 @@ export const solutions: Solution[] = [
       "hospital-to-hospital-transfers",
     ],
     seo: {
-      title: "Redundant Safety Systems | Dragle Aviation",
+      title: "Redundant Safety Systems | Dragale Aviation",
       description:
-        "Learn how Dragle Aviation approaches redundant safety systems for medical eVTOL operations—prioritizing reliability, fault tolerance, and predictable mission readiness.",
+        "Learn how Dragale Aviation approaches redundant safety systems for medical eVTOL operations—prioritizing reliability, fault tolerance, and predictable mission readiness.",
     },
     content: {
       heading: "Reliability-focused design for critical missions",
