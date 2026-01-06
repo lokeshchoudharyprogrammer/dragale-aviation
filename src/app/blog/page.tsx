@@ -16,7 +16,7 @@ export default function BlogIndexPage() {
               Blog
             </h1>
             <p className="mt-4 text-lg sm:text-xl text-gray-200">
-              Thoughts and updates from Dragle Aviation.
+              Thoughts and updates from Dragale Aviation.
             </p>
           </header>
 

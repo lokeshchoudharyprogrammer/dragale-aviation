@@ -1,4 +1,4 @@
-# Dragle Aviation Website — Branch Review Notes
+# Dragale Aviation Website — Branch Review Notes
 
 ## Status and scope
 

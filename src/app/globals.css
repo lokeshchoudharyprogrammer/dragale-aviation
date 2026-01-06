@@ -100,6 +100,44 @@
   border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
+.blog-content table {
+  width: 100%;
+  margin: 1.25rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.blog-content th,
+.blog-content td {
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-content th:last-child,
+.blog-content td:last-child {
+  border-right: 0;
+}
+
+.blog-content tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.blog-content thead th {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgb(255 255 255);
+  font-weight: 700;
+}
+
+.blog-content tbody tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
 
 
 /* Glass effect on the navbar */
