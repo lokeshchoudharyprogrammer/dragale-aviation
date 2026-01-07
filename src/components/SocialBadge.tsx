@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import * as FaIcons from "react-icons/fa";
+import { motion } from 'framer-motion';
+import * as FaIcons from 'react-icons/fa';
 
 interface SocialBadgeProps {
   icon: keyof typeof FaIcons; // like "FaGithub"
@@ -13,7 +13,7 @@ export default function SocialBadge({
   icon,
   label,
   link,
-  color = "#333",
+  color = '#333',
   darkColor,
 }: SocialBadgeProps) {
   const IconComponent = FaIcons[icon];
@@ -30,15 +30,15 @@ export default function SocialBadge({
       rel="noreferrer"
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.95 }}
-      className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border border-dashed transition-all`}
+      className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border border-solid transition-all`}
       style={{
         color: color,
         borderColor: color,
-        
+
         ...(darkColor && {
-          "--tw-text-opacity": 1,
-          "--tw-border-opacity": 1,
-          color: "white",
+          '--tw-text-opacity': 1,
+          '--tw-border-opacity': 1,
+          color: 'white',
           borderColor: darkColor,
         }),
       }}
@@ -48,4 +48,3 @@ export default function SocialBadge({
     </motion.a>
   );
 }
-
