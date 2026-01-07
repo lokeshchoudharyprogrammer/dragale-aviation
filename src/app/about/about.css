@@ -1,0 +1,10 @@
+.section-divider {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-clip-white {
+  background: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #fff;
+}
