@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   FaAmbulance,
   FaBuilding,
@@ -13,7 +13,7 @@ import {
   FaPhone,
   FaShieldAlt,
   FaUser,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 
 interface FormData {
   name: string;
@@ -26,69 +26,67 @@ interface FormData {
   marketingConsent: boolean;
 }
 
-export default function ContactUs({
-  headingLevel = 1,
-}: {
-  headingLevel?: 1 | 2;
-}) {
-  const isEmbedded = headingLevel === 2;
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+}
+
+export default function ContactUs() {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    company: '',
-    position: '',
-    phone: '',
-    message: '',
+    name: "",
+    email: "",
+    company: "",
+    position: "",
+    phone: "",
+    message: "",
     consent: false,
     marketingConsent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
-    {}
-  );
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-  const whyChooseUs = [
+  const testimonials: Testimonial[] = [
     {
-      icon: FaClock,
-      title: 'Rapid Response',
-      description: '24/7 availability for urgent medical transport.',
+      quote: "Dragale Aviation’s swift response saved my father’s life. Their professionalism is unmatched.",
+      author: "Sarah M.",
+      role: "Family Member",
     },
     {
-      icon: FaShieldAlt,
-      title: 'Safety First',
-      description: 'State-of-the-art aircraft and trained medical staff.',
+      quote: "Their medical transport services are reliable and compassionate, giving us peace of mind.",
+      author: "Dr. James R.",
+      role: "Physician",
     },
     {
-      icon: FaHeart,
-      title: 'Compassionate Care',
-      description: 'Patient comfort and dignity are our priorities.',
+      quote: "A trusted partner for emergency air evacuations, always prioritizing patient safety.",
+      author: "Emily T.",
+      role: "Hospital Administrator",
     },
   ];
 
-  const requiredFields = ['name', 'email', 'message', 'consent'];
-  const progress =
-    (requiredFields.filter((field) => formData[field as keyof FormData])
-      .length /
-      requiredFields.length) *
-    100;
+  const whyChooseUs = [
+    { icon: FaClock, title: "Rapid Response", description: "24/7 availability for urgent medical transport." },
+    { icon: FaShieldAlt, title: "Safety First", description: "State-of-the-art aircraft and trained medical staff." },
+    { icon: FaHeart, title: "Compassionate Care", description: "Patient comfort and dignity are our priorities." },
+  ];
+
+  const requiredFields = ["name", "email", "message", "consent"];
+  const progress = (requiredFields.filter((field) => formData[field as keyof FormData]).length / requiredFields.length) * 100;
 
   const validateForm = () => {
-    const newErrors: Partial<Record<keyof FormData, string>> = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (
-      !formData.email.trim() ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
-    )
-      newErrors.email = 'Valid email is required';
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
-    if (!formData.consent) newErrors.consent = 'Consent is required';
+    const newErrors: Partial<FormData> = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = "Valid email is required";
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    // @ts-ignore
+    if (!formData.consent) newErrors.consent = "Consent is required";
     return newErrors;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -109,25 +107,25 @@ export default function ContactUs({
     await new Promise((r) => setTimeout(r, 1500));
 
     try {
-      const res = await fetch('https://my-hono-app-85f.pages.dev/post', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("https://my-hono-app-85f.pages.dev/post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      if (!res.ok) throw new Error('Failed to submit');
+      if (!res.ok) throw new Error("Failed to submit");
       setIsSubmitted(true);
       setFormData({
-        name: '',
-        email: '',
-        company: '',
-        position: '',
-        phone: '',
-        message: '',
+        name: "",
+        email: "",
+        company: "",
+        position: "",
+        phone: "",
+        message: "",
         consent: false,
         marketingConsent: false,
       });
     } catch {
-      alert('Something went wrong. Please try again.');
+      alert("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -140,58 +138,39 @@ export default function ContactUs({
     }
   }, [isSubmitted]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
+
+
+
   return (
     <>
-      <div
-        className={
-          isEmbedded
-            ? 'bg-black text-white py-10 px-4 sm:px-8 lg:px-16'
-            : 'pt-10 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24'
-        }
-      >
-        <main
-          className={`max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 ${
-            isEmbedded ? 'gap-10 scroll-mt-28' : 'gap-12'
-          }`}
-        >
+      <div className="pt-10 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24">
+        <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-10 shadow-lg shadow-black/40"
           >
-            {headingLevel === 2 ? (
-              <h2 className="font-stretch-normal line-clamp-3 text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
-                <FaAmbulance
-                  className="font-stretch-normal line-clamp-3 text-gray-400"
-                  size={32}
-                />{' '}
-                Contact Dragale Aviation
-              </h2>
-            ) : (
-              <h1 className="font-stretch-normal line-clamp-3 text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
-                <FaAmbulance
-                  className="font-stretch-normal line-clamp-3 text-gray-400"
-                  size={32}
-                />{' '}
-                Contact Dragale Aviation
-              </h1>
-            )}
+            <h2 className="font-stretch-normal line-clamp-3 text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
+              <FaAmbulance className="font-stretch-normal line-clamp-3 text-gray-400" size={32} /> Contact Dragale Aviation
+            </h2>
             <p className="font-stretch-normal line-clamp-3 text-gray-300 mb-8 max-w-lg">
-              Reach out for inquiries about our air ambulance services or to
-              coordinate emergency transport.
+              Reach out for inquiries about our air ambulance services or to coordinate emergency transport.
             </p>
 
             {/* Progress Bar */}
-            <progress
-              className="sr-only"
-              value={Math.round(progress)}
-              max={100}
-              aria-label="Form progress"
-            />
             <div
               className="w-full h-2 rounded-full bg-white/20 mb-8 overflow-hidden"
-              aria-hidden="true"
+              role="progressbar"
+              aria-valuenow={progress}
+              aria-valuemin={0}
+              aria-valuemax={100}
             >
               <motion.div
                 initial={{ width: 0 }}
@@ -206,110 +185,92 @@ export default function ContactUs({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {[
                   {
-                    label: 'Name',
-                    id: 'name',
+                    label: "Name",
+                    id: "name",
                     icon: FaUser,
                     required: true,
-                    type: 'text',
+                    type: "text",
                     value: formData.name,
-                    name: 'name',
+                    name: "name",
                     error: errors.name,
-                    placeholder: 'Your Name',
+                    placeholder: "Your Name",
                   },
                   {
-                    label: 'Email',
-                    id: 'email',
+                    label: "Email",
+                    id: "email",
                     icon: FaEnvelope,
                     required: true,
-                    type: 'email',
+                    type: "email",
                     value: formData.email,
-                    name: 'email',
+                    name: "email",
                     error: errors.email,
-                    placeholder: 'you@example.com',
+                    placeholder: "you@example.com",
                   },
                   {
-                    label: 'Company',
-                    id: 'company',
+                    label: "Company",
+                    id: "company",
                     icon: FaBuilding,
                     required: false,
-                    type: 'text',
+                    type: "text",
                     value: formData.company,
-                    name: 'company',
+                    name: "company",
                     error: errors.company,
-                    placeholder: 'Company name',
+                    placeholder: "Company name",
                   },
                   {
-                    label: 'Position',
-                    id: 'position',
+                    label: "Position",
+                    id: "position",
                     icon: FaUser,
                     required: false,
-                    type: 'text',
+                    type: "text",
                     value: formData.position,
-                    name: 'position',
+                    name: "position",
                     error: errors.position,
-                    placeholder: 'Your position',
+                    placeholder: "Your position",
                   },
                   {
-                    label: 'Phone',
-                    id: 'phone',
+                    label: "Phone",
+                    id: "phone",
                     icon: FaPhone,
                     required: false,
-                    type: 'text',
+                    type: "text",
                     value: formData.phone,
-                    name: 'phone',
+                    name: "phone",
                     error: errors.phone,
-                    placeholder: 'Phone number',
+                    placeholder: "Phone number",
                     fullWidth: true,
                   },
-                ].map(
-                  ({
-                    label,
-                    id,
-                    icon: Icon,
-                    required,
-                    type,
-                    value,
-                    name,
-                    error,
-                    placeholder,
-                    fullWidth,
-                  }) => (
-                    <div
-                      key={id}
-                      className={`relative ${fullWidth ? 'sm:col-span-2' : ''}`}
+                ].map(({ label, id, icon: Icon, required, type, value, name, error, placeholder, fullWidth }) => (
+                  <div
+                    key={id}
+                    className={`relative ${fullWidth ? "sm:col-span-2" : ""}`}
+                  >
+                    <label
+                      htmlFor={id}
+                      className="flex items-center gap-2 text-gray-300 font-semibold text-sm select-none"
                     >
-                      <label
-                        htmlFor={id}
-                        className="flex items-center gap-2 text-gray-300 font-semibold text-sm select-none"
-                      >
-                        <Icon /> {label}{' '}
-                        {required && <span className="text-red-400">*</span>}
-                      </label>
-                      <motion.input
-                        type={type}
-                        id={id}
-                        name={name}
-                        value={value}
-                        onChange={handleChange}
-                        placeholder={placeholder}
-                        required={required}
-                        aria-invalid={!!error}
-                        aria-describedby={error ? `${id}-error` : undefined}
-                        className={`mt-1 w-full rounded-xl bg-white/10 border ${
-                          error ? 'border-red-500' : 'border-white/20'
+                      <Icon /> {label} {required && <span className="text-red-400">*</span>}
+                    </label>
+                    <motion.input
+                      type={type}
+                      id={id}
+                      name={name}
+                      value={value}
+                      onChange={handleChange}
+                      placeholder={placeholder}
+                      required={required}
+                      aria-invalid={!!error}
+                      aria-describedby={error ? `${id}-error` : undefined}
+                      className={`mt-1 w-full rounded-xl bg-white/10 border ${error ? "border-red-500" : "border-white/20"
                         } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm`}
-                      />
-                      {error && (
-                        <p
-                          id={`${id}-error`}
-                          className="mt-1 text-xs text-red-400 select-none"
-                        >
-                          {error}
-                        </p>
-                      )}
-                    </div>
-                  )
-                )}
+                    />
+                    {error && (
+                      <p id={`${id}-error`} className="mt-1 text-xs text-red-400 select-none">
+                        {error}
+                      </p>
+                    )}
+                  </div>
+                ))}
 
                 {/* Message */}
                 <div className="sm:col-span-2 relative">
@@ -317,8 +278,7 @@ export default function ContactUs({
                     htmlFor="message"
                     className="font-stretch-normal line-clamp-3 flex items-center gap-2 text-gray-300 font-semibold text-sm select-none"
                   >
-                    <FaComment /> Message{' '}
-                    <span className="text-red-400">*</span>
+                    <FaComment /> Message <span className="text-red-400">*</span>
                   </label>
                   <motion.textarea
                     id="message"
@@ -327,20 +287,14 @@ export default function ContactUs({
                     onChange={handleChange}
                     required
                     aria-invalid={!!errors.message}
-                    aria-describedby={
-                      errors.message ? 'message-error' : undefined
-                    }
+                    aria-describedby={errors.message ? "message-error" : undefined}
                     placeholder="Your message here..."
                     rows={6}
-                    className={`font-stretch-normal line-clamp-3 mt-1 w-full rounded-xl bg-white/10 border ${
-                      errors.message ? 'border-red-500' : 'border-white/20'
-                    } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm resize-y`}
+                    className={`font-stretch-normal line-clamp-3 mt-1 w-full rounded-xl bg-white/10 border ${errors.message ? "border-red-500" : "border-white/20"
+                      } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm resize-y`}
                   />
                   {errors.message && (
-                    <p
-                      id="message-error"
-                      className="mt-1 text-xs text-red-400 select-none"
-                    >
+                    <p id="message-error" className="mt-1 text-xs text-red-400 select-none">
                       {errors.message}
                     </p>
                   )}
@@ -357,26 +311,17 @@ export default function ContactUs({
                     checked={formData.consent}
                     onChange={handleCheckboxChange}
                     required
-                    aria-describedby={
-                      errors.consent ? 'consent-error' : undefined
-                    }
-                    aria-label="Consent to Use Personal Information"
+                    aria-invalid={!!errors.consent}
+                    aria-describedby={errors.consent ? "consent-error" : undefined}
                     className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
                   />
                   <div className="text-sm text-gray-300">
-                    <span className="font-stretch-normal line-clamp-3 font-semibold select-none">
-                      Consent to Use Personal Information
-                    </span>
+                    <span className="font-stretch-normal line-clamp-3 font-semibold select-none">Consent to Use Personal Information</span>
                     <p className="mt-1 text-xs max-w-lg leading-snug">
-                      We collect your name, email, contact number, company, and
-                      message to respond to your inquiry. Your data will be
-                      retained only as long as necessary.
+                      We collect your name, email, contact number, company, and message to respond to your inquiry. Your data will be retained only as long as necessary.
                     </p>
                     {errors.consent && (
-                      <p
-                        id="consent-error"
-                        className="mt-1 text-xs text-red-400 select-none"
-                      >
+                      <p id="consent-error" className="mt-1 text-xs text-red-400 select-none">
                         {errors.consent}
                       </p>
                     )}
@@ -390,16 +335,12 @@ export default function ContactUs({
                     name="marketingConsent"
                     checked={formData.marketingConsent}
                     onChange={handleCheckboxChange}
-                    aria-label="Optional Marketing Communication"
                     className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
                   />
                   <div className="text-sm text-gray-300">
-                    <span className="font-semibold select-none">
-                      Optional Marketing Communication
-                    </span>
+                    <span className="font-semibold select-none">Optional Marketing Communication</span>
                     <p className="mt-1 text-xs max-w-lg leading-snug">
-                      Receive updates about Dragale Aviation’s air ambulance
-                      services and innovations.
+                      Receive updates about Dragale Aviation’s air ambulance services and innovations.
                     </p>
                   </div>
                 </div>
@@ -417,17 +358,18 @@ export default function ContactUs({
                           bg-gradient-to-r from-gray-500 to-gray-600
                           text-white font-semibold py-3 px-10 rounded-full
                           relative overflow-hidden
-                            border-2 border-solid border-gray-400
+                          border-2 border-dashed border-gray-400
                           shadow-lg shadow-gray-800/60
                           flex items-center justify-center gap-3
                           transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed
                           
                           before:absolute before:inset-0 before:rounded-full
-                            before:border-2 before:border-solid before:border-gray-300
+                          before:border-2 before:border-dashed before:border-gray-300
                           before:pointer-events-none before:opacity-40 before:blur-sm
                           before:transition-opacity before:duration-300
                           
                           hover:before:opacity-100
+                          hover:before:animate-dash-border
 
                           after:absolute after:inset-[-4px] after:rounded-full
                           after:border-4 after:border-solid after:border-gray-400
@@ -461,9 +403,10 @@ export default function ContactUs({
                     Submitting...
                   </>
                 ) : (
-                  'Submit Inquiry'
+                  "Submit Inquiry"
                 )}
               </motion.button>
+
             </form>
           </motion.section>
 
@@ -476,15 +419,7 @@ export default function ContactUs({
           >
             {/* Why Choose Us */}
             <section className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-lg shadow-black/40">
-              {headingLevel === 2 ? (
-                <h3 className="text-2xl font-semibold mb-6 text-white">
-                  Why Choose Dragale Aviation?
-                </h3>
-              ) : (
-                <h2 className="text-2xl font-semibold mb-6 text-white">
-                  Why Choose Dragale Aviation?
-                </h2>
-              )}
+              <h3 className="text-2xl font-semibold mb-6 text-white">Why Choose Dragale Aviation?</h3>
               <div className="flex flex-col gap-6">
                 {whyChooseUs.map(({ icon: Icon, title, description }, idx) => (
                   <motion.div
@@ -494,12 +429,8 @@ export default function ContactUs({
                   >
                     <Icon className="text-gray-400 text-3xl mt-1" />
                     <div>
-                      <h4 className="text-lg font-semibold text-white">
-                        {title}
-                      </h4>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        {description}
-                      </p>
+                      <h4 className="text-lg font-semibold text-white">{title}</h4>
+                      <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -543,14 +474,11 @@ export default function ContactUs({
                 className="backdrop-blur-2xl bg-white/10 p-8 rounded-3xl shadow-2xl border border-white/20 max-w-sm w-full"
                 initial={{ y: 20 }}
                 animate={{ y: 0 }}
-                transition={{ type: 'spring', stiffness: 100 }}
+                transition={{ type: "spring", stiffness: 100 }}
               >
                 <div className="flex flex-col items-center text-center space-y-4">
                   <FaCheckCircle className="text-gray-400 text-5xl" />
-                  <h3
-                    id="success-modal-title"
-                    className="text-2xl font-bold text-white"
-                  >
+                  <h3 id="success-modal-title" className="text-2xl font-bold text-white">
                     Thank You!
                   </h3>
                   <p className="text-gray-300 text-sm max-w-xs">

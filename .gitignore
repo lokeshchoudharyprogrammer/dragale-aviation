@@ -33,29 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# python (local tooling)
-/.venv/
-__pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
 # vercel
 .vercel
-
-# editors
-.vscode/
-.idea/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# OS
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-tree.txt

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { FaLinkedin } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { FaLinkedin } from "react-icons/fa";
 
 interface AdvisorCardProps {
   name: string;
@@ -12,24 +12,13 @@ interface AdvisorCardProps {
   linkedin: string;
 }
 
-export default function AdvisorCard({
-  name,
-  title,
-  bio,
-  image,
-  linkedin,
-}: AdvisorCardProps) {
-  const isMobile =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(max-width: 767px)').matches;
-
+export default function AdvisorCard({ name, title, bio, image, linkedin }: AdvisorCardProps) {
   return (
     <motion.div
-      initial={isMobile ? false : { opacity: 0, y: 40 }}
-      {...(isMobile
-        ? { animate: { opacity: 1, y: 0 } }
-        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true } })}
-      transition={{ duration: isMobile ? 0 : 0.6 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
       whileHover={{ scale: 1.04 }}
       className=" relative backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 rounded-3xl shadow-2xl p-0 flex flex-col items-center max-w-3xl w-full border border-white/20 hover:border-white/40 transition-all overflow-hidden group"
     >
@@ -41,7 +30,7 @@ export default function AdvisorCard({
         <div className="relative">
           <Image
             src={image}
-            alt={`${name}, ${title}`}
+            alt={name}
             width={180}
             height={180}
             className="rounded-full object-cover border-4 border-white shadow-lg relative z-10"
