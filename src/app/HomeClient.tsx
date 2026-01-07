@@ -78,14 +78,14 @@ export default function Leading() {
       {/* Main content grows to fill space */}
       <main className="flex-grow overflow-hidden">
         {/* Hero Video Section */}
-        <section className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden h-[60vh] min-h-[300px] border border-white/20">
+        <section className="relative w-[90%] max-w-7xl m-auto my-12 rounded-3xl overflow-hidden md:h-[60vh] h-[30vh]   min-h-[300px] border border-white/20">
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="none"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full md:object-cover object-contain object-top"
             ref={ref}
           >
             <source src="/dargale_aviation.mp4" type="video/mp4" />
@@ -124,16 +124,7 @@ export default function Leading() {
           >
             {!isVoicePlaying ? <VolumeOff /> : <Volume />}
           </button>
-          {/* Blurred Overlay */}
-          {/* <div
-            className="absolute inset-0"
-            style={{
-              background: "rgba(0, 0, 0, 0.3)",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              // zIndex: 1,
-            }}
-          ></div> */}
+         
         </section>
 
         {/* About Company Section */}
