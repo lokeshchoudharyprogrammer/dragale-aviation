@@ -1,142 +1,91 @@
-# Dragale Aviation Website — Branch Review Notes
+# Dragale Aviation
 
-## Status and scope
+**Revolutionizing Emergency Medical Transport in India with Medical-First eVTOLs.**
 
-This document describes work on the **`seo-growth-foundation`** branch.
+Dragale Aviation is a pioneering initiative dedicated to transforming emergency medical services (EMS) in India. By leveraging advanced **eVTOL (electric Vertical Take-Off and Landing)** technology, the project aims to solve the critical "Golden Hour" challenge—ensuring patients receive life-saving care within the first 60 minutes of trauma or medical emergency.
 
-- This branch is **in progress** and **not merged into `main`**.
-- The goal is to make the current site easier for search engines to understand, more stable to load, and easier to extend—without changing the product story or interaction model.
+Unlike standard air taxis designed for commuters, Dragale's aircraft are designed as **"Medical-First"** vehicles—effectively **flying intensive care units** optimized for patient stability, medical crew ergonomics, and rapid response.
 
-## Why this branch exists
+---
 
-The site needed a foundation that supports growth without rewriting the experience.
+## 🚀 Mission & Vision
 
-Specifically, this branch focuses on:
+**The Problem:**
+In India, urban congestion and difficult terrain often prevent ground ambulances from reaching patients or hospitals in time. Traditional helicopter EMS is expensive, scarce, and operationally complex.
 
-- Reducing unnecessary friction for crawling and discovery.
-- Improving clarity of page intent (what each page is “about”).
-- Improving stability and load behavior so the experience is consistent.
-- Establishing a scalable structure for a growing set of Solutions pages.
+**The Solution:**
+A network of dedicated medical eVTOLs that can:
+- Bypass traffic and terrain barriers.
+- Land closer to the point of need (dense cities, remote zones).
+- Provide hospital-level care during transit.
 
-## What was improved (by outcomes)
+---
 
-### 1) Easier discovery and clearer page meaning
+## 🏥 Key Solutions
 
-The site was adjusted to be more legible to crawlers and to reduce ambiguity about the purpose of individual pages.
+This platform showcases three core operational pillars:
 
-Outcomes:
+### 1. Seamless VTOL Patient Transport
+Vertical takeoff capabilities allow for rapid extraction from dense urban centers or remote locations directly to medical facilities. We focus on reducing "friction points" like traffic jams and complex transfer handoffs.
 
-- Better crawl depth and internal discoverability.
-- More consistent, clearer page-level metadata intent.
-- Stronger internal linking where it helps users and discovery.
+### 2. Hospital-to-Hospital Transfers
+High-speed, coordinated inter-facility transport for patients needing higher levels of care (e.g., transferring a cardiac patient from a local clinic to a specialty heart center).
 
-### 2) More stable, predictable loading
+### 3. Live Patient Monitoring System
+A tech-enabled ecosystem that transmits real-time patient vitals from the aircraft to the receiving hospital. This allows doctors on the ground to track trends and prepare for the patient's arrival before they land.
 
-The branch includes changes aimed at reducing visual “jank” and making asset delivery more predictable.
+---
 
-Outcomes:
+## 🛠️ Technology Stack
 
-- Fewer layout shifts during load (better visual stability).
-- Improved asset efficiency where it had clear impact.
+This website is built as a high-performance, scalable platform to communicate Dragale's vision.
 
-### 3) A scalable Solutions structure
+- **Framework:** [Next.js 16.1](https://nextjs.org/) (App Router)
+- **Language:** TypeScript
+- **UI/Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Core Library:** React 19
+- **3D & Motion:**
+  - `three.js` & `@react-three/fiber` (for 3D aircraft models)
+  - `framer-motion` (for smooth UI transitions)
+- **Content Management:** MDX (Markdown + JSX) for blogs and articles.
 
-Solutions content is set up to scale using a slug-based approach under **/solutions/[slug]**.
+---
 
-Outcomes:
+## 📂 Project Structure
 
-- A consistent place for Solutions expansion without proliferating one-off pages.
-- A clearer separation between “what a Solution is” and “which Solution this is.”
-
-## Why these improvements matter
-
-### SEO
-
-Search performance tends to degrade when sites are hard to crawl, have unclear page intent, or require too many hops to reach important content. This work focuses on removing those structural obstacles so that future content additions have a better chance of being discovered and interpreted correctly.
-
-### Performance and UX consistency
-
-Stable, predictable loading helps real users (especially on mobile or poor connections) and reduces the risk that the page feels broken or “shifts under the cursor.” These changes prioritize experience consistency rather than adding new interactions.
-
-### Scalability
-
-As Solutions content grows, a consistent URL structure and page intent reduces long-term maintenance costs and avoids a future cleanup project just to make content navigable.
-
-## What was intentionally NOT changed (and why)
-
-This branch intentionally avoids product/experience redesign.
-
-- The **modal-based interaction patterns** were kept as-is to preserve familiar UX and reduce rollout risk.
-- No new site sections or features were introduced beyond the scope described above.
-- The work is not presented as a “final SEO project”; it is a foundation meant to support future iterations.
-
-## What this enables next (without promising delivery)
-
-With this foundation in place, future work can be evaluated and added with lower risk:
-
-- Adding or expanding Solutions content in a consistent way.
-- Iterating on internal linking and page intent as new pages are introduced.
-- Continuing to improve load stability and asset efficiency as new media is added.
-
-## How to review this branch
-
-When evaluating this branch, review it against the intent above:
-
-- Does each page read as clearly “about” one thing?
-- Can a human (and a crawler) reach important pages without unnecessary detours?
-- Does the experience load more smoothly without changing how users interact?
-- Does the Solutions structure feel ready to grow without creating one-off patterns?
-
-## Notes
-
-- Framework context: Next.js (App Router).
-- This README is deliberately rationale-focused and avoids implementation details.
-
-## Blog writing tips (MDX)
-
-This repo includes a minimal, filesystem-based blog.
-
-### Where posts live
-
-- Add posts in [src/content/blog](src/content/blog).
-- Each file name becomes the slug: `my-post.mdx` → `/blog/my-post`.
-
-### Frontmatter rules (strict)
-
-Each post must include ONLY these fields:
-
-- `title`
-- `description`
-- `publishedDate`
-
-Do not add tags, categories, author, keywords, or any other fields.
-
-### Headings
-
-- Do not include an H1 in the MDX body.
-- The page renders exactly one H1 from `title`.
-
-### Image SOP (non-negotiable)
-
-All images in MDX must be rendered with Next.js `Image`.
-
-Rules:
-
-- Do not use Markdown image syntax (`![]()`).
-- Do not use raw HTML `<img>` tags.
-- Images must be local and live under `/public/images/` (recommended: `/public/images/blog/`).
-- Every image must include `width`, `height`, and a meaningful `alt`.
-
-Required pattern (copy/paste):
-
-```mdx
-import Image from 'next/image';
-
-<Image
-  src="/images/blog/example.jpg"
-  alt="Descriptive, human-readable image description"
-  width={1200}
-  height={675}
-  className="rounded-xl my-8"
-/>
+```bash
+src/
+├── app/                 # Main application routes (Next.js App Router)
+│   ├── about/           # About Us page
+│   ├── solutions/       # Dynamic solutions pages (/solutions/[slug])
+│   ├── blog/            # MDX-powered blog
+│   └── ...
+├── components/          # Reusable UI components (Navbar, 3D Models, etc.)
+├── content/             # MDX files for blog posts
+└── utils/               # Shared utilities
+    └── solutions.ts     # Single source of truth for solution data
 ```
+
+## ⚡ Getting Started
+
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Run Development Server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Open in Browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 📚 Learn More
+
+Check out our **Blog** section within the app to read in-depth articles on:
+- *Why India Needs Dedicated eVTOL Air Ambulances*
+- *Regulatory Readiness for Medical eVTOL Operations*
+- *eVTOL Air Ambulance vs. Helicopter EMS*
