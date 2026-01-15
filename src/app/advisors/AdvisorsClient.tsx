@@ -93,6 +93,10 @@ export default function AdvisorsClient({
         return 'pt-40 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black py-16 px-6';
       })()}
     >
+      <div
+        aria-hidden="true"
+        className="border-t border-white/20 sm:mt-0 sm:mb-10"
+      />
       <motion.div
         className={`${
           isEmbedded ? 'mb-8' : 'mb-16'

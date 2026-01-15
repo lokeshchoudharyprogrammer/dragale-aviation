@@ -3,10 +3,14 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDownToDot, CircleX } from 'lucide-react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { FaAmbulance, FaPhone, FaRocket } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
+
+import evtolDarkBg from '../../../public/images/evtol-dark-bg.png';
+import evtolInside from '../../../public/images/Ayuratha-inside.png';
 
 const PARTICLE_CLASSES = [
   'left-[0%] [animation-delay:0s]',
@@ -348,7 +352,7 @@ export default function Aircraft({
           <motion.div
             className={`${
               isEmbedded ? 'mt-4' : 'mt-10'
-            } text-center max-w-5xl mx-auto relative z-10`}
+            } text-center w-[90%] max-w-7xl mx-auto relative z-10`}
           >
             <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} perspective={1000}>
               <motion.div
@@ -439,6 +443,34 @@ export default function Aircraft({
               </motion.div>
             </Tilt>
           </motion.div>
+
+          {/* Supporting Product Visuals (static) */}
+          <section className="relative z-10 mt-8 py-8 sm:py-10">
+            <div className="mx-auto max-w-7xl">
+              <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
+                {/* Text (left on desktop, top on mobile) */}
+                <div className="min-w-0 lg:order-1">
+                  <h2 className="text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                    A look at the <u>AyuRatha DX1</u> eVTOL air ambulance
+                  </h2>
+                </div>
+
+                {/* Image (right on desktop, below on mobile) */}
+                <div className="min-w-0 lg:order-2 flex justify-center lg:justify-end">
+                  <div className="w-full max-w-md sm:max-w-lg overflow-hidden">
+                    <Image
+                      src={evtolDarkBg}
+                      alt="Conceptual eVTOL air ambulance aircraft design rendered on a dark background"
+                      placeholder="blur"
+                      sizes="(min-width: 1024px) 520px, (min-width: 640px) 480px, 100vw"
+                      className="h-auto w-full object-contain rounded-xl border border-white/10 bg-white/5"
+                      priority={false}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           {/* Performance Highlights Carousel */}
           {/* <motion.div
