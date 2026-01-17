@@ -1,9 +1,9 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import remarkGfm from 'remark-gfm';
+import BlogMdxImage from '@/components/BlogMdxImage';
 import {
   getAllBlogPosts,
   getAllBlogSlugs,
@@ -80,7 +80,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="blog-content">
               <MDXRemote
                 source={post.content}
-                components={{ Image }}
+                components={{ Image: BlogMdxImage }}
                 options={{
                   mdxOptions: {
                     remarkPlugins: [remarkGfm],
