@@ -44,6 +44,8 @@ export default function AdvisorCard({
             alt={`${name}, ${title}`}
             width={180}
             height={180}
+            priority
+            quality={90}
             className="rounded-full object-cover border-4 border-white shadow-lg relative z-10"
           />
           {/* Halo Glow */}

@@ -84,9 +84,11 @@ export default function Leading() {
             loop
             muted
             playsInline
-            preload="none"
+            preload="metadata"
+            poster="/founders/newlogo.png"
             className="absolute inset-0 w-full h-full md:object-cover object-contain object-top"
             ref={ref}
+            aria-label="Dragale Aviation promotional video"
           >
             <source src="/dargale_aviation.mp4" type="video/mp4" />
             Your browser does not support the video tag.
