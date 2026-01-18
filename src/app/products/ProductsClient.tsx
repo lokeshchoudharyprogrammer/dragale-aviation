@@ -3,10 +3,14 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDownToDot, CircleX } from 'lucide-react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { FaAmbulance, FaPhone, FaRocket } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
+
+import evtolDarkBg from '../../../public/images/evtol-dark-bg.png';
+import evtolInside from '../../../public/images/Ayuratha-inside.png';
 
 const PARTICLE_CLASSES = [
   'left-[0%] [animation-delay:0s]',
@@ -34,7 +38,7 @@ const PARTICLE_CLASSES = [
 const aircraftData = {
   model: 'AyuRatha (DX1)',
   useCase: 'Air Ambulance – Hospital-to-Hospital / Emergency Response',
-  flightType: 'VTOL (Vertical Takeoff and Landing)',
+  flightType: 'eVTOL (Electric Vertical Takeoff and Landing)',
   configuration: 'Tilt-rotor with EDF-assisted Cruise',
   medicalEquipment: [
     {
@@ -122,9 +126,9 @@ const aircraftData = {
   },
   performance: {
     mtow: '1900 kg',
-    payload: '500 kg',
+    payload: '350 kg',
     cruisingSpeed: '250 km/h',
-    maxRange: '270 km',
+    maxRange: '150 km',
     flightTime: '45–60 minutes',
     climbRate: '5 m/s',
     serviceCeiling: '1,000 m (3,280 ft)',
@@ -137,7 +141,7 @@ const whyAyuRatha = [
     title: 'Unmatched Speed',
     desc: '250 km/h cruising speed for rapid emergency response and fast travel.',
     href: '/solutions/seamless-vtol-patient-transport',
-    linkText: 'Learn more about seamless VTOL transport',
+    linkText: 'Learn more about seamless eVTOL transport',
     icon: <FaRocket />,
   },
   {
@@ -348,7 +352,7 @@ export default function Aircraft({
           <motion.div
             className={`${
               isEmbedded ? 'mt-4' : 'mt-10'
-            } text-center max-w-5xl mx-auto relative z-10`}
+            } text-center w-[90%] max-w-7xl mx-auto relative z-10`}
           >
             <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} perspective={1000}>
               <motion.div
@@ -425,7 +429,7 @@ export default function Aircraft({
                 >
                   <div className="text-gray-200 text-sm">
                     <FaRocket className="mx-auto text-[#fff] mb-2" />
-                    VTOL Technology
+                    eVTOL Technology
                   </div>
                   <div className="text-gray-200 text-sm">
                     <FaAmbulance className="mx-auto text-[#fff] mb-2" />
@@ -439,6 +443,162 @@ export default function Aircraft({
               </motion.div>
             </Tilt>
           </motion.div>
+
+          {/* Visuals / Gallery */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-7xl mx-auto mt-10 relative z-10"
+            aria-labelledby="aircraft-visuals"
+          >
+            <div className="bg-white/5 backdrop-blur-3xl p-6 sm:p-8 rounded-2xl border border-white/10 shadow-xl">
+              <div className="text-center">
+                <h2
+                  id="aircraft-visuals"
+                  className="text-2xl font-semibold text-white"
+                >
+                  A quick look at the aircraft exterior and the critical-care
+                  cabin built for fast, stable, and clinically efficient
+                  transport.
+                </h2>
+                {/* <p className="mt-2 text-sm sm:text-base text-gray-300 max-w-3xl mx-auto">
+                  A quick look at the aircraft exterior and the critical-care
+                  cabin built for fast, stable, and clinically efficient
+                  transport.
+                </p> */}
+              </div>
+
+              <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Exterior */}
+                <Tilt
+                  tiltMaxAngleX={6}
+                  tiltMaxAngleY={6}
+                  perspective={1000}
+                  scale={1.01}
+                >
+                  <motion.div
+                    variants={cardVariants}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: true }}
+                    className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10 overflow-hidden hover:border-gray-400/30 transition-all"
+                  >
+                    <div className="relative w-full h-0 pb-[56.25%] overflow-hidden bg-white/5">
+                      <Image
+                        src={evtolDarkBg}
+                        alt="AyuRatha (DX1) eVTOL air ambulance exterior"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        priority={!isEmbedded}
+                        quality={75}
+                        placeholder="blur"
+                      />
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                        aria-hidden="true"
+                      />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <p className="text-xs text-gray-200/90">Exterior</p>
+                        <p className="text-lg font-semibold text-white">
+                          AyuRatha (DX1) — Rapid Response eVTOL
+                        </p>
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-sm text-gray-300">
+                        An eVTOL-first design tuned for fast dispatch, smooth
+                        transition to cruise, and reliable performance in
+                        time-critical missions.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <span className="text-[11px] px-2 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                          eVTOL
+                        </span>
+                        <span className="text-[11px] px-2 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                          350 kg payload
+                        </span>
+                        <span className="text-[11px] px-2 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                          250 km/h cruise
+                        </span>
+                        <span className="text-[11px] px-2 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                          150 km range
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Tilt>
+
+                {/* Interior */}
+                <Tilt
+                  tiltMaxAngleX={6}
+                  tiltMaxAngleY={6}
+                  perspective={1000}
+                  scale={1.01}
+                >
+                  <motion.div
+                    variants={cardVariants}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: true }}
+                    className="bg-white/5 backdrop-blur-3xl rounded-2xl border border-white/10 overflow-hidden hover:border-gray-400/30 transition-all"
+                  >
+                    <div className="relative w-full h-0 pb-[56.25%] overflow-hidden bg-white/5">
+                      <Image
+                        src={evtolInside}
+                        alt="AyuRatha DX1 air-ambulance interior cabin"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        quality={75}
+                        loading="lazy"
+                        placeholder="blur"
+                      />
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent"
+                        aria-hidden="true"
+                      />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <p className="text-xs text-gray-200/90">Interior</p>
+                        <p className="text-lg font-semibold text-white">
+                          Critical-Care Cabin — Built for Treatment in Transit
+                        </p>
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-sm text-gray-300">
+                        A focused clinical layout designed around rapid patient
+                        access, monitoring, and stable care delivery during
+                        flight.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <span className="text-[11px] px-2 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                          Stretcher access
+                        </span>
+                        <span className="text-[11px] px-2 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                          Ventilation-ready
+                        </span>
+                        <span className="text-[11px] px-2 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                          Monitoring + comms
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Tilt>
+              </div>
+
+              <div className="mt-6 text-center">
+                <Link
+                  href="/contact-us"
+                  className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 hover:bg-white/15 px-6 py-2 text-sm font-semibold text-white transition"
+                >
+                  Contact us for more details
+                </Link>
+              </div>
+            </div>
+          </motion.section>
 
           {/* Performance Highlights Carousel */}
           {/* <motion.div

@@ -93,16 +93,8 @@ function assertValidNextImageUsage(mdxBody: string, filePath: string) {
   const hasImageTag = /<Image\b/.test(mdxBody);
   if (!hasImageTag) return;
 
-  const hasNextImageImport =
-    /^\s*import\s+Image\s+from\s+['"]next\/image['"]\s*;?\s*$/m.test(
-      mdxBody,
-    );
-
-  if (!hasNextImageImport) {
-    throw new Error(
-      `[blog] ${filePath} uses <Image /> but is missing \"import Image from 'next/image'\" at the top of the MDX file.`,
-    );
-  }
+  // Note: We used to require an explicit import line in MDX. The renderer now provides
+  // an <Image /> component via MDXRemote, so the import is optional (and is stripped anyway).
 
   // Lightweight validation of each <Image .../> block.
   // This intentionally avoids a full JSX parser; it enforces required attributes and local src.

@@ -124,7 +124,6 @@ export default function Leading() {
           >
             {!isVoicePlaying ? <VolumeOff /> : <Volume />}
           </button>
-         
         </section>
 
         {/* About Company Section */}
@@ -160,8 +159,8 @@ export default function Leading() {
       <div className="bg-gradient-to-br from-gray-900 to-black text-white space-y-10 sm:space-y-0">
         <ProductsClient headingLevel={2} />
         <AboutClient headingLevel={2} />
-        <AdvisorsClient headingLevel={2} />
         <TeamClient headingLevel={2} />
+        <AdvisorsClient headingLevel={2} />
         <ContactClient headingLevel={2} />
       </div>
     </div>
