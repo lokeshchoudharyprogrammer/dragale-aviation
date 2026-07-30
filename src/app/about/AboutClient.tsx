@@ -26,21 +26,21 @@ const teamData = [
     img: '/founders/shivanshu.jpeg',
     linkedin: 'https://www.linkedin.com/in/shivanshu-tank-556b00232/',
   },
-  {
-    name: 'Syed Mujahid',
-    role: 'CTO',
-    bio: `
-      Syed Mujahid, an Aerospace Engineering expert, leads the design of Dragale’s eVTOL air ambulance. His experience at Mallard Enterprises and as a Youth Ambassador & Advisor at the Advanced Air Mobility Institute ensures cutting-edge innovation and safety in every system.
+  // {
+  //   name: 'Syed Mujahid',
+  //   role: 'CTO',
+  //   bio: `
+  //     Syed Mujahid, an Aerospace Engineering expert, leads the design of Dragale’s eVTOL air ambulance. His experience at Mallard Enterprises and as a Youth Ambassador & Advisor at the Advanced Air Mobility Institute ensures cutting-edge innovation and safety in every system.
 
-    `,
-    achievements: `
-      - Designed core eVTOL propulsion system
-      - Published research on urban air mobility
-      - Speaker at Global Aviation Summit 2024
-    `,
-    img: '/founders/syed.jpg',
-    linkedin: 'https://www.linkedin.com/in/syed-mujahid-496064228/',
-  },
+  //   `,
+  //   achievements: `
+  //     - Designed core eVTOL propulsion system
+  //     - Published research on urban air mobility
+  //     - Speaker at Global Aviation Summit 2024
+  //   `,
+  //   img: '/founders/syed.jpg',
+  //   linkedin: 'https://www.linkedin.com/in/syed-mujahid-496064228/',
+  // },
 ];
 
 export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
