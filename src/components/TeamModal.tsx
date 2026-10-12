@@ -10,7 +10,6 @@ interface TeamMember {
   role: string;
   img: string;
   bio: string;
-  achievements: string;
 }
 
 interface TeamModalProps {
@@ -24,12 +23,8 @@ const TeamModal: React.FC<TeamModalProps> = ({
   selectedMember,
   isOpen,
   onClose,
-  badgeVariants,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = React.useState<'bio' | 'achievements'>(
-    'bio'
-  );
 
   useEffect(() => {
     if (selectedMember && modalRef.current) {
@@ -68,7 +63,7 @@ const TeamModal: React.FC<TeamModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 flex justify-center items-center z-50 p-4 bg-black/50"
+          className="fixed inset-0 flex justify-center items-center z-50 p-4 bg-gray-900/60 backdrop-blur-sm"
           onClick={onClose}
           role="dialog"
           aria-labelledby="team-member-name"
@@ -76,11 +71,11 @@ const TeamModal: React.FC<TeamModalProps> = ({
         >
           <motion.div
             ref={modalRef}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-            className="bg-black/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-2xl max-w-3xl w-full relative border border-gray-700"
+            className="bg-white p-8 sm:p-16 max-w-4xl w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -88,21 +83,20 @@ const TeamModal: React.FC<TeamModalProps> = ({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={onClose}
-              className="absolute top-4 right-4 text-white text-xl"
+              className="absolute top-8 right-8 text-gray-400 hover:text-gray-900 transition-colors"
               aria-label="Close modal"
             >
-              <CircleX />
+              <CircleX size={32} strokeWidth={1} />
             </motion.button>
 
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-col sm:flex-row gap-12">
               {/* Image */}
-              <div className="w-32 h-32 relative rounded-full overflow-hidden shadow-lg flex-shrink-0 mx-auto sm:mx-0 bg-white">
+              <div className="w-48 h-48 relative rounded-2xl overflow-hidden flex-shrink-0 mx-auto sm:mx-0 shadow-md">
                 <Image
                   src={selectedMember?.img}
                   alt={`${selectedMember?.name}, ${selectedMember?.role}`}
-                  width={128}
-                  height={128}
-                  className="object-cover rounded-full"
+                  fill
+                  className="object-cover"
                 />
               </div>
 
@@ -110,104 +104,22 @@ const TeamModal: React.FC<TeamModalProps> = ({
               <div className="flex-1">
                 <h3
                   id="team-member-name"
-                  className="text-2xl font-bold text-white"
+                  className="text-4xl md:text-5xl font-extrabold tracking-tighter text-gray-900 uppercase"
                 >
                   {selectedMember?.name}
                 </h3>
-                <motion.span
-                  variants={badgeVariants}
-                  initial="initial"
-                  whileHover="hover"
-                  className="inline-block mt-2 px-3 py-1 text-xs font-medium rounded-full border border-gray-600 text-white bg-black/20"
-                >
+                <span className="block mt-4 text-xs font-bold tracking-widest uppercase text-gray-500">
                   {selectedMember?.role}
-                </motion.span>
+                </span>
 
-                {/* Tabs */}
-                <div
-                  className="flex gap-4 mt-6 border-b border-gray-700"
-                  role="tablist"
-                >
-                  {activeTab === 'bio' ? (
-                    <button
-                      id="bio-tab"
-                      onClick={() => setActiveTab('bio')}
-                      className="pb-2 text-sm font-semibold border-b-2 border-white text-white"
-                      aria-selected="true"
-                      aria-controls="bio-panel"
-                      role="tab"
-                      tabIndex={0}
-                    >
-                      Bio
-                    </button>
-                  ) : (
-                    <button
-                      id="bio-tab"
-                      onClick={() => setActiveTab('bio')}
-                      className="pb-2 text-sm font-semibold text-gray-400"
-                      aria-selected="false"
-                      aria-controls="bio-panel"
-                      role="tab"
-                      tabIndex={-1}
-                    >
-                      Bio
-                    </button>
-                  )}
-
-                  {activeTab === 'achievements' ? (
-                    <button
-                      id="achievements-tab"
-                      onClick={() => setActiveTab('achievements')}
-                      className="pb-2 text-sm font-semibold border-b-2 border-white text-white"
-                      aria-selected="true"
-                      aria-controls="achievements-panel"
-                      role="tab"
-                      tabIndex={0}
-                    >
-                      Achievements
-                    </button>
-                  ) : (
-                    <button
-                      id="achievements-tab"
-                      onClick={() => setActiveTab('achievements')}
-                      className="pb-2 text-sm font-semibold text-gray-400"
-                      aria-selected="false"
-                      aria-controls="achievements-panel"
-                      role="tab"
-                      tabIndex={-1}
-                    >
-                      Achievements
-                    </button>
-                  )}
-                </div>
-
-                {/* Tab Panels */}
-                <div
-                  id="bio-panel"
-                  role="tabpanel"
-                  aria-labelledby="bio-tab"
-                  className={`mt-4 text-sm leading-relaxed text-gray-300 ${
-                    activeTab !== 'bio' ? 'hidden' : ''
-                  }`}
-                >
-                  {selectedMember?.bio?.trim()}
-                </div>
-                <div
-                  id="achievements-panel"
-                  role="tabpanel"
-                  aria-labelledby="achievements-tab"
-                  className={`mt-4 text-sm leading-relaxed text-gray-300 ${
-                    activeTab !== 'achievements' ? 'hidden' : ''
-                  }`}
-                >
-                  <ul className="list-disc pl-5">
-                    {selectedMember?.achievements
-                      .trim()
-                      .split('\n')
-                      .map((item, i) => (
-                        <li key={i}>{item.trim().replace(/^- /, '')}</li>
-                      ))}
-                  </ul>
+                {/* Biography */}
+                <div className="mt-8 border-t border-gray-100 pt-6">
+                  <span className="text-xs font-bold tracking-widest uppercase text-gray-400 block mb-3">
+                    Biography
+                  </span>
+                  <div className="text-base sm:text-lg font-light leading-relaxed text-gray-600 whitespace-pre-line">
+                    {selectedMember?.bio?.trim()}
+                  </div>
                 </div>
               </div>
             </div>

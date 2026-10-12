@@ -145,39 +145,31 @@ export default function ContactUs({
       <div
         className={
           isEmbedded
-            ? 'bg-black text-white py-10 px-4 sm:px-8 lg:px-16'
-            : 'pt-10 min-h-screen bg-black text-white py-16 px-6 sm:px-12 lg:px-24'
+            ? 'bg-white text-gray-900 py-10 px-4 sm:px-8 lg:px-16 pt-30'
+            : 'pt-32 pb-16 min-h-screen bg-gray-50 text-gray-900 px-6 sm:px-12 lg:px-24'
         }
       >
         <main
-          className={`max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 ${
-            isEmbedded ? 'gap-10 scroll-mt-28' : 'gap-12'
+          className={`max-w-7xl mx-auto flex flex-col lg:flex-row ${
+            isEmbedded ? 'gap-16 scroll-mt-28' : 'gap-24'
           }`}
         >
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-10 shadow-lg shadow-black/40"
+            className="flex-1"
           >
             {headingLevel === 2 ? (
-              <h2 className="font-stretch-normal line-clamp-3 text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
-                <FaAmbulance
-                  className="font-stretch-normal line-clamp-3 text-gray-400"
-                  size={32}
-                />{' '}
-                Contact Dragale Aviation
+              <h2 className="font-extrabold text-5xl md:text-7xl tracking-tighter uppercase text-gray-900 mb-6 leading-none">
+                Contact <br/><span className="text-gray-400">Us</span>
               </h2>
             ) : (
-              <h1 className="font-stretch-normal line-clamp-3 text-4xl font-extrabold tracking-tight flex items-center gap-3 text-white mb-4">
-                <FaAmbulance
-                  className="font-stretch-normal line-clamp-3 text-gray-400"
-                  size={32}
-                />{' '}
-                Contact Dragale Aviation
+              <h1 className="font-extrabold text-5xl md:text-7xl tracking-tighter uppercase text-gray-900 mb-6 leading-none">
+                Contact <br/><span className="text-gray-400">Us</span>
               </h1>
             )}
-            <p className="font-stretch-normal line-clamp-3 text-gray-300 mb-8 max-w-lg">
+            <p className="text-xl text-gray-600 font-light mb-12 max-w-lg">
               Reach out for inquiries about our air ambulance services or to
               coordinate emergency transport.
             </p>
@@ -190,25 +182,24 @@ export default function ContactUs({
               aria-label="Form progress"
             />
             <div
-              className="w-full h-2 rounded-full bg-white/20 mb-8 overflow-hidden"
+              className="w-full h-1 bg-gray-200 mb-12 overflow-hidden"
               aria-hidden="true"
             >
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.6 }}
-                className="h-full bg-gray-500 rounded-full shadow-lg"
+                className="h-full bg-gray-900"
               />
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
                 {[
                   {
                     label: 'Name',
                     id: 'name',
-                    icon: FaUser,
                     required: true,
                     type: 'text',
                     value: formData.name,
@@ -219,7 +210,6 @@ export default function ContactUs({
                   {
                     label: 'Email',
                     id: 'email',
-                    icon: FaEnvelope,
                     required: true,
                     type: 'email',
                     value: formData.email,
@@ -230,7 +220,6 @@ export default function ContactUs({
                   {
                     label: 'Company',
                     id: 'company',
-                    icon: FaBuilding,
                     required: false,
                     type: 'text',
                     value: formData.company,
@@ -241,7 +230,6 @@ export default function ContactUs({
                   {
                     label: 'Position',
                     id: 'position',
-                    icon: FaUser,
                     required: false,
                     type: 'text',
                     value: formData.position,
@@ -252,7 +240,6 @@ export default function ContactUs({
                   {
                     label: 'Phone',
                     id: 'phone',
-                    icon: FaPhone,
                     required: false,
                     type: 'text',
                     value: formData.phone,
@@ -265,7 +252,6 @@ export default function ContactUs({
                   ({
                     label,
                     id,
-                    icon: Icon,
                     required,
                     type,
                     value,
@@ -280,10 +266,9 @@ export default function ContactUs({
                     >
                       <label
                         htmlFor={id}
-                        className="flex items-center gap-2 text-gray-300 font-semibold text-sm select-none"
+                        className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2"
                       >
-                        <Icon /> {label}{' '}
-                        {required && <span className="text-red-400">*</span>}
+                        {label} {required && <span className="text-gray-900">*</span>}
                       </label>
                       <motion.input
                         type={type}
@@ -295,14 +280,14 @@ export default function ContactUs({
                         required={required}
                         aria-invalid={!!error}
                         aria-describedby={error ? `${id}-error` : undefined}
-                        className={`mt-1 w-full rounded-xl bg-white/10 border ${
-                          error ? 'border-red-500' : 'border-white/20'
-                        } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm`}
+                        className={`w-full bg-transparent border-b ${
+                          error ? 'border-red-500' : 'border-gray-300'
+                        } py-3 text-xl placeholder-gray-300 text-gray-900 focus:outline-none focus:border-gray-900 transition-colors`}
                       />
                       {error && (
                         <p
                           id={`${id}-error`}
-                          className="mt-1 text-xs text-red-400 select-none"
+                          className="mt-2 text-xs font-bold tracking-widest uppercase text-red-500"
                         >
                           {error}
                         </p>
@@ -315,10 +300,9 @@ export default function ContactUs({
                 <div className="sm:col-span-2 relative">
                   <label
                     htmlFor="message"
-                    className="font-stretch-normal line-clamp-3 flex items-center gap-2 text-gray-300 font-semibold text-sm select-none"
+                    className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2"
                   >
-                    <FaComment /> Message{' '}
-                    <span className="text-red-400">*</span>
+                    Message <span className="text-gray-900">*</span>
                   </label>
                   <motion.textarea
                     id="message"
@@ -330,16 +314,16 @@ export default function ContactUs({
                     aria-describedby={
                       errors.message ? 'message-error' : undefined
                     }
-                    placeholder="Your message here..."
-                    rows={6}
-                    className={`font-stretch-normal line-clamp-3 mt-1 w-full rounded-xl bg-white/10 border ${
-                      errors.message ? 'border-red-500' : 'border-white/20'
-                    } px-4 py-3 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-0 transition duration-300 shadow-sm resize-y`}
+                    placeholder="Tell us about your needs..."
+                    rows={4}
+                    className={`w-full bg-transparent border-b ${
+                      errors.message ? 'border-red-500' : 'border-gray-300'
+                    } py-3 text-xl placeholder-gray-300 text-gray-900 focus:outline-none focus:border-gray-900 transition-colors resize-y`}
                   />
                   {errors.message && (
                     <p
                       id="message-error"
-                      className="mt-1 text-xs text-red-400 select-none"
+                      className="mt-2 text-xs font-bold tracking-widest uppercase text-red-500"
                     >
                       {errors.message}
                     </p>
@@ -348,8 +332,8 @@ export default function ContactUs({
               </div>
 
               {/* Consents */}
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
+              <div className="space-y-6 pt-6 border-t border-gray-200">
+                <div className="flex items-start gap-4">
                   <input
                     type="checkbox"
                     id="consent"
@@ -360,22 +344,19 @@ export default function ContactUs({
                     aria-describedby={
                       errors.consent ? 'consent-error' : undefined
                     }
-                    aria-label="Consent to Use Personal Information"
-                    className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
+                    className="mt-1 h-5 w-5 rounded-sm border-gray-300 text-gray-900 focus:ring-gray-900 transition-colors"
                   />
-                  <div className="text-sm text-gray-300">
-                    <span className="font-stretch-normal line-clamp-3 font-semibold select-none">
+                  <div>
+                    <label htmlFor="consent" className="text-sm font-semibold text-gray-900 cursor-pointer">
                       Consent to Use Personal Information
-                    </span>
-                    <p className="mt-1 text-xs max-w-lg leading-snug">
-                      We collect your name, email, contact number, company, and
-                      message to respond to your inquiry. Your data will be
-                      retained only as long as necessary.
+                    </label>
+                    <p className="mt-1 text-sm text-gray-500 font-light max-w-xl">
+                      We collect your details to respond to your inquiry. Your data will be retained only as long as necessary.
                     </p>
                     {errors.consent && (
                       <p
                         id="consent-error"
-                        className="mt-1 text-xs text-red-400 select-none"
+                        className="mt-2 text-xs font-bold tracking-widest uppercase text-red-500"
                       >
                         {errors.consent}
                       </p>
@@ -383,23 +364,21 @@ export default function ContactUs({
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-4">
                   <input
                     type="checkbox"
                     id="marketingConsent"
                     name="marketingConsent"
                     checked={formData.marketingConsent}
                     onChange={handleCheckboxChange}
-                    aria-label="Optional Marketing Communication"
-                    className="h-5 w-5 rounded-md text-gray-400 border-white/30 bg-white/10 focus:ring-gray-400 transition"
+                    className="mt-1 h-5 w-5 rounded-sm border-gray-300 text-gray-900 focus:ring-gray-900 transition-colors"
                   />
-                  <div className="text-sm text-gray-300">
-                    <span className="font-semibold select-none">
+                  <div>
+                    <label htmlFor="marketingConsent" className="text-sm font-semibold text-gray-900 cursor-pointer">
                       Optional Marketing Communication
-                    </span>
-                    <p className="mt-1 text-xs max-w-lg leading-snug">
-                      Receive updates about Dragale Aviation’s air ambulance
-                      services and innovations.
+                    </label>
+                    <p className="mt-1 text-sm text-gray-500 font-light max-w-xl">
+                      Receive updates about Dragale Aviation’s air ambulance services and innovations.
                     </p>
                   </div>
                 </div>
@@ -408,61 +387,9 @@ export default function ContactUs({
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`
-                  
-                         font-stretch-normal line-clamp-3
-                          mt-8 w-full sm:w-auto
-                          bg-gradient-to-r from-gray-500 to-gray-600
-                          text-white font-semibold py-3 px-10 rounded-full
-                          relative overflow-hidden
-                            border-2 border-solid border-gray-400
-                          shadow-lg shadow-gray-800/60
-                          flex items-center justify-center gap-3
-                          transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed
-                          
-                          before:absolute before:inset-0 before:rounded-full
-                            before:border-2 before:border-solid before:border-gray-300
-                          before:pointer-events-none before:opacity-40 before:blur-sm
-                          before:transition-opacity before:duration-300
-                          
-                          hover:before:opacity-100
-
-                          after:absolute after:inset-[-4px] after:rounded-full
-                          after:border-4 after:border-solid after:border-gray-400
-                          after:opacity-30 after:blur-lg
-                          after:pointer-events-none
-                          hover:after:opacity-60
-                  `}
+                className="mt-8 bg-gray-900 text-white font-semibold py-4 px-12 rounded-full uppercase tracking-widest text-sm hover:bg-gray-800 transition-colors disabled:opacity-50"
               >
-                {isSubmitting ? (
-                  <>
-                    <svg
-                      className="animate-spin h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      />
-                    </svg>
-                    Submitting...
-                  </>
-                ) : (
-                  'Submit Inquiry'
-                )}
+                {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
               </motion.button>
             </form>
           </motion.section>
@@ -472,56 +399,30 @@ export default function ContactUs({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-10"
+            className="w-full lg:w-96 flex flex-col pt-10 lg:pt-0"
           >
-            {/* Why Choose Us */}
-            <section className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-lg shadow-black/40">
-              {headingLevel === 2 ? (
-                <h3 className="text-2xl font-semibold mb-6 text-white">
-                  Why Choose Dragale Aviation?
-                </h3>
-              ) : (
-                <h2 className="text-2xl font-semibold mb-6 text-white">
-                  Why Choose Dragale Aviation?
-                </h2>
-              )}
-              <div className="flex flex-col gap-6">
-                {whyChooseUs.map(({ icon: Icon, title, description }, idx) => (
-                  <motion.div
-                    key={idx}
-                    whileHover={{ x: 6 }}
-                    className="flex items-start gap-4"
-                  >
-                    <Icon className="text-gray-400 text-3xl mt-1" />
-                    <div>
-                      <h4 className="text-lg font-semibold text-white">
-                        {title}
-                      </h4>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        {description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </section>
-
-            {/* Testimonials */}
-            {/* <section className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-lg shadow-black/40 max-w-md mx-auto">
-              <h3 className="text-2xl font-semibold mb-6 text-white">What Our Clients Say</h3>
-              <motion.blockquote
-                key={currentTestimonial}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6 }}
-                className="text-gray-300 italic relative before:content-['“'] before:text-gray-400 before:absolute before:-left-4 before:-top-2 before:text-5xl"
-              >
-                {testimonials[currentTestimonial].quote}
-              </motion.blockquote>
-              <p className="mt-4 text-gray-400 font-semibold">{testimonials[currentTestimonial].author}</p>
-              <p className="text-gray-400 text-sm">{testimonials[currentTestimonial].role}</p>
-            </section> */}
+            {headingLevel === 2 ? (
+              <h3 className="text-3xl font-extrabold uppercase tracking-tighter text-gray-900 mb-10">
+                Why Choose <br/><span className="text-gray-400">Us?</span>
+              </h3>
+            ) : (
+              <h2 className="text-3xl font-extrabold uppercase tracking-tighter text-gray-900 mb-10">
+                Why Choose <br/><span className="text-gray-400">Us?</span>
+              </h2>
+            )}
+            <div className="flex flex-col gap-10">
+              {whyChooseUs.map(({ icon: Icon, title, description }, idx) => (
+                <div key={idx} className="flex flex-col gap-3">
+                  <Icon className="text-gray-400 text-3xl" />
+                  <h4 className="text-xl font-bold tracking-tight text-gray-900">
+                    {title}
+                  </h4>
+                  <p className="text-gray-600 font-light leading-relaxed">
+                    {description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </motion.aside>
         </main>
 
@@ -535,32 +436,32 @@ export default function ContactUs({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="fixed inset-0 flex items-center justify-center bg-black/60 z-50"
+              className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4"
               role="dialog"
               aria-labelledby="success-modal-title"
             >
               <motion.div
-                className="backdrop-blur-2xl bg-white/10 p-8 rounded-3xl shadow-2xl border border-white/20 max-w-sm w-full"
+                className="bg-white p-8 rounded-3xl shadow-xl border border-gray-200 max-w-sm w-full"
                 initial={{ y: 20 }}
                 animate={{ y: 0 }}
                 transition={{ type: 'spring', stiffness: 100 }}
               >
                 <div className="flex flex-col items-center text-center space-y-4">
-                  <FaCheckCircle className="text-gray-400 text-5xl" />
+                  <FaCheckCircle className="text-green-500 text-5xl" />
                   <h3
                     id="success-modal-title"
-                    className="text-2xl font-bold text-white"
+                    className="text-2xl font-bold text-gray-900"
                   >
                     Thank You!
                   </h3>
-                  <p className="text-gray-300 text-sm max-w-xs">
+                  <p className="text-gray-600 text-sm max-w-xs">
                     Your inquiry has been received. We’ll respond promptly.
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsSubmitted(false)}
-                    className="bg-gradient-to-r from-gray-600 to-gray-700 text-white py-3 px-8 rounded-full font-semibold text-sm shadow-lg shadow-gray-700/50 hover:from-gray-700 hover:to-gray-800 transition duration-300"
+                    className="bg-gray-900 text-white py-3 px-8 rounded-full font-semibold text-sm shadow-md hover:bg-gray-800 transition duration-300"
                   >
                     Close
                   </motion.button>

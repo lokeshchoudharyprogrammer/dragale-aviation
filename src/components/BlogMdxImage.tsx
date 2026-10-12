@@ -16,12 +16,12 @@ function shimmerSvg(width: number, height: number) {
 <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
   <defs>
     <linearGradient id="g">
-      <stop stop-color="rgba(255,255,255,0.06)" offset="20%" />
-      <stop stop-color="rgba(255,255,255,0.14)" offset="50%" />
-      <stop stop-color="rgba(255,255,255,0.06)" offset="70%" />
+      <stop stop-color="rgba(0,0,0,0.04)" offset="20%" />
+      <stop stop-color="rgba(0,0,0,0.08)" offset="50%" />
+      <stop stop-color="rgba(0,0,0,0.04)" offset="70%" />
     </linearGradient>
   </defs>
-  <rect width="${width}" height="${height}" fill="rgba(255,255,255,0.06)" />
+  <rect width="${width}" height="${height}" fill="rgba(0,0,0,0.04)" />
   <rect id="r" width="${width}" height="${height}" fill="url(#g)" />
   <animate xlink:href="#r" attributeName="x" from="-${width}" to="${width}" dur="1.2s" repeatCount="indefinite" />
 </svg>`.trim();
@@ -43,6 +43,8 @@ export default function BlogMdxImage(props: ImageProps) {
   return (
     <Image
       {...props}
+      width={width}
+      height={height}
       sizes={sizes}
       quality={props.quality ?? 72}
       placeholder={props.placeholder ?? 'blur'}

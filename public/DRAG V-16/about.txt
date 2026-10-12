@@ -1,0 +1,58 @@
+# DRAG V-16
+## Fixed-Wing UAV for Medical Logistics
+
+*Connecting Healthcare. Delivering Critical Supplies.*
+
+DRAG V-16 is a fixed-wing unmanned aerial vehicle (UAV) developed by Dragale Aviation Private Limited for medical logistics and time-sensitive healthcare transportation. With a payload capacity of 16 kg, the platform is designed to support the transportation of essential medical supplies between hospitals, diagnostic laboratories, blood banks and healthcare facilities.
+
+Its design focuses on payload capacity, range and operational efficiency to support point-to-point medical logistics missions.
+
+### Medical Mission Applications
+
+*Blood & Blood Products*  
+Transportation of blood units and eligible blood products between blood banks, hospitals and healthcare facilities.
+
+*Diagnostic Laboratory Samples*  
+Transportation of diagnostic specimens and laboratory samples between collection centres, diagnostic laboratories and hospitals.
+
+*Vaccine Transportation*  
+Support for vaccine distribution using appropriate packaging and validated temperature-control systems.
+
+*Medicines & Pharmaceuticals*  
+Transportation of medicines and pharmaceutical supplies between healthcare facilities and distribution points.
+
+*Emergency Medical Supplies*  
+Delivery of selected emergency medical supplies and essential healthcare materials.
+
+*Medical Logistics Networks*  
+Aerial transportation solutions for hospitals, diagnostic laboratories, blood banks and healthcare networks.
+
+### Technical Specifications
+
+| Parameter | Specification |
+|---|---|
+| Aircraft | DRAG V-16 |
+| Manufacturer | Dragale Aviation Private Limited |
+| Aircraft Type | Fixed-Wing UAV |
+| Primary Application | Medical Logistics |
+| Payload Capacity | 16 kg |
+| Maximum Take-Off Weight (MTOW) | 46 kg |
+| Range | 160 km |
+| Endurance | 1 hour |
+| Cruise Speed | 160 km/h |
+| Operating Altitude | 400 ft |
+| Wing Configuration | High-Wing |
+| Tail Configuration | Twin-Boom H-Tail |
+| Propulsion | Electric |
+
+Specifications are based on the conceptual aircraft design and may be subject to engineering validation, testing, operating conditions and applicable regulatory requirements.
+
+### Advancing Medical Logistics
+
+Dragale Aviation is developing aerial logistics solutions to help healthcare organisations explore faster and more flexible transportation of essential medical supplies. DRAG V-16 is designed to support the evolving requirements of medical transportation networks.
+
+### Partnership & Enquiries
+
+We welcome enquiries from hospitals, diagnostic laboratories, blood banks and healthcare organisations interested in medical UAV logistics and potential pilot programmes.
+
+*Contact Dragale Aviation to explore collaboration opportunities.*

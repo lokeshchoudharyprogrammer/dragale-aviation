@@ -2,7 +2,7 @@
 
 'use client';
 
-import TeamCard from '@/components/TeamCard';
+import Image from "next/image";
 import TeamModal from '@/components/TeamModal';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
@@ -17,11 +17,6 @@ const teamData = [
     role: 'Founder & CEO',
     bio: `
       Driven by a mission to transform emergency medical transport, Shivanshu Tank founded Dragale Aviation to create India’s first air ambulance eVTOL. With a Bachelor’s in Computer Science & Engineering, he blends technical expertise with visionary leadership to deliver faster, safer, and smarter critical care solutions.
-    `,
-    achievements: `
-      - Founded Dragale Aviation in 2023
-      - Led development of eVTOL prototype
-      - Recognized as a Young Innovator by India Tech Awards
     `,
     img: '/founders/shivanshu.jpeg',
     linkedin: 'https://www.linkedin.com/in/shivanshu-tank-556b00232/',
@@ -104,14 +99,6 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
     }
   }, [selectedMember]);
 
-  const cardVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
   const badgeVariants = {
     initial: { scale: 1, y: 0 },
     hover: {
@@ -126,8 +113,8 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
       <section
         className={
           isEmbedded
-            ? 'bg-black text-white'
-            : 'min-h-screen bg-black pt-10 text-white'
+            ? 'bg-white text-gray-900'
+            : 'min-h-screen bg-white pt-10 text-gray-900'
         }
       >
         <main
@@ -137,89 +124,194 @@ export default function About({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
           } max-w-6xl mx-auto`}
         >
           {/* Hero */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="relative text-left pb-5 section-divider"
-          >
-            {headingLevel === 2 ? (
-              <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-clip-white">
-                Dragale Aviation
-              </h2>
-            ) : (
-              <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-clip-white">
-                Dragale Aviation
-              </h1>
-            )}
-            <p className="font-stretch-normal line-clamp-3 text-gray-300 text-base leading-relaxed max-w-3xl">
-              At Dragale Aviation, we’re redefining emergency medical transport
-              with India’s first eVTOL air ambulance. Our mission is to deliver
-              rapid, safe, and innovative critical care, ensuring every patient
-              reaches help when it matters most.
-            </p>
-          </motion.div>
+          <div className="relative min-h-[40vh] flex flex-col justify-center pb-20 pt-16 border-b border-gray-100">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {headingLevel === 2 ? (
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 leading-tight mb-8">
+                  Dragale <span className="text-gray-400">Aviation</span>
+                </h2>
+              ) : (
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 leading-tight mb-8">
+                  Dragale <span className="text-gray-400">Aviation</span>
+                </h1>
+              )}
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-2xl"
+            >
+              <p className="text-lg md:text-xl text-gray-600 font-light leading-relaxed">
+                At Dragale Aviation, we’re redefining emergency medical transport
+                with India’s first eVTOL air ambulance. Our mission is to deliver
+                rapid, safe, and innovative critical care.
+              </p>
+            </motion.div>
+          </div>
 
           {/* Vision */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative text-left pb-5 section-divider"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8 }}
+            className="py-20 md:py-24 border-b border-gray-100 relative"
           >
-            <h2 className="text-2xl font-semibold mb-4 text-white">
-              Our Vision
-            </h2>
-            <p className="font-stretch-normal line-clamp-3  text-gray-400 text-base max-w-3xl">
-              We envision a future where advanced air mobility transforms lives.
-              By pioneering eVTOL technology, Dragale Aviation aims to make
-              emergency medical transport accessible, efficient, and sustainable
-              across India and beyond.
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+              <div className="md:col-span-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+                    Our Vision
+                  </h2>
+                </motion.div>
+              </div>
+              
+              <div className="md:col-span-8">
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  viewport={{ once: true }}
+                  className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-light leading-relaxed"
+                >
+                  We envision a future where advanced air mobility transforms lives. By pioneering eVTOL technology, Dragale Aviation aims to make emergency medical transport <span className="font-bold text-gray-900">accessible, efficient, and sustainable</span> across India and beyond.
+                </motion.p>
+              </div>
+            </div>
           </motion.div>
 
           {/* Animated Heading */}
-          <h2
-            ref={ref}
-            className="flex justify-start relative text-left pb-5 section-divider"
-            aria-label="Meet Our Visionaries"
-          >
-            <AnimatePresence>
-              {text.split('').map((char, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.3, delay: i * 0.03 }}
-                  className="text-2xl sm:text-4xl font-bold tracking-tight select-none text-white"
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </motion.span>
-              ))}
-            </AnimatePresence>
-          </h2>
+          <div className="pt-20 pb-12 overflow-hidden" aria-label="Meet Our Visionaries">
+            <h2
+              ref={ref}
+              className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 inline-flex"
+            >
+              <AnimatePresence>
+                {text.split('').map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 100 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.8, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block"
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </motion.span>
+                ))}
+              </AnimatePresence>
+            </h2>
+          </div>
 
-          {/* Team Grid */}
-          <section
-            className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 justify-center  items-center"
-            aria-label="Team Members"
-          >
-            <TeamCard
-              teamData={teamData}
-              cardVariants={cardVariants}
-              badgeVariants={badgeVariants}
-              handleCardClick={(person) => handleCardClick(person as Person)}
-            />
-          </section>
+          {/* Founder Spotlights */}
+          <div className="pb-32 space-y-24" aria-label="Team Members">
+            {teamData.map((person, index) => (
+              <motion.section
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="relative py-8 md:py-12 lg:py-16">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center relative z-10">
+                    
+                    {/* Image side */}
+                    <div className={`lg:col-span-5 relative ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
+                      <motion.div 
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.5 }}
+                        className="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer"
+                        onClick={() => handleCardClick(person as Person)}
+                      >
+                        <Image
+                          src={person.img}
+                          alt={person.name}
+                          fill
+                          className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                        />
+                      </motion.div>
+                    </div>
+                    
+                    {/* Content side */}
+                    <div className={`lg:col-span-7 flex flex-col justify-center ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
+                      <motion.div
+                        initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <h3 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 tracking-tight">
+                          {person.name}
+                        </h3>
+                        <p className="text-sm font-semibold tracking-widest uppercase text-gray-500 mb-8 border-b border-gray-200 pb-4 inline-block">
+                          {person.role}
+                        </p>
+                        
+                        <div className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed mb-10 whitespace-pre-line">
+                          {person.bio.trim()}
+                        </div>
+                        
+                        <div className="flex flex-wrap items-center gap-6">
+                          <button
+                            onClick={() => handleCardClick(person as Person)}
+                            className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-white bg-gray-900 border border-gray-900 px-6 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors duration-300"
+                          >
+                            Read Full Bio
+                          </button>
+                          {person.linkedin && (
+                            <a
+                              href={person.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-gray-900 border border-gray-900 px-6 py-3 rounded-full hover:bg-gray-900 hover:text-white transition-colors duration-300"
+                            >
+                              LinkedIn
+                            </a>
+                          )}
+                        </div>
+                      </motion.div>
+                    </div>
+                  </div>
+                </div>
+              </motion.section>
+            ))}
+          </div>
 
           {/* Team Section */}
-          {showTeam && <TeamPage headingLevel={2} contained />}
+          {showTeam && (
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="border-t border-gray-200 pt-24 pb-16"
+            >
+              <TeamPage headingLevel={2} contained />
+            </motion.div>
+          )}
 
           {/* Advisors Section */}
           {showAdvisors ? (
-            <section>
+            <motion.section 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="border-t border-gray-200 pt-24 pb-16"
+            >
               <AdvisorsClient headingLevel={2} contained />
-            </section>
+            </motion.section>
           ) : null}
 
           {/* Modal Pop-Up */}

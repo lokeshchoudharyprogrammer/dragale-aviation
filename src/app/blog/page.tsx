@@ -8,50 +8,50 @@ export default function BlogIndexPage() {
   const posts = getAllBlogPosts();
 
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+    <div className="pt-24 min-h-screen bg-gray-50 text-gray-900">
       <main className="px-4 sm:px-8 lg:px-16 py-12">
-        <div className="max-w-5xl mx-auto">
-          <header className="text-center max-w-3xl mx-auto relative p-6">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-              Blog
+        <div className="max-w-6xl mx-auto">
+          <header className="w-full pb-12 border-b border-gray-200">
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter uppercase text-gray-900 leading-none">
+              The <span className="text-gray-400">Journal</span>
             </h1>
-            <p className="mt-4 text-lg sm:text-xl text-gray-200">
-              Thoughts and updates from Dragale Aviation.
+            <p className="mt-6 text-xl text-gray-600 font-light max-w-2xl">
+              Thoughts, updates, and deep dives from Dragale Aviation.
             </p>
           </header>
 
           {posts.length === 0 ? (
-            <p className="mt-6 text-center text-gray-300">No posts yet.</p>
+            <p className="mt-12 text-gray-400 font-light text-lg">No publications available at this time.</p>
           ) : (
-            <ul className="mt-6 grid grid-cols-1 gap-4">
+            <div className="mt-12 flex flex-col border-t-2 border-gray-900">
               {posts.map((post) => (
-                <li key={post.slug}>
+                <article key={post.slug} className="border-b border-gray-200 group">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="block rounded-2xl shadow-xl bg-white/5 backdrop-blur-3xl overflow-hidden border border-white/10 hover:border-gray-400/30 transition-all p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    className="block py-10 hover:bg-white transition-colors px-4 -mx-4 rounded-xl"
                     aria-label={`Read ${post.title}`}
                   >
-                    <div className="flex flex-col gap-2">
-                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                        <h2 className="text-xl sm:text-2xl font-semibold text-white">
-                          {post.title}
-                        </h2>
-                        <time
-                          dateTime={post.publishedDateObj.toISOString()}
-                          className="text-sm text-gray-400"
-                        >
-                          {post.publishedDate}
-                        </time>
-                      </div>
-                      <p className="text-gray-300">{post.description}</p>
-                      <span className="text-gray-300 text-xs underline underline-offset-4">
-                        Read more
-                      </span>
+                    <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 mb-4">
+                      <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 group-hover:text-gray-500 transition-colors">
+                        {post.title}
+                      </h2>
+                      <time
+                        dateTime={post.publishedDateObj.toISOString()}
+                        className="text-sm font-bold tracking-widest uppercase text-gray-400 shrink-0"
+                      >
+                        {post.publishedDate}
+                      </time>
                     </div>
+                    <p className="text-lg text-gray-600 font-light max-w-4xl leading-relaxed mb-6">
+                      {post.description}
+                    </p>
+                    <span className="text-xs font-bold tracking-widest uppercase text-gray-900 border-b border-gray-900 pb-1 group-hover:text-gray-500 group-hover:border-gray-500 transition-colors">
+                      Read Article
+                    </span>
                   </Link>
-                </li>
+                </article>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       </main>

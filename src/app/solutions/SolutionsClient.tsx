@@ -3,33 +3,31 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaAmbulance } from 'react-icons/fa';
-import Tilt from 'react-parallax-tilt';
 
 const cardData = [
   {
     desc: 'Seamless VTOL Patient Transport',
     details:
-      'Our eVTOL design enables vertical takeoff and landing, ensuring rapid access to remote or congested areas for seamless patient transport.',
-    img: '/images/Seamless VTOL Patient Transport.jpg',
+      'Our medical-first eVTOL airframe is engineered for vertical takeoff and landing, facilitating rapid emergency access across urban congestion and challenging terrain.',
+    img: '/images/aircraft/left_side_view.jpeg',
   },
   {
     desc: 'Hospital-to-Hospital Transfers',
     details:
-      'Efficiently transfer patients between medical facilities with our high-speed eVTOL, reducing transit time for critical care.',
-    img: '/images/Hospital-to-Hospital Transfers.jpg',
+      'Dedicated point-to-point aerial transfers connecting trauma centers and specialty care facilities with predictable flight corridors.',
+    img: '/images/aircraft/front_top_view.jpeg',
   },
   {
     desc: 'Live Patient Monitoring System',
     details:
-      'Real-time monitoring systems track vital signs during transport, ensuring medical teams are informed and prepared.',
-    img: '/images/Live Patient Monitoring System.jpg',
+      'Integrated medical cabin with dedicated power for ventilators, monitors, and telemetry to support uninterrupted care en route.',
+    img: '/images/Ayuratha-inside.png',
   },
   {
     desc: 'Critical Heart Patient Support',
     details:
-      'Specialized equipment and trained staff provide life-saving care for heart patients during air transport.',
-    img: '/images/Critical Heart Patient Support.jpg',
+      'Stretcher-first cabin architecture designed to accommodate advanced cardiac support systems and specialized critical care personnel.',
+    img: '/images/aircraft/front_view.jpeg',
   },
 ];
 
@@ -60,27 +58,10 @@ export default function Home() {
 
   return (
     <>
-      <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
-        {/* Breadcrumb Navigation */}
-
+      <div className="pt-24 min-h-screen bg-gray-50 text-gray-900">
         <main id="solutions" className="px-4 sm:px-8 lg:px-16 py-12">
-          {/* Animated Background */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            animate={{ opacity: [0.2, 0.3, 0.2] }}
-            transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
-          >
-            <motion.div
-              className="absolute top-1/3 left-1/3 opacity-10 text-gray-400"
-              animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-              transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
-            >
-              <FaAmbulance size={40} />
-            </motion.div>
-          </motion.div>
-
           {/* Hero Section */}
-          <motion.div className="text-center max-w-4xl mx-auto relative  p-6">
+          <motion.div className="max-w-6xl mx-auto w-full pb-16 border-b border-gray-200">
             <motion.h1
               initial={isMobile ? false : { opacity: 0, y: 20 }}
               {...(isMobile
@@ -90,9 +71,9 @@ export default function Home() {
                     viewport: { once: true },
                   })}
               transition={{ duration: isMobile ? 0 : 0.6 }}
-              className="solutions-ssr-visible text-3xl sm:text-4xl md:text-5xl font-bold text-white"
+              className="text-5xl md:text-7xl font-extrabold tracking-tighter uppercase text-gray-900 leading-none"
             >
-              Revolutionizing Air Ambulance Transport
+              Revolutionizing <br/> <span className="text-gray-400">Air Ambulance</span>
             </motion.h1>
             <motion.p
               initial={isMobile ? false : { opacity: 0, y: 20 }}
@@ -106,7 +87,7 @@ export default function Home() {
                 duration: isMobile ? 0 : 0.6,
                 delay: isMobile ? 0 : 0.2,
               }}
-              className="solutions-ssr-visible mt-4 text-lg sm:text-xl text-gray-200"
+              className="mt-8 text-xl sm:text-2xl font-light text-gray-600 max-w-3xl leading-relaxed"
             >
               Pioneering India’s first eVTOL air ambulance for rapid, safe, and
               innovative critical care.
@@ -123,43 +104,14 @@ export default function Home() {
                 duration: isMobile ? 0 : 0.6,
                 delay: isMobile ? 0 : 0.4,
               }}
-              className="solutions-ssr-visible mt-4 max-w-3xl mx-auto text-sm sm:text-base text-gray-300"
+              className="mt-6 text-sm sm:text-base text-gray-500 font-medium tracking-wide uppercase max-w-2xl"
               id="hero-desc"
             >
-              Dragale’s eVTOL ambulance delivers unmatched speed (200 km/h),
-              range (150 km), and advanced medical capabilities, ensuring
-              patients receive life-saving care when every second counts.
+              Speed (200 km/h) • Range (150 km) • Advanced Medical Capabilities
             </motion.p>
-            <motion.a
-              href="/contact-us"
-              whileHover={{ scale: 1.05, backgroundColor: '#6B7280' }}
-              whileTap={{ scale: 0.95 }}
-              initial={isMobile ? false : { opacity: 0, y: 20 }}
-              {...(isMobile
-                ? { animate: { opacity: 1, y: 0 } }
-                : {
-                    whileInView: { opacity: 1, y: 0 },
-                    viewport: { once: true },
-                  })}
-              transition={{
-                duration: isMobile ? 0 : 0.6,
-                delay: isMobile ? 0 : 0.6,
-              }}
-              className="solutions-ssr-visible mt-6 inline-flex bg-gray-500 text-white py-3 px-8 rounded-full font-medium text-base shadow-md hover:bg-gray-600 transition duration-300 navbar-glass"
-              aria-label="Contact us for eVTOL ambulance inquiries"
-              aria-describedby="hero-desc"
-            >
-              Get in Touch
-            </motion.a>
-            <motion.div
-              className="mt-2 w-full h-15 bg-[url('/evtol-silhouette.png')] bg-center bg-contain bg-no-repeat opacity-30"
-              animate={{ scale: [1, 1.02, 1], opacity: [0.3, 0.4, 0.3] }}
-              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-              aria-hidden="true"
-            />
           </motion.div>
 
-          {/* Cards Grid */}
+          {/* Cards List */}
           <motion.div
             initial={isMobile ? false : { opacity: 0, y: 20 }}
             {...(isMobile
@@ -169,99 +121,71 @@ export default function Home() {
                   viewport: { once: true },
                 })}
             transition={{ duration: isMobile ? 0 : 0.6 }}
-            className="solutions-ssr-visible grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto mt-0"
+            className="max-w-6xl mx-auto mt-12 flex flex-col border-t-2 border-gray-900"
           >
-            {cardData.map((card, index) => (
-              <Tilt
-                key={index}
-                tiltMaxAngleX={8}
-                tiltMaxAngleY={8}
-                perspective={1000}
-                transitionSpeed={300}
-                scale={1.02}
-              >
-                {(() => {
-                  const href = cardHrefMap[card.desc];
+            {cardData.map((card, index) => {
+              const href = cardHrefMap[card.desc];
 
-                  const CardBody = (
-                    <motion.div
-                      variants={cardVariants}
-                      initial={isMobile ? false : 'initial'}
-                      {...(isMobile
-                        ? { animate: 'animate' }
-                        : { whileInView: 'animate', viewport: { once: true } })}
-                      transition={{
-                        duration: isMobile ? 0 : 0.6,
-                        delay: isMobile ? 0 : index * 0.1,
-                      }}
-                      className="solutions-ssr-visible relative rounded-2xl shadow-xl bg-white/5 backdrop-blur-3xl overflow-hidden border border-white/10 hover:border-gray-400/30 transition-all group"
-                    >
-                      {/* Image Section */}
-                      <div className="relative w-full h-48 overflow-hidden">
-                        <motion.div
-                          className="absolute inset-0 border border-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          animate={{ opacity: [0.2, 0.3, 0.2] }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }}
-                        />
-                        <Image
-                          src={card.img}
-                          alt={`${card.desc} — Dragale Aviation eVTOL air ambulance solution`}
-                          fill
-                          priority={index === 0}
-                          loading={index > 0 ? 'lazy' : undefined}
-                          className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                        />
-                      </div>
+              const CardBody = (
+                <motion.div
+                  variants={cardVariants}
+                  initial={isMobile ? false : 'initial'}
+                  {...(isMobile
+                    ? { animate: 'animate' }
+                    : { whileInView: 'animate', viewport: { once: true } })}
+                  transition={{
+                    duration: isMobile ? 0 : 0.6,
+                    delay: isMobile ? 0 : index * 0.1,
+                  }}
+                  className="flex flex-col md:flex-row items-center gap-8 md:gap-16 group"
+                >
+                  {/* Description */}
+                  <div className="flex-1 md:pr-8">
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 group-hover:text-gray-500 transition-colors mb-4">
+                      {card.desc}
+                    </h2>
+                    <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
+                      {card.details}
+                    </p>
+                    <span className="text-xs font-bold tracking-widest uppercase text-gray-900 border-b border-gray-900 pb-1 group-hover:text-gray-500 group-hover:border-gray-500 transition-colors">
+                      Learn More
+                    </span>
+                  </div>
 
-                      {/* Description */}
-                      <div className="bg-white/10 backdrop-blur-md p-4 text-center">
-                        <p className="text-sm sm:text-base text-gray-200 font-medium">
-                          {card.desc}
-                        </p>
-                        <motion.span
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          className="mt-2 inline-block text-gray-300 text-xs underline"
-                          aria-hidden="true"
-                        >
-                          Learn More
-                        </motion.span>
-                      </div>
-                    </motion.div>
-                  );
+                  {/* Image Section */}
+                  <div className="relative w-full md:w-1/2 aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shrink-0">
+                    <div className="absolute inset-0 bg-gray-900/10 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                    <Image
+                      src={card.img}
+                      alt={`${card.desc} — Dragale Aviation eVTOL air ambulance solution`}
+                      fill
+                      priority={index === 0}
+                      loading={index > 0 ? 'lazy' : undefined}
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                </motion.div>
+              );
 
-                  if (!href) return CardBody;
-
-                  return (
+              return (
+                <div key={index} className="border-b border-gray-200 py-16">
+                  {href ? (
                     <Link
                       href={href}
                       aria-label={`Learn more about ${card.desc}`}
-                      className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-2xl"
+                      className="block focus:outline-none"
                     >
                       {CardBody}
                     </Link>
-                  );
-                })()}
-              </Tilt>
-            ))}
+                  ) : (
+                    CardBody
+                  )}
+                </div>
+              );
+            })}
           </motion.div>
         </main>
-
-        <style jsx>{`
-          @media (max-width: 767px) {
-            .solutions-ssr-visible {
-              opacity: 1 !important;
-              transform: none !important;
-            }
-          }
-        `}</style>
-
-        {/* <Footer /> */}
       </div>
     </>
   );

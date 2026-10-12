@@ -89,3 +89,24 @@ Check out our **Blog** section within the app to read in-depth articles on:
 - *Why India Needs Dedicated eVTOL Air Ambulances*
 - *Regulatory Readiness for Medical eVTOL Operations*
 - *eVTOL Air Ambulance vs. Helicopter EMS*
+
+
+{"projectId":"prj_xtp28I24kfEhSbnEl0XtGqVfiGDR","orgId":"team_ojRmBquSDawq2k7IBpba3fzL","projectName":"dragale-aviation"}
+
+
+{
+  "projectId": "prj_AjH0n3wLg4up5xkIKzknH76eOsaa",
+  "orgId": "team_Axhf8R0rQCx9LMb9nXTB0NqO",
+  "projectName": "dragale-aviation",
+  "settings": {
+    "createdAt": 1746207723487,
+    "framework": "nextjs",
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "22.x"
+  }
+}

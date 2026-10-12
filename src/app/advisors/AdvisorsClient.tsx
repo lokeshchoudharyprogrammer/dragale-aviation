@@ -1,9 +1,68 @@
 'use client';
 
 import SocialBadge from '@/components/SocialBadge';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef } from 'react';
+import { Star } from 'lucide-react';
+
+const fadeUpItem = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const ScrollSection = ({ section, index, progress, total }: any) => {
+  const sectionLength = 1 / total;
+  const start = index * sectionLength;
+  const end = (index + 1) * sectionLength;
+
+  // Make the transition sharp so sections don't overlap. 
+  // 15% of the section length for fading in, 15% for fading out.
+  const transitionLength = sectionLength * 0.15; 
+
+  const fadeInStart = index === 0 ? 0 : start;
+  const fadeInEnd = index === 0 ? 0 : start + transitionLength;
+  
+  const fadeOutStart = index === total - 1 ? 1 : end - transitionLength;
+  const fadeOutEnd = index === total - 1 ? 1 : end;
+
+  const opacity = useTransform(
+    progress,
+    [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd],
+    [0, 1, 1, 0]
+  );
+  
+  const y = useTransform(
+    progress,
+    [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd],
+    [100, 0, 0, -100]
+  );
+  
+  const pointerEvents = useTransform(opacity, (o) => o > 0.5 ? 'auto' : 'none');
+
+  return (
+    <motion.div style={{ opacity, y, pointerEvents }} className="absolute inset-0 flex flex-col justify-start pt-4 md:pt-12">
+      <h4 className="text-sm md:text-base font-medium tracking-wider uppercase text-gray-500 mb-6 md:mb-8 pb-3 border-b border-gray-200 flex items-center gap-2">
+        <Star className="w-4 h-4 text-gray-400" />
+        {section.title}
+      </h4>
+      <ul className="space-y-6 md:space-y-8">
+        {section.bullets.map((bullet: string, bIdx: number) => (
+          <li key={bIdx} className="flex items-start gap-4">
+            <span className="text-gray-300 mt-3 text-[10px] tracking-tighter">●</span>
+            <span className="text-lg md:text-2xl font-light text-gray-800 leading-relaxed">
+              {bullet}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+};
 
 export default function AdvisorsClient({
   headingLevel = 1,
@@ -13,16 +72,18 @@ export default function AdvisorsClient({
   contained?: boolean;
 }) {
   const isEmbedded = headingLevel === 2;
-  const isMobile =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(max-width: 767px)').matches;
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
-  const headerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
-  };
-  const [openSectionId, setOpenSectionId] = useState<string | null>(null);
-  const [isIntroExpanded, setIsIntroExpanded] = useState(false);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  // Subtle image parallax effect while pinned
+  const imageScale = useTransform(smoothProgress, [0, 1], [1, 1.05]);
+  const imageY = useTransform(smoothProgress, [0, 1], ['-2%', '2%']);
 
   const bioIntro =
     'Dan Sloat is the Founder & President of the Advanced Air Mobility Institute, a global nonprofit research organization dedicated to advancing the aviation and AAM ecosystem for public benefit. He is recognized as a top global AAM industry leader and regularly advises governments, academia, and industry on electric and autonomous aviation adoption.';
@@ -30,8 +91,13 @@ export default function AdvisorsClient({
   const bioSections = useMemo(
     () => [
       {
+        id: 'intro',
+        title: 'Biography',
+        bullets: [bioIntro],
+      },
+      {
         id: 'electro-academics',
-        title: 'Electro.Aero + academic roles',
+        title: 'Electro.Aero & Academic Roles',
         bullets: [
           'President of Electro.Aero',
           "Academic Coordinator (Master's in AAM)",
@@ -40,7 +106,7 @@ export default function AdvisorsClient({
       },
       {
         id: 'speaking-influence',
-        title: 'Speaking & global influence',
+        title: 'Speaking & Global Influence',
         bullets: [
           'ICAO keynote speaker',
           'Presentations across 25+ cities, 16 countries',
@@ -49,7 +115,7 @@ export default function AdvisorsClient({
       },
       {
         id: 'leadership-military',
-        title: 'Previous leadership & military service',
+        title: 'Leadership & Military Service',
         bullets: [
           'CEO of vertiport company',
           'Chief Aeronautics Officer',
@@ -58,18 +124,16 @@ export default function AdvisorsClient({
       },
       {
         id: 'education-credentials',
-        title: 'Education & credentials',
+        title: 'Education & Credentials',
         bullets: [
-          'Masters in Economics',
-          'MBA',
+          'Masters in Economics & MBA',
           'Juris Doctor',
-          'Part 61 private pilot',
-          'Part 107 drone pilot',
+          'Part 61 private pilot & Part 107 drone pilot',
         ],
       },
       {
         id: 'advisory-roles',
-        title: 'Advisory roles',
+        title: 'Advisory Roles',
         bullets: [
           'Adjunct professor (University of Arkansas)',
           'Fellow of Royal Aeronautical Society',
@@ -80,211 +144,116 @@ export default function AdvisorsClient({
     []
   );
 
-  const toggleSection = (id: string) => {
-    setOpenSectionId((prev) => (prev === id ? null : id));
-  };
-
   return (
-    <div
-      className={(() => {
-        if (contained) return 'py-10';
-        if (isEmbedded)
-          return 'bg-gradient-to-b from-black via-gray-950 to-black py-10 px-4 sm:px-8 lg:px-16';
-        return 'pt-40 min-h-screen bg-gradient-to-b from-black via-gray-950 to-black py-16 px-6';
+    <div className={(() => {
+        if (contained) return 'py-16 lg:py-24';
+        if (isEmbedded) return 'bg-white pt-24 pb-0 lg:pt-32 border-t border-gray-100';
+        return 'pt-24 md:pt-32 pb-0 min-h-screen bg-white';
       })()}
     >
-      <div
-        aria-hidden="true"
-        className="border-t border-white/20 sm:mt-0 sm:mb-10"
-      />
-      <motion.div
-        className={`${
-          isEmbedded ? 'mb-8' : 'mb-16'
-        } max-w-4xl mx-auto text-center`}
-        variants={headerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {headingLevel === 2 ? (
-          <h2 className="text-5xl md:text-6xl font-extrabold uppercase tracking-widest text-white">
-            Board of Advisors
-          </h2>
-        ) : (
-          <h1 className="text-5xl md:text-6xl font-extrabold uppercase tracking-widest text-white">
-            Board of Advisors
-          </h1>
-        )}
+      {/* Non-sticky Intro Section */}
+      <div className="max-w-[80rem] mx-auto px-4 sm:px-8 lg:px-12 mb-8 md:mb-16">
         <motion.div
-          className="mt-4 mx-auto "
-          animate={{
-            opacity: [0.6, 1, 0.6],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatType: 'loop',
-            ease: 'easeInOut',
-          }}
-        />
-      </motion.div>
+          className={`${isEmbedded ? 'mb-8' : 'mb-12'}`}
+          variants={fadeUpItem}
+          initial="hidden"
+          animate="visible"
+        >
+          {headingLevel === 2 ? (
+            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight text-gray-900">
+              Board of <span className="text-gray-400 font-light">Advisors</span>
+            </h2>
+          ) : (
+            <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-gray-900">
+              Board of <span className="text-gray-400 font-light">Advisors</span>
+            </h1>
+          )}
+        </motion.div>
 
-      {/* Premium Full-Width Header */}
-      <motion.div
-        initial={isMobile ? false : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: isMobile ? 0 : 0.8 }}
-        className={`relative text-left ${
-          isEmbedded ? 'mt-8' : 'mt-20'
-        } max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12 pb-12 border-b border-white/20`}
-      >
-        {/* Profile Image */}
-        <div className="relative w-40 h-40 flex-shrink-0 rounded-full overflow-hidden shadow-2xl border-2 border-[#0077b5]/0 border border-solid">
-          <Image
-            src="/advisor.jpeg"
-            alt="Dan Sloat, Founder and President of Advanced Air Mobility Institute"
-            fill
-            sizes="(max-width: 768px) 256px, 256px"
-            className="object-cover object-center"
-          />
-        </div>
-
-        {/* Name + Title + Social */}
-        <div className="flex-1 text-center md:text-left">
-          <h2 className="font-stretch-normal line-clamp-3 text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Dan Sloat
-          </h2>
-          <div className="w-24 h-[2px] bg-white mx-auto md:mx-0 mt-2 rounded-full"></div>
-
-          <p className="font-stretch-normal line-clamp-3  mt-4 text-xl text-gray-300 font-medium leading-relaxed max-w-2xl">
-            Founder & President, Advanced Air Mobility Institute
+        <motion.div
+          variants={fadeUpItem}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="max-w-4xl"
+        >
+          <h3 className="text-xl md:text-2xl font-light text-gray-600 leading-relaxed mb-6">
+            Guiding the development of advanced aeromedical platforms requires visionary leadership. Our board brings together world-renowned experts in aerospace, regulatory affairs, and critical care.
+          </h3>
+          <p className="text-base text-gray-400 font-light tracking-wide border-l border-gray-200 pl-4">
+            Together, we are developing medical-first eVTOL and UAV platforms designed for time-critical emergency applications.
           </p>
+        </motion.div>
+      </div>
 
-          <div className="mt-6">
-            <SocialBadge
-              icon="FaLinkedin"
-              label="LinkedIn"
-              link="https://www.linkedin.com/in/dan-sloat/"
-              color="#0077b5"
-            />
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Bio Section */}
-      <motion.div
-        initial={isMobile ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: isMobile ? 0 : 0.4, duration: isMobile ? 0 : 0.8 }}
-        className="max-w-4xl mx-auto mt-12"
+      {/* Scroll-based Sequence Container */}
+      <div 
+        ref={containerRef} 
+        style={{ height: `${bioSections.length * 70}vh` }} 
+        className="relative w-full"
       >
-        <h2 className="text-3xl font-bold text-white relative inline-block">
-          Biography
-          <span className="block w-20 h-[2px] bg-white mt-2 rounded-full"></span>
-        </h2>
+        {/* Pinned Section */}
+        <div className="sticky top-0 md:top-[5vh] h-[100dvh] md:h-[90vh] w-full flex flex-col justify-start pt-8 md:pt-12 overflow-hidden bg-white">
+          <div className="max-w-[80rem] w-full mx-auto px-4 sm:px-8 lg:px-12 flex flex-col md:flex-row gap-8 lg:gap-20 items-start h-full">
+            
+            {/* Left Column: Fixed-Size Portrait */}
+            <div className="w-48 sm:w-64 md:w-80 flex-shrink-0">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-gray-50 shadow-2xl">
+                <motion.div style={{ scale: imageScale, y: imageY }} className="w-full h-full origin-center relative">
+                  <Image
+                    src="/advisor.jpeg"
+                    alt="Dan Sloat, Founder and President of Advanced Air Mobility Institute"
+                    fill
+                    sizes="(max-width: 768px) 192px, 320px"
+                    className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    priority
+                  />
+                </motion.div>
+              </div>
 
-        <div className="mt-8 space-y-4">
-          <div>
-            <motion.p
-              initial={isMobile ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: isMobile ? 0 : 0.05,
-                duration: isMobile ? 0 : undefined,
-              }}
-              className={`text-gray-300 text-base md:text-lg leading-relaxed text-justify md:line-clamp-none ${
-                isIntroExpanded ? 'line-clamp-none' : 'line-clamp-3'
-              }`}
-            >
-              {bioIntro}
-            </motion.p>
+              <div className="mt-6 flex justify-between items-start">
+                <div>
+                  <h2 className="text-xl md:text-2xl font-medium text-gray-900 tracking-tight">
+                    Dan Sloat
+                  </h2>
+                  <p className="mt-1 text-xs font-semibold tracking-widest uppercase text-gray-400">
+                    Founder & President, AAMI
+                  </p>
+                </div>
+                <div className="pt-1">
+                  <SocialBadge
+                    icon="FaLinkedin"
+                    label="LinkedIn"
+                    link="https://www.linkedin.com/in/dan-sloat/"
+                    color="#9ca3af"
+                  />
+                </div>
+              </div>
+            </div>
 
-            <div className="mt-2 flex justify-end md:hidden">
-              <button
-                type="button"
-                onClick={() => setIsIntroExpanded((v) => !v)}
-                className="text-sm font-semibold text-white/90 hover:text-white transition-colors"
-              >
-                {isIntroExpanded ? 'Read less' : 'Read more'}
-              </button>
+            {/* Right Column: Scrolling Bio Sections */}
+            <div className="relative flex-1 w-full h-64 md:h-[500px]">
+              {bioSections.map((section, idx) => (
+                <ScrollSection 
+                  key={section.id} 
+                  section={section} 
+                  index={idx} 
+                  progress={smoothProgress} 
+                  total={bioSections.length} 
+                />
+              ))}
+            </div>
+
+            {/* Vertical Scroll Progress Timeline on the right */}
+            <div className="absolute right-4 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 h-32 md:h-64 w-[2px] bg-gray-100 rounded-full overflow-hidden z-20 hidden md:block">
+              <motion.div 
+                style={{ scaleY: smoothProgress, originY: 0 }}
+                className="w-full h-full bg-gray-900"
+              />
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            {bioSections.map((section, index) => {
-              const isOpen = openSectionId === section.id;
-
-              return (
-                <motion.div
-                  key={section.id}
-                  initial={isMobile ? false : { opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: isMobile ? 0 : 0.1 + index * 0.06,
-                    duration: isMobile ? 0 : undefined,
-                  }}
-                  className={`h-full rounded-lg md:rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden ${
-                    isOpen ? 'md:col-span-2' : ''
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => toggleSection(section.id)}
-                    className="w-full min-h-[72px] md:min-h-[84px] px-4 py-3 md:px-5 md:py-4 flex items-center justify-between gap-3 md:gap-4 text-left hover:bg-white/5 transition-colors"
-                  >
-                    <span className="text-white font-semibold text-base md:text-lg leading-snug">
-                      {section.title}
-                    </span>
-                    <span
-                      className={`shrink-0 inline-flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-full border border-white/15 text-white/90 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180' : 'rotate-0'
-                      }`}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        focusable="false"
-                      >
-                        <path
-                          d="M6 9l6 6 6-6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen ? (
-                      <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
-                        className="px-4 md:px-5"
-                      >
-                        <div className="pb-4 md:pb-5">
-                          <ul className="list-disc pl-5 space-y-1 text-gray-300 text-sm md:text-base leading-relaxed">
-                            {section.bullets.map((bullet) => (
-                              <li key={bullet}>{bullet}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

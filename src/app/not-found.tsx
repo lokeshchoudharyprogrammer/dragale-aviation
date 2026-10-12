@@ -10,30 +10,30 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+    <div className="pt-24 min-h-screen bg-gray-50 text-gray-900 flex flex-col justify-center">
       <main className="px-4 sm:px-8 lg:px-16 py-12">
-        <section className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Page not found
+        <section className="max-w-4xl mx-auto text-center flex flex-col items-center">
+          <h1 className="text-8xl md:text-9xl font-extrabold tracking-tighter text-gray-900 mb-6">
+            404
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-gray-200">
-            The page you’re looking for doesn’t exist or may have moved.
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6 uppercase">
+            Page Not <span className="text-gray-400">Found</span>
+          </h2>
+          <p className="mt-4 text-xl text-gray-600 font-light max-w-lg mb-12">
+            The page you’re looking for doesn’t exist or may have been moved.
           </p>
 
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <Link
-              href="/"
-              className="inline-flex bg-gray-500 text-white py-3 px-8 rounded-full font-medium text-base shadow-md hover:bg-gray-600 transition duration-300 navbar-glass"
-              aria-label="Go back to the homepage"
-            >
-              Back to Home
-            </Link>
-          </div>
+          <Link
+            href="/"
+            className="bg-gray-900 text-white font-semibold py-4 px-12 rounded-full uppercase tracking-widest text-sm hover:bg-gray-800 transition-colors"
+            aria-label="Go back to the homepage"
+          >
+            Return to Home
+          </Link>
 
-          <div className="mt-10 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-2xl p-6 sm:p-8 text-left">
-            <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
-              If you reached this page from a link on our site, let us know and
-              we’ll fix it.
+          <div className="mt-24 w-full border-t border-gray-200 pt-8">
+            <p className="text-gray-500 font-light text-sm uppercase tracking-widest">
+              If you reached this page from a link on our site, please let us know.
             </p>
           </div>
         </section>

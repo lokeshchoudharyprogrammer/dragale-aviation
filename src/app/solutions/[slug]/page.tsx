@@ -60,34 +60,38 @@ export default async function SolutionPage({ params }: PageProps) {
     );
 
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+    <div className="pt-24 min-h-screen bg-gray-50 text-gray-900">
       <main className="px-4 sm:px-8 lg:px-16 py-12">
         <article className="max-w-4xl mx-auto">
-          <header className="space-y-4">
+          <div className="mb-12">
             <Link
               href="/solutions"
-              className="text-gray-300 text-sm underline"
+              className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-gray-500 hover:text-gray-900 transition-colors"
               aria-label="Back to solutions"
             >
-              Back to Solutions
+              <span aria-hidden="true">←</span>
+              <span>Back to solutions</span>
             </Link>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+          </div>
+
+          <header className="w-full pb-12 border-b border-gray-200">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-gray-900 mb-6">
               {solution.title}
             </h1>
-            <p className="text-base sm:text-lg text-gray-200">
+            <p className="text-xl text-gray-600 font-light leading-relaxed">
               {solution.shortDescription}
             </p>
           </header>
 
-          <section className="mt-10 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-xl sm:text-2xl font-semibold text-white">
+          <section className="py-12">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-8">
               {solution.content.heading}
             </h2>
-            <div className="mt-4 space-y-4">
+            <div className="space-y-6">
               {solution.content.paragraphs.map((paragraph, idx) => (
                 <p
                   key={idx}
-                  className="text-gray-200 text-sm sm:text-base leading-relaxed"
+                  className="text-lg text-gray-600 font-light leading-relaxed"
                 >
                   {paragraph}
                 </p>
@@ -96,21 +100,23 @@ export default async function SolutionPage({ params }: PageProps) {
           </section>
 
           {relatedSolutions.length > 0 ? (
-            <section className="mt-8" aria-labelledby="related-solutions">
+            <section className="mt-16 pt-12 border-t-2 border-gray-900" aria-labelledby="related-solutions">
               <h2
                 id="related-solutions"
-                className="text-sm sm:text-base font-semibold text-gray-200"
+                className="text-xs font-bold tracking-widest uppercase text-gray-500 mb-8"
               >
-                Related solutions you may need
+                Related Solutions
               </h2>
-              <ul className="mt-3 space-y-2">
+              <ul className="grid grid-cols-1 gap-0 border-t border-gray-200">
                 {relatedSolutions.map((s) => (
-                  <li key={s.slug} className="text-sm sm:text-base">
+                  <li key={s.slug}>
                     <Link
                       href={`/solutions/${s.slug}`}
-                      className="text-gray-300 underline underline-offset-4 hover:text-white transition"
+                      className="block py-6 border-b border-gray-200 group"
                     >
-                      {s.title}
+                      <span className="text-lg font-bold tracking-tight text-gray-900 group-hover:text-gray-500 transition-colors">
+                        {s.title}
+                      </span>
                     </Link>
                   </li>
                 ))}

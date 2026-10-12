@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700&display=swap");
 @import "tailwindcss";
 
-/* Minimal blog typography (no Tailwind Typography plugin) */
+/* Minimal blog typography */
 .blog-content {
-  color: rgb(209 213 219); /* gray-300 */
-  font-size: 1.05rem;
+  color: rgb(55 65 81); /* gray-700 */
+  font-size: 1.125rem;
   line-height: 1.85;
 }
 
@@ -13,33 +13,38 @@
 }
 
 .blog-content h2 {
-  margin-top: 2.25rem;
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-  font-weight: 700;
-  color: rgb(255 255 255);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 800;
+  color: rgb(17 24 39); /* gray-900 */
+  letter-spacing: -0.05em;
 }
 
 .blog-content h3 {
-  margin-top: 1.75rem;
-  font-size: 1.35rem;
-  line-height: 1.9rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
   font-weight: 700;
-  color: rgb(255 255 255);
+  color: rgb(17 24 39);
+  letter-spacing: -0.025em;
 }
 
 .blog-content strong {
-  color: rgb(255 255 255);
+  color: rgb(17 24 39);
+  font-weight: 700;
 }
 
 .blog-content a {
-  color: rgb(226 232 240);
+  color: rgb(17 24 39);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
 .blog-content a:hover {
-  color: rgb(255 255 255);
+  color: rgb(107 114 128); /* gray-500 */
   text-decoration-thickness: 2px;
 }
 
@@ -54,7 +59,7 @@
 }
 
 .blog-content li + li {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 .blog-content code {
@@ -62,61 +67,62 @@
     "Courier New", monospace;
   padding: 0.15rem 0.3rem;
   border-radius: 0.25rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  color: rgb(243 244 246);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  color: rgb(17 24 39);
 }
 
 .blog-content pre {
-  padding: 1rem;
+  padding: 1.25rem;
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.10);
   overflow-x: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .blog-content pre code {
   background: transparent;
   border: 0;
   padding: 0;
-  color: rgb(243 244 246);
+  color: rgb(55 65 81);
 }
 
 .blog-content blockquote {
-  margin-top: 1.25rem;
-  padding-left: 1rem;
-  border-left: 2px solid rgba(255, 255, 255, 0.18);
-  color: rgb(229 231 235);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+  border-left: 4px solid rgb(229 231 235); /* gray-200 */
+  color: rgb(107 114 128); /* gray-500 */
+  font-style: italic;
 }
 
 .blog-content hr {
-  margin: 2rem 0;
+  margin: 3rem 0;
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgb(229 231 235);
 }
 
 .blog-content img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  margin: 2rem 0;
 }
 
 .blog-content table {
   width: 100%;
-  margin: 1.25rem 0;
+  margin: 1.5rem 0;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 0.75rem;
-  overflow: hidden;
+  border: 1px solid rgb(229 231 235);
 }
 
 .blog-content th,
 .blog-content td {
-  border-right: 1px solid rgba(255, 255, 255, 0.22);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-  padding: 0.65rem 0.75rem;
+  border-right: 1px solid rgb(229 231 235);
+  border-bottom: 1px solid rgb(229 231 235);
+  padding: 0.75rem 1rem;
   text-align: left;
   vertical-align: top;
 }
@@ -131,16 +137,14 @@
 }
 
 .blog-content thead th {
-  background: rgba(255, 255, 255, 0.06);
-  color: rgb(255 255 255);
+  background: rgba(0, 0, 0, 0.02);
+  color: rgb(17 24 39);
   font-weight: 700;
 }
 
 .blog-content tbody tr:nth-child(even) td {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.01);
 }
-
-
 
 /* Glass effect on the navbar */
 .navbar-glass {
@@ -155,8 +159,13 @@
   font-family: 'Archivo';
 }
 
-
-
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 @keyframes float {
   0% {
