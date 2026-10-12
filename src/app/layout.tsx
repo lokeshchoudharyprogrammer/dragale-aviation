@@ -47,6 +47,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+
+
 // const GTM_ID = 'GTM-TK7SGHK6';
 
 export default function RootLayout({
