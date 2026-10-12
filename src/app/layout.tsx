@@ -66,7 +66,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script> */}
         {/* End Google Tag Manager */}
-        <link rel="preload" href="/models/2-draco.glb" as="fetch" crossOrigin="anonymous" />
+        {/* <link rel="preload" href="/models/2-draco.glb" as="fetch" crossOrigin="anonymous" /> */}
       </head>
       <body
         suppressHydrationWarning
@@ -83,7 +83,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript> */}
         {/* End Google Tag Manager (noscript) */}
-        <GlobalLoader />
+        {/* <GlobalLoader /> */}
         <header>
           <Navbar />
         </header>
