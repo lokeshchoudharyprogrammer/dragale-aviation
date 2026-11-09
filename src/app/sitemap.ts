@@ -42,6 +42,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
     },
     {
+      url: `${baseUrl}/partnerships`,
+      lastModified,
+    },
+    {
       url: `${baseUrl}/contact-us`,
       lastModified,
     },

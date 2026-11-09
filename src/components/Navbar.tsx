@@ -207,6 +207,7 @@ export default function Navbar() {
             {[
               { href: '/solutions', label: 'Solutions' },
               { href: '/blog', label: 'Blogs' },
+              { href: '/partnerships', label: 'Partnerships' },
               { href: '/about', label: 'About' }
             ].map((item) => (
               <Link
@@ -319,6 +320,7 @@ export default function Navbar() {
               {[
                 { href: '/solutions', label: 'Solutions' },
                 { href: '/blog', label: 'Blogs' },
+                { href: '/partnerships', label: 'Partnerships' },
                 { href: '/about', label: 'About' }
               ].map((item, i) => (
                 <motion.div
