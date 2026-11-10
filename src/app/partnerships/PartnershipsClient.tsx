@@ -15,6 +15,7 @@ interface Partner {
   logoDark: boolean; // true = logo is white, needs dark background
   logoWidth: number;
   logoHeight: number;
+  logoClass: string;
   summary: string;
   highlights: string[];
 }
@@ -29,6 +30,7 @@ const partners: Partner[] = [
     logoDark: false,
     logoWidth: 1908,
     logoHeight: 386,
+    logoClass: 'w-3/5 h-auto',
     summary:
       'Avionyz is a dedicated aviation news platform delivering reliable coverage, industry updates, events, and insights. As our media partner, Avionyz helps amplify Dragale Aviation’s story across the global aviation community.',
     highlights: [
@@ -46,12 +48,31 @@ const partners: Partner[] = [
     logoDark: true,
     logoWidth: 1280,
     logoHeight: 341,
+    logoClass: 'w-3/5 h-auto',
     summary:
       'MyOnlineJet is an aviation infrastructure technology company focused on urban air mobility, vertiport networks, and next-generation transport systems. As our infrastructure partner, it supports the ground ecosystem our aircraft need to operate.',
     highlights: [
       'Urban air mobility & vertiport networks',
       'Next-generation transport systems',
       'Ground infrastructure for medical eVTOL missions',
+    ],
+  },
+  {
+    name: 'ASR Aviation',
+    role: 'Charter Partner',
+    url: 'https://asraviation.com/',
+    domain: 'asraviation.com',
+    logo: '/partners/asr-aviation-logo.png',
+    logoDark: true,
+    logoWidth: 888,
+    logoHeight: 802,
+    logoClass: 'h-3/4 w-auto',
+    summary:
+      'ASR Aviation provides private jet and helicopter charter options across India, Dubai, the USA, Europe and selected international destinations. As our charter partner, ASR Aviation extends our air mobility ecosystem with on-demand charter access.',
+    highlights: [
+      'Private jet & helicopter charter worldwide',
+      'Coverage across India, Dubai, USA & Europe',
+      'On-demand charter access, subject to availability',
     ],
   },
 ];
@@ -77,7 +98,7 @@ const PartnershipsClient: React.FC = () => {
         </motion.div>
 
         {/* Partner cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
           {partners.map((partner, index) => (
             <motion.div
               key={partner.name}
@@ -106,7 +127,7 @@ const PartnershipsClient: React.FC = () => {
                     width={partner.logoWidth}
                     height={partner.logoHeight}
                     unoptimized={partner.logo.endsWith('.svg')}
-                    className="object-contain w-3/5 h-auto transition-transform duration-500 ease-out group-hover:scale-105"
+                    className={`object-contain ${partner.logoClass} transition-transform duration-500 ease-out group-hover:scale-105`}
                   />
                   <span className="absolute top-3 right-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#00AEEF] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <ArrowUpRight className="w-4 h-4" />
